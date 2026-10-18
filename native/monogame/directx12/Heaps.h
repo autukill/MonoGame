@@ -8,6 +8,25 @@
 #include <queue>
 
 namespace Graphics {
+#define ENGINE_DX12_PAGED_CPU 1
+    // CPU-only descriptors keep stable handles. Shader-visible heaps remain contiguous
+    // and retain their existing per-backbuffer ownership and 65,536-entry capacity.
+    class PagedCpuDescHeap {
+        static constexpr size_t PageSize = 4096;
+        ID3D12Device* m_device;
+        uint32_t m_increment;
+        size_t m_limit;
+        uint64_t m_next = 0;
+        std::vector<Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>> m_pages;
+        std::queue<uint64_t> m_free;
+    public:
+        PagedCpuDescHeap(ID3D12Device* device, size_t limit)
+            : m_device(device),
+              m_increment(device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)), m_limit(limit) {}
+        D3D12_CPU_DESCRIPTOR_HANDLE AllocCpuHandle();
+        void FreeCpuHandle(D3D12_CPU_DESCRIPTOR_HANDLE handle);
+    };
+
     class NonShaderVisibleDescHeap {
     protected:
         ID3D12Device* m_device;
@@ -48,7 +67,7 @@ namespace Graphics {
         unsigned int m_idx = 0;
 
         // Non-shader visible heaps
-        std::unique_ptr<NonShaderVisibleDescHeap> m_srvHeap;
+        std::unique_ptr<PagedCpuDescHeap> m_srvHeap;
         std::unique_ptr<NonShaderVisibleDescHeap> m_samplerHeap;
         std::unique_ptr<NonShaderVisibleDescHeap> m_rtvHeap;
         std::unique_ptr<NonShaderVisibleDescHeap> m_dsvHeap;

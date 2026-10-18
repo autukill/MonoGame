@@ -12,6 +12,42 @@ using namespace DirectX;
 using namespace DX;
 using namespace Graphics;
 
+D3D12_CPU_DESCRIPTOR_HANDLE PagedCpuDescHeap::AllocCpuHandle() {
+    const uint64_t index = m_free.empty() ? m_next : m_free.front();
+    if (index >= m_limit)
+        throw std::out_of_range("No more room in the CPU SRV descriptor heap");
+    const size_t page = static_cast<size_t>(index / PageSize);
+    if (page == m_pages.size()) {
+        const auto size = static_cast<UINT>(std::min(PageSize, m_limit - page * PageSize));
+        D3D12_DESCRIPTOR_HEAP_DESC desc = { D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, size, D3D12_DESCRIPTOR_HEAP_FLAG_NONE, 0 };
+        Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> heap;
+        ThrowIfFailed(m_device->CreateDescriptorHeap(&desc, IID_GRAPHICS_PPV_ARGS(heap.GetAddressOf())));
+        m_pages.push_back(std::move(heap));
+    }
+    auto handle = m_pages[page]->GetCPUDescriptorHandleForHeapStart();
+    handle.ptr += static_cast<SIZE_T>(index % PageSize) * m_increment;
+    // Commit bookkeeping only after allocation succeeds. An exhausted/failed call
+    // leaves both the next index and freed descriptors available for a retry.
+    if (m_free.empty()) ++m_next;
+    else m_free.pop();
+    return handle;
+}
+
+void PagedCpuDescHeap::FreeCpuHandle(D3D12_CPU_DESCRIPTOR_HANDLE handle) {
+    for (size_t page = 0; page < m_pages.size(); ++page) {
+        const SIZE_T start = m_pages[page]->GetCPUDescriptorHandleForHeapStart().ptr;
+        const SIZE_T count = std::min(PageSize, m_limit - page * PageSize);
+        if (handle.ptr >= start && handle.ptr - start < count * m_increment && (handle.ptr - start) % m_increment == 0) {
+            const uint64_t index = page * PageSize + (handle.ptr - start) / m_increment;
+            if (index >= m_next) break;
+            m_free.push(index);
+            return;
+        }
+    }
+    throw std::invalid_argument("Descriptor does not belong to this CPU SRV heap");
+}
+
+
 NonShaderVisibleDescHeap::NonShaderVisibleDescHeap(ID3D12Device* device, D3D12_DESCRIPTOR_HEAP_TYPE type, D3D12_DESCRIPTOR_HEAP_FLAGS flags, uint32_t size)
     : m_device(device), m_type(type), m_size(size) {
     m_increment = device->GetDescriptorHandleIncrementSize(type);
@@ -70,7 +106,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE ShaderVisibleDescHeap::GetGpuHandle(size_t index) co
 Heaps::Heaps(ID3D12Device* device, int backBufferCount) {
     m_device = device;
 
-    m_srvHeap = std::make_unique<NonShaderVisibleDescHeap>(device, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 1 << 16);
+    m_srvHeap = std::make_unique<PagedCpuDescHeap>(device, 1 << 16);
     m_samplerHeap = std::make_unique<NonShaderVisibleDescHeap>(device, D3D12_DESCRIPTOR_HEAP_TYPE_SAMPLER, 1024);
     m_rtvHeap = std::make_unique<NonShaderVisibleDescHeap>(device, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 1024);
     m_dsvHeap = std::make_unique<NonShaderVisibleDescHeap>(device, D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1024);
