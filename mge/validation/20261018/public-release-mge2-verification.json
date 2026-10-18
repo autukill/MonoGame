@@ -1,0 +1,49 @@
+{
+  "PackageId": "MyGameEngine.MonoGame.Runtime.Windows.DX12",
+  "Version": "3.8.6-mge.2",
+  "PublicUrl": "https://www.nuget.org/packages/MyGameEngine.MonoGame.Runtime.Windows.DX12/3.8.6-mge.2",
+  "VerifiedUtc": "2026-10-18T10:55:00.892624+00:00",
+  "SourceCommit": "a8be8f5d2bfb27c92709d2b7f03959257f0a10f7",
+  "SourcePushed": true,
+  "UploadedPackageSha256": "b0c82b52079610f8b0e28d092df2ba959e4c3e9016aae84798a9fe727cc59149",
+  "PublicPackageSha256": "3f7fdd37674923b991657f0f106966c527001eedc3284e8b72d6254329f10509",
+  "NativeSha256": "9c3f4bd2963929a57b25ba5f2779d0926a52726626f4982339d1d33cde3e9d59",
+  "ContentHash": "RndGOr3ZVu07CprBwvoae7yn5OlkU9QDagMoO5ryoGdocYPYOtS5OWyaeIVUxuoLJcQQ36lgGsKqlKeJ+I8LAg==",
+  "RestoredSource": "https://api.nuget.org/v3/index.json",
+  "EmptyCache": true,
+  "LocalFeedUsed": false,
+  "FallbackCacheUsed": false,
+  "RepositorySignatureVerified": true,
+  "AllOriginalPayloadBytesIdentical": true,
+  "PublicPackageBytes": 1232865,
+  "NativeDllBytes": 2763776,
+  "PublicConsumerBuilds": [
+    "win-x64 Release"
+  ],
+  "SearchIndexCompleteAtDownload": false,
+  "SignedArchiveSha512": "iIgBTAejBbWdo07dyjzg/DIoq7KidNbMYi1vyOMaQ+PbVD9X40rLHHXHM/l2i5r2ikA0PqyDJ6o+eBH3e6rLrQ==",
+  "HashCorrection": "Initial lock edit used archive SHA512; locked restore rejected it. Corrected from NuGet metadata and independently restored project.assets library sha512; caches and package untouched.",
+  "EngineLockedRestores": [
+    "hosting-false-Portable",
+    "hosting-false-win-x64",
+    "hosting-true-Portable",
+    "hosting-true-win-x64",
+    "audio-false-Portable",
+    "audio-false-win-x64",
+    "audio-true-Portable",
+    "audio-true-win-x64",
+    "benchmark-false-Portable",
+    "benchmark-false-win-x64",
+    "benchmark-true-Portable",
+    "benchmark-true-win-x64"
+  ],
+  "EngineJitBuilds": [
+    "hosting-false-Portable",
+    "hosting-false-win-x64",
+    "audio-false-Portable",
+    "audio-false-win-x64",
+    "benchmark-false-Portable",
+    "benchmark-false-win-x64"
+  ],
+  "EngineVersion": "3.8.6-mge.2"
+}
