@@ -1,3 +1,18 @@
+# MyGameEngine-maintained MonoGame
+
+本仓库按官方正式发行版维护 MyGameEngine 实际需要的修复。
+当前分支 `mge/3.8.6` 基于官方 NuGet 3.8.6 的源码提交
+`c610a529667336f63da323c6057274258727664b`。
+仅交付 Windows x64 DX12 原生运行库，托管 Framework 继续使用官方 3.8.6。
+
+- [维护与同步规则](mge/docs/maintenance.md)
+- [修复清单与版本矩阵](mge/docs/fixes.md)
+- [本仓库贡献规则](MGE-CONTRIBUTING.md)
+
+原始 MonoGame 说明、许可证和第三方声明保留如下。
+
+---
+
 <div align="center">
  <a href="https://monogame.net/">
    <img height="128" alt="MonoGame" src="https://raw.githubusercontent.com/MonoGame/MonoGame.Logo/refs/heads/master/FullColorOnLight/LogoOnly_128px.png">

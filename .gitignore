@@ -104,3 +104,17 @@ _*
 /native/**/*.make
 /native/**/Makefile
 /native/**/*.mgfxo.h
+# MyGameEngine maintenance outputs and local secrets
+/mge/out/
+/mge/local-feed/
+/mge/.packages/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/CMakeUserPresets.json
+*.snupkg
+.env
+.env.*
+*.pfx
+*.p12
+*.key
+NuGet.Config.local
