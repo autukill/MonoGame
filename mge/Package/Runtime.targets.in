@@ -1,0 +1,15 @@
+<Project>
+ <PropertyGroup><MgeMonoGameDx12ExpectedSha256>@@HASH@@</MgeMonoGameDx12ExpectedSha256></PropertyGroup>
+ <Target Name="ValidateMgeMonoGameDx12Compatibility" BeforeTargets="CoreCompile;ComputeFilesToPublish" DependsOnTargets="ResolveReferences">
+  <ItemGroup>
+   <_MgeFramework Include="@(ReferencePath)" Condition="'%(ReferencePath.NuGetPackageId)'=='MonoGame.Framework.Native'"/>
+   <_MgeConflictingRuntime Include="@(NativeCopyLocalItems)" Condition="'%(NativeCopyLocalItems.NuGetPackageId)'=='MonoGame.Runtime.Windows.DX12'"/>
+  </ItemGroup>
+  <Error Condition="'$(MonoGameVersion)'!='' And '$(MonoGameVersion)'!='3.8.6'" Text="MyGameEngine DX12 runtime requires official MonoGame.Framework.Native 3.8.6."/>
+  <Error Condition="'@(_MgeFramework)'!='' And '%(_MgeFramework.NuGetPackageVersion)'!='3.8.6'" Text="Incompatible MonoGame.Framework.Native version; expected 3.8.6."/>
+  <Error Condition="'@(_MgeConflictingRuntime)'!=''" Text="Remove official MonoGame.Runtime.Windows.DX12 when using the MyGameEngine DX12 runtime."/>
+  <GetFileHash Files="$(MSBuildThisFileDirectory)../runtimes/win-x64/native/mgruntime.dll" Algorithm="SHA256"><Output TaskParameter="Items" ItemName="_MgeNativeHash"/></GetFileHash>
+  <Error Condition="'%(_MgeNativeHash.FileHash)'!='$(MgeMonoGameDx12ExpectedSha256)'" Text="MyGameEngine DX12 package DLL hash mismatch."/>
+  <Error Condition="'$(RuntimeIdentifier)'!='' And '$(RuntimeIdentifier)'!='win-x64'" Text="MyGameEngine DX12 runtime supports win-x64 only."/>
+ </Target>
+</Project>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+  <TargetFramework>netstandard2.1</TargetFramework><IncludeBuildOutput>false</IncludeBuildOutput><IsPackable>true</IsPackable>
+  <PackageId>MyGameEngine.MonoGame.Runtime.Windows.DX12</PackageId><PackageVersion>3.8.6-mge.1</PackageVersion>
+  <Authors>MyGameEngine</Authors><Description>MyGameEngine-maintained Windows x64 DX12 native runtime for official MonoGame.Framework.Native 3.8.6. Six documented native fixes; unofficial maintenance package.</Description>
+  <PackageLicenseExpression>MS-PL</PackageLicenseExpression><PackageReadmeFile>README.md</PackageReadmeFile>
+  <RepositoryType>git</RepositoryType><RepositoryCommit>$(MgeSourceCommit)</RepositoryCommit><PackageTags>MonoGame;MyGameEngine;DX12;Windows;native</PackageTags>
+  <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking><EnableDefaultItems>false</EnableDefaultItems>
+ </PropertyGroup>
+ <ItemGroup>
+  <None Include="README.md" Pack="true" PackagePath="/"/>
+  <None Include="$(MgePayload)/mgruntime.dll" Pack="true" PackagePath="runtimes/win-x64/native/"/>
+  <None Include="$(MgePayload)/provenance.json" Pack="true" PackagePath="/"/>
+  <None Include="$(MgePayload)/licenses/**/*" Pack="true" PackagePath="licenses/%(RecursiveDir)"/>
+  <None Include="$(MgePayload)/MyGameEngine.MonoGame.Runtime.Windows.DX12.targets" Pack="true" PackagePath="buildTransitive/"/>
+  <None Include="../docs/*.md" Pack="true" PackagePath="docs/"/>
+ </ItemGroup>
+</Project>
