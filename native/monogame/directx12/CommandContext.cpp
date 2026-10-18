@@ -378,13 +378,12 @@ void CommandContext::CreateGenerateMipPipelineResources() {
         rootParameters[2].InitAsDescriptorTable(1, &targetDescriptorRange); // u0
 
         CD3DX12_VERSIONED_ROOT_SIGNATURE_DESC RootSig(3, rootParameters, 1, &sampler, rootSignatureFlags);
-        ID3DBlob* pSerializedRootSig = nullptr;
-        ID3DBlob* pErrorBlob = nullptr;
-        D3D12SerializeVersionedRootSignature(&RootSig, &pSerializedRootSig, &pErrorBlob);
+        ComPtr<ID3DBlob> serializedRootSig, errorBlob;
+        ThrowIfFailed(D3D12SerializeVersionedRootSignature(&RootSig, serializedRootSig.GetAddressOf(), errorBlob.GetAddressOf()));
 
-        m_deviceRes->GetD3DDevice()->CreateRootSignature(
-            0, pSerializedRootSig->GetBufferPointer(), pSerializedRootSig->GetBufferSize(),
-            IID_GRAPHICS_PPV_ARGS(m_generateMipRootSig.ReleaseAndGetAddressOf()));
+        ThrowIfFailed(m_deviceRes->GetD3DDevice()->CreateRootSignature(
+            0, serializedRootSig->GetBufferPointer(), serializedRootSig->GetBufferSize(),
+            IID_GRAPHICS_PPV_ARGS(m_generateMipRootSig.ReleaseAndGetAddressOf())));
     }
 
     {
