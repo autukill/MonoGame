@@ -37,7 +37,6 @@ CommandContext::CommandContext(DeviceResources* deviceResources) : m_deviceRes(d
     auto d3dDevice = deviceResources->GetD3DDevice();
     m_heaps = deviceResources->GetGraphicsHeaps();
     CreateDefaultRootSignature();
-    CreateGenerateMipPipelineResources();
 
     for (size_t i = 0; i < MAX_BACK_BUFFER_COUNT; ++i) {
         m_tempTextures[i] = {};
@@ -174,6 +173,8 @@ void CommandContext::ResolveResource(Texture* source, Texture* dest) {
 
 void CommandContext::GenerateMipmap(Texture* source)
 {
+    if (!m_generatePipelinePSO)
+        CreateGenerateMipPipelineResources();
     CommandList* cmdResolve = cmd;
     if (!cmd)
     {

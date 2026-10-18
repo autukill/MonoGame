@@ -8,7 +8,7 @@
 | [MGE-DX12-001](001-unused-constant-buffers.md) | 闲置常量缓冲 | 已迁入，待最终GPU验证 |
 | [MGE-DX12-002](002-dx12-window-flags.md) | DX12 Vulkan窗口标志 | 已迁入，待最终GPU验证 |
 | [MGE-DX12-003](003-mip-com-lifetime.md) | mip临时COM blob | 已迁入，待最终GPU验证 |
-| MGE-DX12-004 | mip管线延迟创建 | 待迁入 |
+| [MGE-DX12-004](004-lazy-mip-pipeline.md) | mip管线延迟创建 | 已迁入，待最终GPU验证 |
 | MGE-DX12-005 | CPU SRV描述符分页 | 待迁入 |
 | MGE-DX12-006 | mip后恢复图形PSO | 待迁入 |
 
