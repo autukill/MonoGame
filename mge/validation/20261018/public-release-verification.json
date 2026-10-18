@@ -1,0 +1,56 @@
+{
+  "PackageId": "MyGameEngine.MonoGame.Runtime.Windows.DX12",
+  "Version": "3.8.6-mge.1",
+  "PublicUrl": "https://www.nuget.org/packages/MyGameEngine.MonoGame.Runtime.Windows.DX12/3.8.6-mge.1",
+  "VerifiedUtc": "2026-10-18T04:45:45.6473777+00:00",
+  "UploadedPackageSha256": "4C4B845B1478F376BC52A9492045E330FB4FDC105270D51ADC03BEB63B713F32",
+  "PublicPackageSha256": "B8EE8592EFC15D00223B4F21E65DFFE1760E1DC2BFD4D9287F758EE790D1A6B5",
+  "NativeSha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0",
+  "ContentHash": "+TmD80tbZL4D+fvn1n16o/7+WPP0rU36k+79VzraBjd6nagk9iuh2fUpsXIbWjjstsoo272gAAbDIDg9KIqzAg==",
+  "RestoredSource": "https://api.nuget.org/v3/index.json",
+  "EmptyCache": true,
+  "LocalFeedUsed": false,
+  "FallbackCacheUsed": false,
+  "RepositorySignatureVerified": true,
+  "SourceCommit": "9bef89ca658bdb1cc4d4c14cac1383207ba997d9",
+  "ConsumerDeployments": [
+    {
+      "Configuration": "blank-portable-final",
+      "NativeRelativePath": "runtimes/win-x64/native/mgruntime.dll",
+      "NativeSha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0",
+      "LicensesAndProvenanceFiles": 5
+    },
+    {
+      "Configuration": "blank-win-x64",
+      "NativeRelativePath": "mgruntime.dll",
+      "NativeSha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0",
+      "LicensesAndProvenanceFiles": 5
+    },
+    {
+      "Configuration": "blank-aot",
+      "NativeRelativePath": "mgruntime.dll",
+      "NativeSha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0",
+      "LicensesAndProvenanceFiles": 5
+    }
+  ],
+  "PublicConsumerBuilds": [
+    "RIDless Release",
+    "win-x64 Release",
+    "win-x64 NativeAOT Full Trim publish"
+  ],
+  "EngineLockedBuilds": [
+    "Hosting JIT Portable",
+    "Hosting JIT win-x64",
+    "Audio JIT Portable",
+    "Audio JIT win-x64"
+  ],
+  "EngineLockedRestores": [
+    "Hosting NativeAOT Portable",
+    "Hosting NativeAOT win-x64",
+    "Audio NativeAOT Portable",
+    "Audio NativeAOT win-x64"
+  ],
+  "GameTestsRerun": false,
+  "TenBattleAcceptanceCompleted": false,
+  "TenBattleAcceptanceDisposition": "User requested no further Game tests; prior results retained separately"
+}

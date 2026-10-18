@@ -1,0 +1,29 @@
+{
+  "Pid": 47632,
+  "StartedUtc": "2026-10-18T04:23:37.3685013Z",
+  "Executable": "D:\\Projects\\Zhao\\MyGameEngine-MonoGame\\mge\\out\\aot-route-news-fixed\\Monster.exe",
+  "ExeSha256": "5AAF2D53086C44E99266E7305F2D413A89FC9E2BE42F9C512215DC95F919A898",
+  "NativeSha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0",
+  "Arguments": [
+    "--news",
+    "--width",
+    "1280",
+    "--height",
+    "720"
+  ],
+  "FixtureSource": "D:\\Projects\\Zhao\\MyGameEngine\\artifacts\\aot-ten-route-20261018\\audio-paired-normal\\after-1\\UserData\\profile.json",
+  "FixtureChanges": "World7/city3, selection and run-opening match, full initial core HP, currency 100000000",
+  "NoForcedGc": true,
+  "TextureCache": "default",
+  "Input": "Actual player menus via computer-use",
+  "Completed": false,
+  "NativeModules": [
+    {
+      "Path": "D:\\Projects\\Zhao\\MyGameEngine-MonoGame\\mge\\out\\aot-route-news-fixed\\mgruntime.DLL",
+      "Sha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0"
+    }
+  ],
+  "AuthoredBattleCount": 3,
+  "FullTenBattleRouteCompleted": false,
+  "Exited": true
+}

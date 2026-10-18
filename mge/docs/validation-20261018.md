@@ -177,9 +177,9 @@ mge/out/blank-ridless-run-final.json 记录使用 dotnet 执行未设置 RID 的
 
 mge/out/hosting-cadence-final.log 记录 **59.99 UPS、29.99 FPS、CPU 0.172 秒 / 5.001 秒，即一个逻辑核的 3.44%**，并记录 GPU sleeping cadence/CPU bound 断言通过。该 cadence 是独立的 hosting 调度场景；不能用它改写上面 quiet 空窗口约一个逻辑核的实测结果，也不能宣称两种场景具有相同调度条件。
 
-## 待补验证与边界
+## 初次归档时的验证边界（最终状态见发布记录）
 
-截至本次更新，九轮 quiet 内存汇总已完成。以下项目仍待补，不提前下完成结论：
+初次归档时九轮 quiet 内存汇总已完成，以下两项尚未补齐；这是当时状态，后续实际结果见本文末及发布记录：
 
 1. **真实 Game NativeAOT 十次路径**：发布已完成，运行验收进行中；需补全部路径的实际运行/加载 DLL、场景结果、退出码及独立证据。当前少数已进行的路径不等于十次完整通过。
 2. **NuGet 公开发布后的独立还原**：本记录仅核对本地包；公开还原、空缓存验证、公开 nupkg 身份和内部 DLL 哈希仍待补。仓库签名可能改变整个 nupkg 的哈希，须分别记录包哈希和内部 DLL 哈希。
@@ -204,3 +204,8 @@ mge/out/hosting-cadence-final.log 记录 **59.99 UPS、29.99 FPS、CPU 0.172 秒
 首次尝试使用开发截图参数，被 Shipping 参数解析器按设计拒绝；日志保留在 mge/out/news-fixed-aot-startup/，不计为启动通过。随后使用支持的 `--news --width 1280 --height 720`，在独立完整副本 mge/out/news-fixed-aot-startup-normal/ 运行 8.09 秒。[启动记录](../validation/20261018/news-fixed-aot-startup.json) 确认可见窗口、实际加载的 mgruntime.dll 哈希一致、没有 coreclr/clrjit 模块。结束时只停止核对 PID/启动时间/路径的本任务进程；此项不是正常退出、固定结算字幕、十局或 quiet 内存验收。没有操作鼠标键盘，也没有恢复用户已停止的 Computer Use。
 
 真实结算字幕和自然音频排空的证据仍是上一节的开发 Game/真实 Opus 检查。NuGet 尚未正式提交发布；最终实际十局与公开源验证保持待完成。
+## 公开发布完成与用户停止重复测试
+
+2026-10-18，3.8.6-mge.1 已经 NuGet 网页正式提交、服务端验证和索引完成，公开下载及独立空缓存还原通过。公开 nupkg 签名、哈希、三个最小消费部署配置和引擎八个锁图的结果，见 [发布记录](release-3.8.6-mge.1.md) 及 [归档报告](../validation/20261018/public-release-verification.json)。本次没有再运行 Game；AOT 消费验证是发布最小 Blank 工程而非运行 Game。
+
+用户在修复后真实 AOT 同进程完成三场战斗后明确取消重复 Game 测试，测试进程已停止。本轮 [route.process](../validation/20261018/news-fixed-route-stopped.json) 的 AuthoredBattleCount=3、FullTenBattleRouteCompleted=false，[user-stop](../validation/20261018/news-fixed-user-stop.json) 记录取消原因；十局不再作为待补工作，也不计通过。已有其他对话的实测只按原样参考，不能替换成本包的新十局结论。之前“四局中断”“三局中止”分别属于不同 EXE 运行，不能相加成七局连续通过。
