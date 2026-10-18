@@ -2,7 +2,7 @@
   "PackageId": "MyGameEngine.MonoGame.Runtime.Windows.DX12",
   "Version": "3.8.6-mge.1",
   "PublicUrl": "https://www.nuget.org/packages/MyGameEngine.MonoGame.Runtime.Windows.DX12/3.8.6-mge.1",
-  "VerifiedUtc": "2026-10-18T04:45:45.6473777+00:00",
+  "VerifiedUtc": "2026-10-18T12:45:45.6473777+08:00",
   "UploadedPackageSha256": "4C4B845B1478F376BC52A9492045E330FB4FDC105270D51ADC03BEB63B713F32",
   "PublicPackageSha256": "B8EE8592EFC15D00223B4F21E65DFFE1760E1DC2BFD4D9287F758EE790D1A6B5",
   "NativeSha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0",
@@ -52,5 +52,9 @@
   ],
   "GameTestsRerun": false,
   "TenBattleAcceptanceCompleted": false,
-  "TenBattleAcceptanceDisposition": "User requested no further Game tests; prior results retained separately"
+  "TenBattleAcceptanceDisposition": "User requested no further Game tests; prior results retained separately",
+  "GameAotPublicLockedRestore": true,
+  "GameAotRuntimeLibraries": [
+    "MyGameEngine.MonoGame.Runtime.Windows.DX12/3.8.6-mge.1"
+  ]
 }

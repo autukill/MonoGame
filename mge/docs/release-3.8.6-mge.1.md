@@ -35,3 +35,8 @@ https://www.nuget.org/packages/MyGameEngine.MonoGame.Runtime.Windows.DX12/3.8.6-
 新闻展示时钟问题由 MyGameEngine 1c218fd4 修复；真实 Opus、字幕退出及修复后 AOT 有界启动已记录。随后修复后的同一正式 AOT 进程完成三场战斗并恢复新闻菜单；用户要求停止重复 Game 测试，进程已退出，FullTenBattleRouteCompleted=false。该轮没有满足十局，不改写为通过。
 
 后续参考 MyGameEngine 的 docs/performance/aot-ten-route-20261018.md、aot-resident-ledger-20261018.md 和 basis-ldr-init-20261018.md 等已有实测，保留各自 EXE/DLL/场景和是否候选包的身份边界，不把其他 DLL 的结果当成本包新做的十局验证。本次公开源接入只进行还原、构建和产物哈希核对，不再运行 Game。
+## 引擎接入提交
+
+MyGameEngine main 提交 `29bc737e290f06029d0653bcb260c1b172d2adb3` 已锁定公开包版本、接入公共 Hosting/Audio 和直接 DX12 基准入口，删除旧 DLL 覆盖 targets 与仓库携带 DLL，保留历史 provenance。OpenGL/Vulkan/Android 和非 x64 选择未改。
+
+正式 Game 的 Shipping NativeAOT 项目图另外通过 nuget.org 独立缓存 locked restore；实际 project.assets.json 仅有 MyGameEngine.MonoGame.Runtime.Windows.DX12/3.8.6-mge.1，无官方 DX12 runtime。此步骤只还原依赖，没有编译或运行 Game。引擎接入与公开源验证文档位于 MyGameEngine/docs/operations/monogame-maintained-runtime.md。
