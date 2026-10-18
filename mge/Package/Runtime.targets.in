@@ -1,5 +1,9 @@
 <Project>
  <PropertyGroup><MgeMonoGameDx12ExpectedSha256>@@HASH@@</MgeMonoGameDx12ExpectedSha256></PropertyGroup>
+ <ItemGroup>
+  <None Include="$(MSBuildThisFileDirectory)../licenses/*" Link="licenses/monogame-dx12/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest"/>
+  <None Include="$(MSBuildThisFileDirectory)../provenance.json" Link="licenses/monogame-dx12/provenance.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest"/>
+ </ItemGroup>
  <Target Name="ValidateMgeMonoGameDx12Compatibility" BeforeTargets="CoreCompile;ComputeFilesToPublish" DependsOnTargets="ResolveReferences">
   <ItemGroup>
    <_MgeFramework Include="@(ReferencePath)" Condition="'%(ReferencePath.NuGetPackageId)'=='MonoGame.Framework.Native'"/>
