@@ -8,3 +8,5 @@
 native lifecycle执行三次设备创建销毁，验证mip精确像素；不改根签名或shader。
 
 上游状态仅针对已核查基线；其他发行版须重新核查。
+
+共用复现代码与运行方法：[build-and-release.md](build-and-release.md#自包含复现入口)。

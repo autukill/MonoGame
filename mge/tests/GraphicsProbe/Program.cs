@@ -4,6 +4,12 @@ using Microsoft.Xna.Framework.Graphics;
 // Independent public-API regression, not referenced by any engine or player project.
 try
 {
+    if (args is ["--constant-ring", var output, var expectedHash])
+    {
+        int result=NativeConstantRingProbe.Run(output);
+        if(result!=0)return result;
+        args=[expectedHash];
+    }
     if (args.Length != 1) throw new ArgumentException("Pass the expected native DLL SHA256.");
     using var process = System.Diagnostics.Process.GetCurrentProcess();
     Console.WriteLine($"Owned mixed regression PID={process.Id} StartedUtc={process.StartTime.ToUniversalTime():O}");

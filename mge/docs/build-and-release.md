@@ -25,3 +25,15 @@
 发布后等待验证完成，从nuget.org用独立空缓存重新还原并核对内部DLL哈希。
 NuGet可能对包追加仓库签名，公开下载nupkg整体哈希须单独记录，内部DLL应保持一致。
 不存储API key；已发布版本不可覆盖，后续修订递增mge.N。正式结果另记交付报告。
+
+## 自包含复现入口
+
+- `mge/tests/Blank`：真实可见1280x720、HiDef、60Hz/VSync空窗口，可Release JIT或NativeAOT + Full Trim。
+- `mge/tests/GraphicsProbe`：常规运行传入DLL SHA256，验证混合mip绘制；
+  `--constant-ring OUTPUT SHA256`额外验证5000次跨帧上传及像素。
+- `mge/tests/native`：COM/mip生命周期、首次使用计时、满容量描述符、query回归。
+- `mge/measure-empty-window.ps1`：在独立副本中替换受测DLL，记录实际加载模块与哈希，
+  对相同EXE测官方原版/同源未修复/维护版；不修改任何基线、NuGet缓存或真实应用输出。
+
+共用初始化与断言工具，不为六项问题复制六套窗口工程。源码检查只作为边界守卫，
+不能代替上面的可运行复现和GPU/内存验证。每项文档指向对应的共用复现入口。
