@@ -1,0 +1,27 @@
+{
+  "SourceHead": "a368caf559a6f663fc2a2ae92cf7b5c0386f81bb",
+  "FixCommit": "1c218fd4e3b8ef01ec9834b9e2c4ea4bd2966153",
+  "ExeSha256": "5AAF2D53086C44E99266E7305F2D413A89FC9E2BE42F9C512215DC95F919A898",
+  "NativeSha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0",
+  "Counts": {
+    ".ktx2": 49,
+    ".opus": 358,
+    ".ogg": 3,
+    ".ttf": 2
+  },
+  "Missing": [],
+  "Changed": [],
+  "AllPreserved": true,
+  "NativeAotPublishExitCode": 0,
+  "ShippingIsolationPassed": true,
+  "FullTenBattleRouteCompleted": false,
+  "PublicNugetPublished": false,
+  "NewCounts": {
+    ".ktx2": 49,
+    ".opus": 358,
+    ".ogg": 3,
+    ".ttf": 2
+  },
+  "Added": [],
+  "SourceIncludesPendingNugetIntegration": true
+}

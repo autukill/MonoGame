@@ -193,4 +193,14 @@ mge/out/hosting-cadence-final.log 记录 **59.99 UPS、29.99 FPS、CPU 0.172 秒
 
 `mge/out/news-subtitle-fix`保存真实最终Opus自然排空等19项断言、固定voxAnc31的12秒开发Game trace、实际24E2运行库hash和截图。该开发Game的AssetsCompiled完整来自先前Shipping包。trace记录约1.052秒TryPlay成功，声音年龄5.1667完成且请求Completed/outstanding=0，News年龄7.4正常淡出；最后截图字幕消失且菜单恢复。不改声音/字幕时长或音质。
 
-用户中止了界面自动操作，NuGet候选仅已上传并核对元数据，**尚未Submit发布**。修复后Shipping AOT的重新发布、真实十局和NuGet公源空缓存验证仍待补齐。具体游戏故障记录见相邻MyGameEngine仓库 `games/Monster/docs/news-result-short-voice-20261018.md`。
+用户中止了界面自动操作，NuGet候选仅已上传并核对元数据，**尚未Submit发布**。修复后 Shipping AOT 已重新发布并完成下述有界启动；真实十局和 NuGet 公源空缓存验证仍待补齐。具体游戏故障记录见相邻MyGameEngine仓库 `games/Monster/docs/news-result-short-voice-20261018.md`。
+
+## 新闻修复后的 Shipping AOT 重发与有界启动
+
+`mge/out/game-aot-news-fixed-build.log` 记录串行 NativeAOT + Full Trim 发布成功，三个托管程序集及最终发布目录的 Shipping 隔离检查通过。源码 HEAD 为 `a368caf559a6f663fc2a2ae92cf7b5c0386f81bb`，包含新闻修复 `1c218fd4` 以及本任务待提交的 NuGet 接入变更；不将此输出描述为干净 main 的独立重建。
+
+[产物身份](../validation/20261018/news-fixed-aot-identity.json) 记录 EXE SHA256 `5AAF2D53086C44E99266E7305F2D413A89FC9E2BE42F9C512215DC95F919A898`、最终 native SHA256 `24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0`。本次与旧 game-aot/AssetsCompiled 逐路径比对：49 张 KTX2、358 个 Opus、3 个 Ogg、2 个 TTF 内容一致，无新增、缺失或变化；这是这两个具体目录的计数，不改写早先另一组质量对照的原始计数。
+
+首次尝试使用开发截图参数，被 Shipping 参数解析器按设计拒绝；日志保留在 mge/out/news-fixed-aot-startup/，不计为启动通过。随后使用支持的 `--news --width 1280 --height 720`，在独立完整副本 mge/out/news-fixed-aot-startup-normal/ 运行 8.09 秒。[启动记录](../validation/20261018/news-fixed-aot-startup.json) 确认可见窗口、实际加载的 mgruntime.dll 哈希一致、没有 coreclr/clrjit 模块。结束时只停止核对 PID/启动时间/路径的本任务进程；此项不是正常退出、固定结算字幕、十局或 quiet 内存验收。没有操作鼠标键盘，也没有恢复用户已停止的 Computer Use。
+
+真实结算字幕和自然音频排空的证据仍是上一节的开发 Game/真实 Opus 检查。NuGet 尚未正式提交发布；最终实际十局与公开源验证保持待完成。

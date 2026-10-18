@@ -1,0 +1,17 @@
+{
+  "Pid": 35916,
+  "StartedUtc": "2026-10-18T04:06:25.9328951Z",
+  "Seconds": 8.0923202,
+  "VisibleWindow": true,
+  "NativeModules": [
+    {
+      "Path": "D:\\Projects\\Zhao\\MyGameEngine-MonoGame\\mge\\out\\news-fixed-aot-startup-normal\\mgruntime.DLL",
+      "Sha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0"
+    }
+  ],
+  "NativeAotNoCoreClr": true,
+  "NoForcedGc": true,
+  "StopByHarness": true,
+  "NormalGameExitTested": false,
+  "FullTenBattleRouteCompleted": false
+}
