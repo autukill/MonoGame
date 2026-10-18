@@ -236,6 +236,8 @@ struct MGG_Buffer
 	FrameCounter frame = 0;
 	uint8_t* push = nullptr;
 	bool dirty = false;
+	// A virgin upload allocation has no prior contents or recorded IA binding to preserve.
+	bool hasWrittenOrBound = false;
 
 	D3D12_HEAP_TYPE heapType;
 	size_t dataSize = 0;
@@ -1153,6 +1155,7 @@ void MGDX_ApplyState(MGG_GraphicsDevice* device)
 
 			cl->IASetIndexBuffer(&ibv);
 			device->indexBuffer->frame = currentFrame;
+			device->indexBuffer->hasWrittenOrBound = true;
 		}
 
 		device->indexBufferDirty = false;
@@ -1186,6 +1189,7 @@ void MGDX_ApplyState(MGG_GraphicsDevice* device)
 			cl->IASetVertexBuffers(i, 1, &vbv);
 
 			buffer->frame = currentFrame;
+			buffer->hasWrittenOrBound = true;
 		}
 
 		device->vertexBuffersDirty = 0;
@@ -1764,7 +1768,9 @@ void MGG_Buffer_SetData(MGG_GraphicsDevice* device, MGG_Buffer*& buffer, mgint o
 	// TODO: Force discard here if we find we're
 	// copying over data still in use.  See NX.
 
-	if (discard)
+	// The first write to an unused upload resource can use its existing allocation.
+	// Later writes/bindings retain the original rename and cross-frame lifetime rules.
+	if (discard && (buffer->heapType != D3D12_HEAP_TYPE_UPLOAD || buffer->hasWrittenOrBound))
 	{
 		auto last = buffer;
 
@@ -1789,6 +1795,7 @@ void MGG_Buffer_SetData(MGG_GraphicsDevice* device, MGG_Buffer*& buffer, mgint o
 		}
 	}
 
+	buffer->hasWrittenOrBound = true;
 	auto length = elementCount * vertexStride;
 
 	if (buffer->heapType == D3D12_HEAP_TYPE_UPLOAD)
@@ -2504,3 +2511,7 @@ MG_EXPORT void MGG_GraphicsDevice_GetNativeHandles(const MGG_GraphicsDevice* dev
 	handles->QueueFamilyIndex = 0;	// DX12 doesn't have queue families.
 	handles->QueueIndex       = 0;
 }
+
+#if defined(MGE_BUFFER_FIRST_WRITE_PROBE)
+#include "../../../mge/tests/native/BufferFirstWriteProbe.h"
+#endif

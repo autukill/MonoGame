@@ -9,6 +9,6 @@
   },
   "frameworkVersion": "3.8.6",
   "packageId": "MyGameEngine.MonoGame.Runtime.Windows.DX12",
-  "packageVersion": "3.8.6-mge.1",
+  "packageVersion": "3.8.6-mge.2",
   "officialRuntimeSha256": "1179B04B0AA1F983DD50E37F03D797040E35E9A3A13A50B34D7A776CF0DE8AB0"
 }

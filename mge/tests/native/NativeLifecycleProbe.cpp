@@ -7,6 +7,9 @@
 #include <cstdio>
 using namespace Graphics;
 using Microsoft::WRL::ComPtr;
+#ifdef MGE_BUFFER_FIRST_WRITE_PROBE
+void VerifyBufferFirstWrite(Graphics::DeviceResources* resources);
+#endif
 static void Check(HRESULT hr) { if(FAILED(hr))throw std::runtime_error("D3D12 regression operation failed"); }
 static void Sample(const char* stage,double milliseconds=0) {
     PROCESS_MEMORY_COUNTERS_EX memory{}; memory.cb=sizeof(memory);
@@ -35,6 +38,9 @@ int main() {
             }
             if(!adapter)throw std::runtime_error("No hardware adapter");
             DeviceResources device(MGSurfaceFormat::Color,2); device.CreateDeviceResources(factory.Get(),adapter.Get());
+            #ifdef MGE_BUFFER_FIRST_WRITE_PROBE
+            VerifyBufferFirstWrite(&device);
+            #endif
             auto context=device.GetCommandContext(); auto heaps=device.GetGraphicsHeaps();
             Sample("device.ready");
             Texture texture(SurfaceType::Texture,TextureDimension::Texture2D,16,16,1,5,MGSurfaceFormat::Color);
