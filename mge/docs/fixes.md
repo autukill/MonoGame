@@ -10,7 +10,7 @@
 | [MGE-DX12-003](003-mip-com-lifetime.md) | mip临时COM blob | 已迁入，待最终GPU验证 |
 | [MGE-DX12-004](004-lazy-mip-pipeline.md) | mip管线延迟创建 | 已迁入，待最终GPU验证 |
 | [MGE-DX12-005](005-paged-cpu-descriptors.md) | CPU SRV描述符分页 | 已迁入，待最终GPU验证 |
-| MGE-DX12-006 | mip后恢复图形PSO | 待迁入 |
+| [MGE-DX12-006](006-restore-mip-graphics-pso.md) | mip后恢复图形PSO | 已迁入，待最终GPU验证 |
 
 未包含实验性LazyQuery。对“官方未修复”的判断只针对已核查的基线或注明日期的审计，
 不推断其他官方发行版或未来develop状态。

@@ -68,6 +68,7 @@ void CommandContext::Reset()
     cmdList = cmd->Get();
 
     cmdList->SetGraphicsRootSignature(m_rootSig.Get());
+    m_currentPSO = nullptr;
 
     ID3D12DescriptorHeap* descriptorHeaps[] = {
         m_heaps->GetSRVShaderHeap(),
@@ -258,6 +259,10 @@ void CommandContext::GenerateMipmap(Texture* source)
         };
         cmdList->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 
+        // Compute dispatch replaced the active pipeline. The graphics manager
+        // may skip rebinding an unchanged hash, so restore the recorded PSO.
+        if (m_currentPSO) cmdList->SetPipelineState(m_currentPSO);
+
         // Keep the temp texture around for deferred deletion.
         m_tempTextures[m_backBufferIndex].push_back(staging);
 
@@ -308,6 +313,7 @@ void CommandContext::SetPSODeviceParameters(D3D12_GRAPHICS_PIPELINE_STATE_DESC& 
 
 void CommandContext::SetPipelineState(ID3D12PipelineState* ps) {
     cmdList->SetPipelineState(ps);
+    m_currentPSO = ps;
 }
 
 void CommandContext::SetRenderTargets(UINT NumRTVs, const D3D12_CPU_DESCRIPTOR_HANDLE RTVs[]) {
