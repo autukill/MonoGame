@@ -55,4 +55,3 @@ python ./mge/summarize-empty-window.py ./mge/out/memory-final ./mge/out/memory-f
 测量脚本采样结束后按已核对身份停止进程；正常 Game.Exit() 测试另行记录。quiet 内存比较与 GPU 回读/绘制功能 probe 分别运行、分别解释。CPU 逻辑核当量不能当作整机 CPU 百分比。
 
 2026-10-18 的小型交付证据保存在 mge/validation/20261018/，结论及覆盖边界见 [validation-20261018.md](validation-20261018.md)。不要提交大日志、截图、二进制或 NuGet 缓存。
-

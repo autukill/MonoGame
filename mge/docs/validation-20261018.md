@@ -185,4 +185,12 @@ mge/out/hosting-cadence-final.log 记录 **59.99 UPS、29.99 FPS、CPU 0.172 秒
 2. **NuGet 公开发布后的独立还原**：本记录仅核对本地包；公开还原、空缓存验证、公开 nupkg 身份和内部 DLL 哈希仍待补。仓库签名可能改变整个 nupkg 的哈希，须分别记录包哈希和内部 DLL 哈希。
 
 本记录不宣称上述待补项目已完成，不将本地包核对等同于公开发布验证。
+## 新闻结算中断与修复
 
+最终运行库实际接入的 Shipping NativeAOT Game 在同一进程进入4场战斗后，第四次死亡返回新闻时停止自动收起。原始证据 `mge/out/aot-route-final/route.process.json` 明确为 `Completed=false`、`AuthoredBattleCount=4`、`FullTenBattleRouteCompleted=false`，不得将其写成十局通过。
+
+该问题已用不依赖原生图形或音频的 fake 回归确定为游戏展示时钟死锁：`voxAnc31`的实际5.16375秒声音先于6.4秒字幕结束，音频完成提前return冻结了展示年龄。MyGameEngine `1c218fd4e3b8ef01ec9834b9e2c4ea4bd2966153` 修复此逻辑并新增六种小步边界回归；旧逻辑红灯、修复后VO/News/音乐组绿灯。
+
+`mge/out/news-subtitle-fix`保存真实最终Opus自然排空等19项断言、固定voxAnc31的12秒开发Game trace、实际24E2运行库hash和截图。该开发Game的AssetsCompiled完整来自先前Shipping包。trace记录约1.052秒TryPlay成功，声音年龄5.1667完成且请求Completed/outstanding=0，News年龄7.4正常淡出；最后截图字幕消失且菜单恢复。不改声音/字幕时长或音质。
+
+用户中止了界面自动操作，NuGet候选仅已上传并核对元数据，**尚未Submit发布**。修复后Shipping AOT的重新发布、真实十局和NuGet公源空缓存验证仍待补齐。具体游戏故障记录见相邻MyGameEngine仓库 `games/Monster/docs/news-result-short-voice-20261018.md`。
