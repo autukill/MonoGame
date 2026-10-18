@@ -25,3 +25,5 @@ MGE-DX12-007：[首次上传 Discard](007-virgin-upload-discard.md)，3.8.6-mge.
 - MGE-DX12-004: `e61763a80da1bda9fae51c0bac4b0b991a78b5da`
 - MGE-DX12-005: `dba0937bb6b944915b5e6764320fc022f806075b`
 - MGE-DX12-006: `ad392d7a4843216953baece2b19ba114e6fd5e0b`
+
+- MGE-DX12-008: [上传缓冲使用既有对齐容量](008-upload-placement-capacity.md)，本地候选，待性能验证。

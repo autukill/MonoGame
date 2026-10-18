@@ -1631,9 +1631,16 @@ static MGG_Buffer* MGDX_BufferDiscard(MGG_GraphicsDevice* device, MGG_Buffer* bu
 MGG_Buffer* MGDX_Buffer_Create(MGG_GraphicsDevice* device, size_t sizeInBytes, D3D12_HEAP_TYPE heap, D3D12_RESOURCE_STATES state)
 {
 	auto buffer = new MGG_Buffer();
-	buffer->actualSize = buffer->dataSize = sizeInBytes;
+	buffer->dataSize = sizeInBytes;
+	// UPLOAD allocations already consume placement-aligned storage. Expose that
+	// physical capacity to best-fit reuse; keep caller-visible bounds unrounded.
+	const size_t alignment = D3D12_DEFAULT_RESOURCE_PLACEMENT_ALIGNMENT;
+	if (heap == D3D12_HEAP_TYPE_UPLOAD && sizeInBytes > SIZE_MAX - (alignment - 1))
+		throw std::overflow_error("Upload buffer capacity overflow");
+	buffer->actualSize = heap == D3D12_HEAP_TYPE_UPLOAD ?
+		(sizeInBytes + alignment - 1) & ~(alignment - 1) : sizeInBytes;
 
-	auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(buffer->dataSize, D3D12_RESOURCE_FLAG_NONE, D3D12_DEFAULT_RESOURCE_PLACEMENT_ALIGNMENT);
+	auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(buffer->actualSize, D3D12_RESOURCE_FLAG_NONE, D3D12_DEFAULT_RESOURCE_PLACEMENT_ALIGNMENT);
 	D3D12MA::ALLOCATION_DESC allocDesc = {};
 
 	buffer->m_currentState = state;

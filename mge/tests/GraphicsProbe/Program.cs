@@ -4,6 +4,13 @@ using Microsoft.Xna.Framework.Graphics;
 // Independent public-API regression, not referenced by any engine or player project.
 try
 {
+    if (args is ["--buffers", var bufferHash])
+    {
+        using var probe = new DynamicBufferProbe();
+        probe.Run();
+        if (probe.Frames != 6) throw new InvalidOperationException("Dynamic buffer probe closed early.");
+        args=[bufferHash];
+    }
     if (args is ["--constant-ring", var output, var expectedHash])
     {
         int result=NativeConstantRingProbe.Run(output);
