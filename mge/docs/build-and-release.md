@@ -1,8 +1,39 @@
 # 可复现构建、回归与发布
 
-需要Windows x64、Visual Studio 2026 C++桌面工具/CMake、Python 3和.NET 11 SDK。
-先按upstream.json还原SDL和stb子模块；官方MonoGame.Runtime.Windows.DX12 3.8.6
-用于提取并核对六份原始Effect字节码，其SHA256固定。不会修改该官方DLL或缓存。
+需要 Windows x64、Git、Visual Studio 2026 C++ 桌面工具及 Windows SDK/CMake、
+**64 位 Python 3** 和 .NET 11 SDK。Python 的 ctypes 会载入 x64 DLL，不能使用 32 位 Python。
+构建脚本通过 vswhere 查找 Visual Studio，不要求本机示例中的安装路径。
+
+在维护分支的仓库根目录还原固定子模块；具体提交见 mge/upstream.json：
+
+```powershell
+git submodule update --init external/stb native/monogame/external/sdl2
+git -C native/monogame/external/sdl2 submodule update --init sdl
+git submodule status --recursive
+```
+
+官方 MonoGame.Runtime.Windows.DX12 3.8.6 用于提取并核对六份原始 Effect 字节码，
+DLL SHA256 固定为 1179B04B0AA1F983DD50E37F03D797040E35E9A3A13A50B34D7A776CF0DE8AB0。
+构建脚本不会下载官方包、初始化子模块或修改官方 DLL/缓存。
+默认从 USERPROFILE/.nuget/packages/monogame.runtime.windows.dx12/3.8.6/
+runtimes/win-x64/native/mgruntime.dll 读取；此默认值不跟随 NUGET_PACKAGES。
+若该文件不存在，可在独立依赖目录准备官方包：
+
+```powershell
+$taskPrerequisites = Join-Path $env:TEMP ('mge-dx12-prerequisites-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $taskPrerequisites | Out-Null
+$taskOfficialPackage = Join-Path $taskPrerequisites 'official-3.8.6.nupkg'
+Invoke-WebRequest 'https://api.nuget.org/v3-flatcontainer/monogame.runtime.windows.dx12/3.8.6/monogame.runtime.windows.dx12.3.8.6.nupkg' -OutFile $taskOfficialPackage
+$taskOfficialRoot = Join-Path $taskPrerequisites 'official-3.8.6'
+[IO.Compression.ZipFile]::ExtractToDirectory($taskOfficialPackage, $taskOfficialRoot)
+$taskOfficialRuntime = Join-Path $taskOfficialRoot 'runtimes/win-x64/native/mgruntime.dll'
+(Get-FileHash -LiteralPath $taskOfficialRuntime -Algorithm SHA256).Hash
+./mge/build.ps1 -OfficialRuntime $taskOfficialRuntime -OutputRoot ./mge/out/release-1
+```
+
+这个过程只准备官方对照 DLL，不需要先还原依赖自维护包的 Blank/GraphicsProbe。
+OutputRoot 必须是尚不存在的目录；源码、维护文档和回归须先提交，满足干净源码检查。
+若默认位置已有匹配的官方 DLL，则直接使用以下命令：
 
 ```powershell
 ./mge/build.ps1 -OutputRoot ./mge/out/release-1
