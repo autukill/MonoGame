@@ -35,11 +35,6 @@ public:
     ID3D12PipelineState* m_prevPSO = nullptr;
     ID3D12PipelineState* m_currentPSO = nullptr;
 
-    size_t m_cbOffset = 0;
-    Microsoft::WRL::ComPtr<D3D12MA::Allocation> m_cbAlloc[MAX_BACK_BUFFER_COUNT];
-    Microsoft::WRL::ComPtr<ID3D12Resource> m_cbRes[MAX_BACK_BUFFER_COUNT];
-    uint8_t* m_cbContent[MAX_BACK_BUFFER_COUNT];
-
     std::vector<Texture*> m_tempTextures[MAX_BACK_BUFFER_COUNT];
 
     std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> m_currentRTV;

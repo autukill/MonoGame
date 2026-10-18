@@ -39,20 +39,7 @@ CommandContext::CommandContext(DeviceResources* deviceResources) : m_deviceRes(d
     CreateDefaultRootSignature();
     CreateGenerateMipPipelineResources();
 
-    D3D12MA::ALLOCATION_DESC cbUploadAllocDesc = { D3D12MA::ALLOCATION_FLAG_NONE, D3D12_HEAP_TYPE_UPLOAD };
-    D3D12_RESOURCE_DESC cbUploadResourceDesc = CD3DX12_RESOURCE_DESC::Buffer(512 * D3D12_DEFAULT_RESOURCE_PLACEMENT_ALIGNMENT); // should be more than enough for CB
     for (size_t i = 0; i < MAX_BACK_BUFFER_COUNT; ++i) {
-        deviceResources->GetAllocator()->CreateResource(
-            &cbUploadAllocDesc,
-            &cbUploadResourceDesc,
-            D3D12_RESOURCE_STATE_GENERIC_READ,
-            nullptr,
-            &m_cbAlloc[i],
-            IID_GRAPHICS_PPV_ARGS(m_cbRes[i].ReleaseAndGetAddressOf()));
-
-        CD3DX12_RANGE readRange(0, 0); // We do not intend to read from this resource on the CPU.
-        m_cbRes[i]->Map(0, &readRange, (void**)(&m_cbContent[i]));
-
         m_tempTextures[i] = {};
     }
 }
@@ -89,7 +76,6 @@ void CommandContext::Reset()
     };
     cmdList->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 
-    m_cbOffset = 0;
 }
 
 void CommandContext::Reset(unsigned int currentFrame) {
