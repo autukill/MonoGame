@@ -6,12 +6,8 @@ if(Test-Path -LiteralPath $out){throw 'Choose a fresh output directory'}
 $pin=Get-Content "$PSScriptRoot/upstream.json" -Raw|ConvertFrom-Json
 $commit=(& git -C $root rev-parse HEAD).Trim();if($LASTEXITCODE){throw 'Cannot read source commit'}
 & git -C $root merge-base --is-ancestor $pin.commit HEAD;if($LASTEXITCODE){throw 'Wrong source ancestry'}
-if(& git -C $root status --porcelain --untracked-files=no){throw 'Commit tracked source changes before building'}
-foreach($entry in $pin.submodules.PSObject.Properties){
- $source=Join-Path $root $entry.Name
- if((& git -C $source rev-parse HEAD).Trim() -ne $entry.Value){throw "Wrong submodule: $($entry.Name)"}
- if(& git -C $source status --porcelain --untracked-files=no){throw "Modified submodule: $($entry.Name)"}
-}
+. "$PSScriptRoot/assert-clean-source.ps1"
+Assert-MgeCleanSource -Root $root -Pins $pin.submodules
 New-Item -ItemType Directory -Path "$out/effects","$out/payload/licenses" -Force|Out-Null
 & python "$PSScriptRoot/extract-builtin-effects.py" $OfficialRuntime "$out/effects";if($LASTEXITCODE){throw 'Effect preservation failed'}
 & python -m unittest discover -s "$PSScriptRoot/tests" -v;if($LASTEXITCODE){throw 'Source regressions failed'}
@@ -29,7 +25,8 @@ try {
  if($LASTEXITCODE){throw 'ABI or builtin Effect mismatch'}
  & "$out/build/Release/dx12-lifecycle.exe" *> "$out/lifecycle.log"
  if($LASTEXITCODE){throw "Native lifecycle regression failed: $out/lifecycle.log"}
- if((& git -C $root rev-parse HEAD).Trim() -ne $commit -or (& git -C $root status --porcelain --untracked-files=no)){throw 'Source changed during build'}
+ Assert-MgeCleanSource -Root $root -Pins $pin.submodules
+ if((& git -C $root rev-parse HEAD).Trim() -ne $commit -or $LASTEXITCODE){throw 'Source changed during build'}
  Copy-Item -LiteralPath "$out/build/Release/mgruntime.dll" -Destination "$out/payload/mgruntime.dll"
  Copy-Item -LiteralPath "$root/LICENSE.txt","$root/THIRD-PARTY-NOTICES.txt" -Destination "$out/payload/licenses"
  Copy-Item -LiteralPath "$root/native/monogame/external/sdl2/sdl/LICENSE.txt" -Destination "$out/payload/licenses/SDL-LICENSE.txt"

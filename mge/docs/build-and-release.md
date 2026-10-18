@@ -39,3 +39,5 @@ NuGet可能对包追加仓库签名，公开下载nupkg整体哈希须单独记�
 不能代替上面的可运行复现和GPU/内存验证。每项文档指向对应的共用复现入口。
 
 包内targets将许可证、第三方声明与provenance复制到消费者输出和发布目录的licenses/monogame-dx12/；原生DLL仍由标准NuGet运行库资产选择。
+
+生产脚本同时拒绝未提交和未跟踪输入，包括被.gitignore隐藏但会进入native编译的文件；Git状态查询失败也会终止。可执行 `./mge/tests/verify-clean-source.ps1` 验证忽略头文件被拒绝。
