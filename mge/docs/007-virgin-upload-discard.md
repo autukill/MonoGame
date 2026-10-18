@@ -8,4 +8,4 @@
 
 NativeLifecycleProbe 的独立测试验证首写不换资源、第二次 Discard 必须换资源且旧数据保留，覆盖顶点/索引、首写 Discard/NoOverwrite、非零偏移与交错步幅。该测试只编译进回归 EXE，不进入 mgruntime.dll，不增加导出。另需运行现有 mip/query 生命周期、GPU 跨帧像素和真实 AOT 三次切关。
 
-当前为 3.8.6-mge.2 本地候选，尚未公开发布或接入引擎；实际收益、负对照与回归结果在验证提交补充。KTX2、音频、音质、GC 和其他后端不变。
+原版负对照在“First upload write unnecessarily renamed a virgin resource”处按预期失败；修复版三轮设备生命周期及独立 GPU 验证通过。单独修复未消除真实 Game 的上传池扩容，不能把不同随机战斗的工作集差异当作此项收益；主要容量复用优化见 MGE-DX12-008。当前为 3.8.6-mge.2 本地候选，尚未公开发布或接入引擎。KTX2、音频、音质、GC 和其他后端不变。

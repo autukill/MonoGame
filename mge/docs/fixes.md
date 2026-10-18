@@ -12,7 +12,7 @@
 | [MGE-DX12-005](005-paged-cpu-descriptors.md) | CPU SRV描述符分页 | 已迁入；原生生命周期与GPU回归通过 |
 | [MGE-DX12-006](006-restore-mip-graphics-pso.md) | mip后恢复图形PSO | 已迁入；原生生命周期与GPU回归通过 |
 
-MGE-DX12-007：[首次上传 Discard](007-virgin-upload-discard.md)，3.8.6-mge.2 本地候选，待运行验证。
+MGE-DX12-007：[首次上传 Discard](007-virgin-upload-discard.md)，原版负对照与修复回归通过。
 
 未包含实验性LazyQuery。对“官方未修复”的判断只针对已核查的基线或注明日期的审计，
 不推断其他官方发行版或未来develop状态。
@@ -26,4 +26,4 @@ MGE-DX12-007：[首次上传 Discard](007-virgin-upload-discard.md)，3.8.6-mge.
 - MGE-DX12-005: `dba0937bb6b944915b5e6764320fc022f806075b`
 - MGE-DX12-006: `ad392d7a4843216953baece2b19ba114e6fd5e0b`
 
-- MGE-DX12-008: [上传缓冲使用既有对齐容量](008-upload-placement-capacity.md)，本地候选，待性能验证。
+- MGE-DX12-008: [上传缓冲使用既有对齐容量](008-upload-placement-capacity.md)，原生/GPU/真实 AOT 资源复核通过；无探针性能对照由引擎仓库记录。
