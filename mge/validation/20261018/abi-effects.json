@@ -1,0 +1,895 @@
+{
+  "control": "C:\\Users\\zhao\\.nuget\\packages\\monogame.runtime.windows.dx12\\3.8.6\\runtimes\\win-x64\\native\\mgruntime.dll",
+  "candidate": "D:\\Projects\\Zhao\\MyGameEngine-MonoGame\\mge\\out\\release-final\\build\\Release\\mgruntime.dll",
+  "controlSha256": "1179b04b0aa1f983dd50e37f03d797040e35e9a3a13a50b34d7a776cf0de8ab0",
+  "candidateSha256": "24e2ec39d7c8f0ac4ab9f8ee48024d3e5a34a310c3964272f05bced11b8e4bc0",
+  "exportCount": 172,
+  "exports": [
+    {
+      "name": "MGA_Buffer_Create",
+      "ordinal": 1,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Buffer_Destroy",
+      "ordinal": 2,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Buffer_GetDuration",
+      "ordinal": 3,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Buffer_InitializeFormat",
+      "ordinal": 4,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Buffer_InitializePCM",
+      "ordinal": 5,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Buffer_InitializeXact",
+      "ordinal": 6,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_System_Create",
+      "ordinal": 7,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_System_Destroy",
+      "ordinal": 8,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_System_GetMaxInstances",
+      "ordinal": 9,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_System_SetReverbSettings",
+      "ordinal": 10,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_AppendBuffer",
+      "ordinal": 11,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_Apply3D",
+      "ordinal": 12,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_ClearFilterMode",
+      "ordinal": 13,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_Create",
+      "ordinal": 14,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_Destroy",
+      "ordinal": 15,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_GetBufferCount",
+      "ordinal": 16,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_GetFinishedBufferCount",
+      "ordinal": 17,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_GetPosition",
+      "ordinal": 18,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_GetState",
+      "ordinal": 19,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_Pause",
+      "ordinal": 20,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_Play",
+      "ordinal": 21,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_Resume",
+      "ordinal": 22,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_SetBuffer",
+      "ordinal": 23,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_SetFilterMode",
+      "ordinal": 24,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_SetPan",
+      "ordinal": 25,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_SetPitch",
+      "ordinal": 26,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_SetReverbMix",
+      "ordinal": 27,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_SetVolume",
+      "ordinal": 28,
+      "forwarder": null
+    },
+    {
+      "name": "MGA_Voice_Stop",
+      "ordinal": 29,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_BlendState_Create",
+      "ordinal": 30,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_BlendState_Destroy",
+      "ordinal": 31,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Buffer_Create",
+      "ordinal": 32,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Buffer_Destroy",
+      "ordinal": 33,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Buffer_GetData",
+      "ordinal": 34,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Buffer_SetData",
+      "ordinal": 35,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_DepthStencilState_Create",
+      "ordinal": 36,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_DepthStencilState_Destroy",
+      "ordinal": 37,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_EffectResource_GetBytecode",
+      "ordinal": 38,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsAdapter_Get",
+      "ordinal": 39,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsAdapter_GetInfo",
+      "ordinal": 40,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_BeginFrame",
+      "ordinal": 41,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_Clear",
+      "ordinal": 42,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_Create",
+      "ordinal": 43,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_Destroy",
+      "ordinal": 44,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_Draw",
+      "ordinal": 45,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_DrawIndexed",
+      "ordinal": 46,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_DrawIndexedInstanced",
+      "ordinal": 47,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_GetBackBufferData",
+      "ordinal": 48,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_GetBackBufferMultiSampleCount",
+      "ordinal": 49,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_GetCaps",
+      "ordinal": 50,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_GetNativeHandles",
+      "ordinal": 51,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_GetTitleSafeArea",
+      "ordinal": 52,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_Present",
+      "ordinal": 53,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_ResizeSwapchain",
+      "ordinal": 54,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_ResolveRenderTargets",
+      "ordinal": 55,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetBlendState",
+      "ordinal": 56,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetConstantBuffer",
+      "ordinal": 57,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetDepthStencilState",
+      "ordinal": 58,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetIndexBuffer",
+      "ordinal": 59,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetInputLayout",
+      "ordinal": 60,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetRasterizerState",
+      "ordinal": 61,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetRenderTargets",
+      "ordinal": 62,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetSamplerState",
+      "ordinal": 63,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetScissorRectangle",
+      "ordinal": 64,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetShader",
+      "ordinal": 65,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetTexture",
+      "ordinal": 66,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetVertexBuffer",
+      "ordinal": 67,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsDevice_SetViewport",
+      "ordinal": 68,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsSystem_Create",
+      "ordinal": 69,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_GraphicsSystem_Destroy",
+      "ordinal": 70,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_InputLayout_Create",
+      "ordinal": 71,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_InputLayout_Destroy",
+      "ordinal": 72,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_OcclusionQuery_Begin",
+      "ordinal": 73,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_OcclusionQuery_Create",
+      "ordinal": 74,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_OcclusionQuery_Destroy",
+      "ordinal": 75,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_OcclusionQuery_End",
+      "ordinal": 76,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_OcclusionQuery_GetResult",
+      "ordinal": 77,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_RasterizerState_Create",
+      "ordinal": 78,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_RasterizerState_Destroy",
+      "ordinal": 79,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_RenderTarget_Create",
+      "ordinal": 80,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_RenderTarget_WrapNativeHandle",
+      "ordinal": 81,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_SamplerState_Create",
+      "ordinal": 82,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_SamplerState_Destroy",
+      "ordinal": 83,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Shader_Create",
+      "ordinal": 84,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Shader_Destroy",
+      "ordinal": 85,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Texture_Create",
+      "ordinal": 86,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Texture_Destroy",
+      "ordinal": 87,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Texture_GetData",
+      "ordinal": 88,
+      "forwarder": null
+    },
+    {
+      "name": "MGG_Texture_SetData",
+      "ordinal": 89,
+      "forwarder": null
+    },
+    {
+      "name": "MGI_FreeRGBA",
+      "ordinal": 90,
+      "forwarder": null
+    },
+    {
+      "name": "MGI_ReadRGBA",
+      "ordinal": 91,
+      "forwarder": null
+    },
+    {
+      "name": "MGI_WriteJpg",
+      "ordinal": 92,
+      "forwarder": null
+    },
+    {
+      "name": "MGI_WritePng",
+      "ordinal": 93,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_AudioDecoder_Create",
+      "ordinal": 94,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_AudioDecoder_Decode",
+      "ordinal": 95,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_AudioDecoder_Destroy",
+      "ordinal": 96,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_AudioDecoder_SetPosition",
+      "ordinal": 97,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_Create",
+      "ordinal": 98,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_Destroy",
+      "ordinal": 99,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_GetDuration",
+      "ordinal": 100,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_GetPosition",
+      "ordinal": 101,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_Pause",
+      "ordinal": 102,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_Play",
+      "ordinal": 103,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_Resume",
+      "ordinal": 104,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_SetVolume",
+      "ordinal": 105,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_Stop",
+      "ordinal": 106,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_Song_TryDequeueEvent",
+      "ordinal": 107,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_VideoDecoder_Create",
+      "ordinal": 108,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_VideoDecoder_Decode",
+      "ordinal": 109,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_VideoDecoder_Destroy",
+      "ordinal": 110,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_VideoDecoder_GetAudioDecoder",
+      "ordinal": 111,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_VideoDecoder_GetPosition",
+      "ordinal": 112,
+      "forwarder": null
+    },
+    {
+      "name": "MGM_VideoDecoder_SetLooped",
+      "ordinal": 113,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Cursor_Create",
+      "ordinal": 114,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Cursor_CreateCustom",
+      "ordinal": 115,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Cursor_Destroy",
+      "ordinal": 116,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_GamePad_GetCaps",
+      "ordinal": 117,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_GamePad_GetMaxSupported",
+      "ordinal": 118,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_GamePad_SetVibration",
+      "ordinal": 119,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Mouse_SetVisible",
+      "ordinal": 120,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Mouse_WarpPosition",
+      "ordinal": 121,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_BeforeDraw",
+      "ordinal": 122,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_BeforeInitialize",
+      "ordinal": 123,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_BeforeRun",
+      "ordinal": 124,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_BeforeUpdate",
+      "ordinal": 125,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_Create",
+      "ordinal": 126,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_Destroy",
+      "ordinal": 127,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_Free",
+      "ordinal": 128,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_GetGraphicsBackend",
+      "ordinal": 129,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_GetPlatform",
+      "ordinal": 130,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_MakePath",
+      "ordinal": 131,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Platform_PollEvent",
+      "ordinal": 132,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_BeginRecreateNativeWindow",
+      "ordinal": 133,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_Create",
+      "ordinal": 134,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_CreateNativeWindow",
+      "ordinal": 135,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_Destroy",
+      "ordinal": 136,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_DestroyNativeWindow",
+      "ordinal": 137,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_EnterFullScreen",
+      "ordinal": 138,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_ExitFullScreen",
+      "ordinal": 139,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_FinalizeRecreateNativeWindow",
+      "ordinal": 140,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_GetAllowUserResizing",
+      "ordinal": 141,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_GetIsBorderless",
+      "ordinal": 142,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_GetNativeHandle",
+      "ordinal": 143,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_GetPosition",
+      "ordinal": 144,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_RecreateForGraphicsRetry",
+      "ordinal": 145,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_SetAllowUserResizing",
+      "ordinal": 146,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_SetClientSize",
+      "ordinal": 147,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_SetCursor",
+      "ordinal": 148,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_SetIconBitmap",
+      "ordinal": 149,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_SetIsBorderless",
+      "ordinal": 150,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_SetPosition",
+      "ordinal": 151,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_SetTitle",
+      "ordinal": 152,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_Show",
+      "ordinal": 153,
+      "forwarder": null
+    },
+    {
+      "name": "MGP_Window_ShowMessageBox",
+      "ordinal": 154,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Asset_Close",
+      "ordinal": 155,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Asset_Open",
+      "ordinal": 156,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Asset_Read",
+      "ordinal": 157,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Asset_Seek",
+      "ordinal": 158,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_CloseContainer",
+      "ordinal": 159,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_CloseDevice",
+      "ordinal": 160,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_CommitContainer",
+      "ordinal": 161,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_DeleteContainer",
+      "ordinal": 162,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_DirectoryCreate",
+      "ordinal": 163,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_DirectoryDelete",
+      "ordinal": 164,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_EnumerateContent",
+      "ordinal": 165,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_FileDelete",
+      "ordinal": 166,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_FileLoad",
+      "ordinal": 167,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_FileSave",
+      "ordinal": 168,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_GetFreeSpace",
+      "ordinal": 169,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_GetTotalSpace",
+      "ordinal": 170,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_OpenContainer",
+      "ordinal": 171,
+      "forwarder": null
+    },
+    {
+      "name": "MG_Storage_OpenDevice",
+      "ordinal": 172,
+      "forwarder": null
+    }
+  ],
+  "effects": {
+    "AlphaTestEffect": {
+      "bytes": 24614,
+      "sha256": "e856b13b798c68cb0dec5c3af5f88e2c6ec5a7dfc50bc0b2f3adfa985728f4f4"
+    },
+    "BasicEffect": {
+      "bytes": 106388,
+      "sha256": "22b8fd30a1b2696753350796e69ecf5b9e0dac69b1987d75f7431c9fbf508430"
+    },
+    "DualTextureEffect": {
+      "bytes": 19645,
+      "sha256": "eac0cb968fbb6917f60458d8e2dab4210e526f07e78f5162290d7351c1fd1021"
+    },
+    "EnvironmentMapEffect": {
+      "bytes": 33104,
+      "sha256": "62be040466dfd3d65bcedaf97d9356f8f85bd4f9055e8d7c5ab1d5f4b011ce59"
+    },
+    "SkinnedEffect": {
+      "bytes": 66134,
+      "sha256": "bc38eb0abf249a62771d9f67e4c98aba61b4d1f05eafb3ce37b4ae559d881e32"
+    },
+    "SpriteEffect": {
+      "bytes": 5679,
+      "sha256": "5a3c0388c764f9d5c2e8a57a9f3cd069e2f43550ad03b6cdcbbfce38db9bac00"
+    }
+  }
+}

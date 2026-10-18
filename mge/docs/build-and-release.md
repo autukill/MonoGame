@@ -41,3 +41,18 @@ NuGet可能对包追加仓库签名，公开下载nupkg整体哈希须单独记�
 包内targets将许可证、第三方声明与provenance复制到消费者输出和发布目录的licenses/monogame-dx12/；原生DLL仍由标准NuGet运行库资产选择。
 
 生产脚本同时拒绝未提交和未跟踪输入，包括被.gitignore隐藏但会进入native编译的文件；Git状态查询失败也会终止。可执行 `./mge/tests/verify-clean-source.ps1` 验证忽略头文件被拒绝。
+
+## 空窗口统计汇总与验证归档
+
+三配置各三轮的 mge/measure-empty-window.ps1 全部完成后，可只处理既有 JSON 汇总统计：
+
+```powershell
+python ./mge/summarize-empty-window.py ./mge/out/memory-final ./mge/out/memory-final/summary.json
+```
+
+输入目录含 official-1 至 official-3、same-source-unpatched-1 至 same-source-unpatched-3、maintained-1 至 maintained-3，各自含 process.json。汇总检查可见窗口、相同 EXE、实际 native 哈希、NativeAOT 模块身份和完成状态，输出 5/15/30/60 秒 WS、Private、Peak WS、累计 CPU 秒及逻辑核当量的三轮 min/median/max。该脚本只读既有采样并写汇总，不启动应用或构建。
+
+测量脚本采样结束后按已核对身份停止进程；正常 Game.Exit() 测试另行记录。quiet 内存比较与 GPU 回读/绘制功能 probe 分别运行、分别解释。CPU 逻辑核当量不能当作整机 CPU 百分比。
+
+2026-10-18 的小型交付证据保存在 mge/validation/20261018/，结论及覆盖边界见 [validation-20261018.md](validation-20261018.md)。不要提交大日志、截图、二进制或 NuGet 缓存。
+

@@ -1,0 +1,30 @@
+{
+  "official": {
+    "nativeSha256": "1179B04B0AA1F983DD50E37F03D797040E35E9A3A13A50B34D7A776CF0DE8AB0",
+    "modules": [
+      "d3d12.dll",
+      "D3D12Core.dll",
+      "vulkan-1.dll",
+      "nvoglv64.dll",
+      "nvwgf2umx.dll"
+    ]
+  },
+  "same-source-unpatched": {
+    "nativeSha256": "20D3E456CFA5E0ED8E5361C7A95A353B2262D1576A496E7C8B1786C0E7BC462B",
+    "modules": [
+      "d3d12.dll",
+      "D3D12Core.dll",
+      "vulkan-1.dll",
+      "nvoglv64.dll",
+      "nvwgf2umx.dll"
+    ]
+  },
+  "maintained": {
+    "nativeSha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0",
+    "modules": [
+      "d3d12.dll",
+      "D3D12Core.dll",
+      "nvwgf2umx.dll"
+    ]
+  }
+}

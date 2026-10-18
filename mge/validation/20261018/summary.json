@@ -1,0 +1,411 @@
+{
+  "sampleSeconds": [
+    5,
+    15,
+    30,
+    60
+  ],
+  "runsPerCase": 3,
+  "units": {
+    "memory": "MiB",
+    "CPU": "cumulative seconds and logical-core equivalents"
+  },
+  "cases": {
+    "official": {
+      "nativeSha256": "1179B04B0AA1F983DD50E37F03D797040E35E9A3A13A50B34D7A776CF0DE8AB0",
+      "exeSha256": "F9BE96EC6B185D3F82132F09B4D0C0511DD7AC4B55D2E266D67A1A1B405BC075",
+      "processes": [
+        {
+          "pid": 41232,
+          "startedUtc": "2026-10-18T03:24:45.8971993Z"
+        },
+        {
+          "pid": 11316,
+          "startedUtc": "2026-10-18T03:27:46.5565998Z"
+        },
+        {
+          "pid": 17344,
+          "startedUtc": "2026-10-18T03:30:46.9616868Z"
+        }
+      ],
+      "samples": [
+        {
+          "seconds": 5,
+          "WorkingSetMiB": {
+            "min": 207.75,
+            "median": 209.40234375,
+            "max": 209.4296875
+          },
+          "PrivateMiB": {
+            "min": 268.7578125,
+            "median": 268.984375,
+            "max": 269.29296875
+          },
+          "PeakWorkingSetMiB": {
+            "min": 207.75390625,
+            "median": 209.40234375,
+            "max": 209.4296875
+          },
+          "CpuSeconds": {
+            "min": 4.96875,
+            "median": 5.0,
+            "max": 5.046875
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.9877518767285657,
+            "median": 0.9897908366533865,
+            "max": 0.9997771394611727
+          }
+        },
+        {
+          "seconds": 15,
+          "WorkingSetMiB": {
+            "min": 209.41015625,
+            "median": 209.43359375,
+            "max": 210.04296875
+          },
+          "PrivateMiB": {
+            "min": 268.7578125,
+            "median": 268.984375,
+            "max": 269.58984375
+          },
+          "PeakWorkingSetMiB": {
+            "min": 209.41015625,
+            "median": 209.43359375,
+            "max": 210.04296875
+          },
+          "CpuSeconds": {
+            "min": 14.78125,
+            "median": 14.921875,
+            "max": 15.046875
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.9818166722019263,
+            "median": 0.9920799813842165,
+            "max": 1.0005901715653678
+          }
+        },
+        {
+          "seconds": 30,
+          "WorkingSetMiB": {
+            "min": 209.58203125,
+            "median": 209.58984375,
+            "max": 210.29296875
+          },
+          "PrivateMiB": {
+            "min": 268.94140625,
+            "median": 269.1328125,
+            "max": 269.73828125
+          },
+          "PeakWorkingSetMiB": {
+            "min": 209.58203125,
+            "median": 209.58984375,
+            "max": 210.29296875
+          },
+          "CpuSeconds": {
+            "min": 29.71875,
+            "median": 29.90625,
+            "max": 30.109375
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.9889108877944895,
+            "median": 0.9961444940377058,
+            "max": 1.0002782299591375
+          }
+        },
+        {
+          "seconds": 60,
+          "WorkingSetMiB": {
+            "min": 209.50390625,
+            "median": 209.5078125,
+            "max": 210.2109375
+          },
+          "PrivateMiB": {
+            "min": 268.7578125,
+            "median": 268.95703125,
+            "max": 269.55859375
+          },
+          "PeakWorkingSetMiB": {
+            "min": 209.58203125,
+            "median": 209.58984375,
+            "max": 210.29296875
+          },
+          "CpuSeconds": {
+            "min": 59.53125,
+            "median": 59.921875,
+            "max": 60.0
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.9907838894898893,
+            "median": 0.9984316682218075,
+            "max": 0.9994003597841296
+          }
+        }
+      ]
+    },
+    "same-source-unpatched": {
+      "nativeSha256": "20D3E456CFA5E0ED8E5361C7A95A353B2262D1576A496E7C8B1786C0E7BC462B",
+      "exeSha256": "F9BE96EC6B185D3F82132F09B4D0C0511DD7AC4B55D2E266D67A1A1B405BC075",
+      "processes": [
+        {
+          "pid": 45276,
+          "startedUtc": "2026-10-18T03:25:46.1683718Z"
+        },
+        {
+          "pid": 44864,
+          "startedUtc": "2026-10-18T03:28:46.6990060Z"
+        },
+        {
+          "pid": 34760,
+          "startedUtc": "2026-10-18T03:31:47.1153503Z"
+        }
+      ],
+      "samples": [
+        {
+          "seconds": 5,
+          "WorkingSetMiB": {
+            "min": 209.44921875,
+            "median": 209.609375,
+            "max": 209.82421875
+          },
+          "PrivateMiB": {
+            "min": 268.81640625,
+            "median": 269.25,
+            "max": 269.30859375
+          },
+          "PeakWorkingSetMiB": {
+            "min": 209.44921875,
+            "median": 209.609375,
+            "max": 209.82421875
+          },
+          "CpuSeconds": {
+            "min": 4.9375,
+            "median": 5.03125,
+            "max": 5.109375
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.9843500797448166,
+            "median": 0.9976700376759865,
+            "max": 1.0095583876704208
+          }
+        },
+        {
+          "seconds": 15,
+          "WorkingSetMiB": {
+            "min": 209.453125,
+            "median": 209.6171875,
+            "max": 209.8359375
+          },
+          "PrivateMiB": {
+            "min": 268.81640625,
+            "median": 269.26171875,
+            "max": 269.30859375
+          },
+          "PeakWorkingSetMiB": {
+            "min": 209.453125,
+            "median": 209.6171875,
+            "max": 209.8359375
+          },
+          "CpuSeconds": {
+            "min": 14.96875,
+            "median": 15.03125,
+            "max": 15.0625
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.9964551990414059,
+            "median": 1.0004825612353567,
+            "max": 1.002495840266223
+          }
+        },
+        {
+          "seconds": 30,
+          "WorkingSetMiB": {
+            "min": 209.62890625,
+            "median": 209.796875,
+            "max": 209.98046875
+          },
+          "PrivateMiB": {
+            "min": 269.0,
+            "median": 269.41015625,
+            "max": 269.4921875
+          },
+          "PeakWorkingSetMiB": {
+            "min": 209.62890625,
+            "median": 209.796875,
+            "max": 209.98046875
+          },
+          "CpuSeconds": {
+            "min": 30.140625,
+            "median": 30.265625,
+            "max": 30.515625
+          },
+          "CpuCoreEquivalent": {
+            "min": 1.0012498754276982,
+            "median": 1.007242578541001,
+            "max": 1.0140439637124912
+          }
+        },
+        {
+          "seconds": 60,
+          "WorkingSetMiB": {
+            "min": 209.54296875,
+            "median": 209.86328125,
+            "max": 209.90625
+          },
+          "PrivateMiB": {
+            "min": 268.8125,
+            "median": 269.234375,
+            "max": 269.37890625
+          },
+          "PeakWorkingSetMiB": {
+            "min": 209.62890625,
+            "median": 209.9296875,
+            "max": 209.98046875
+          },
+          "CpuSeconds": {
+            "min": 60.09375,
+            "median": 60.375,
+            "max": 60.59375
+          },
+          "CpuCoreEquivalent": {
+            "min": 1.000678567265582,
+            "median": 1.0047763280521902,
+            "max": 1.0095929554466994
+          }
+        }
+      ]
+    },
+    "maintained": {
+      "nativeSha256": "24E2EC39D7C8F0AC4AB9F8EE48024D3E5A34A310C3964272F05BCED11B8E4BC0",
+      "exeSha256": "F9BE96EC6B185D3F82132F09B4D0C0511DD7AC4B55D2E266D67A1A1B405BC075",
+      "processes": [
+        {
+          "pid": 45736,
+          "startedUtc": "2026-10-18T03:26:46.3854835Z"
+        },
+        {
+          "pid": 41168,
+          "startedUtc": "2026-10-18T03:29:46.8413203Z"
+        },
+        {
+          "pid": 36704,
+          "startedUtc": "2026-10-18T03:32:47.2894299Z"
+        }
+      ],
+      "samples": [
+        {
+          "seconds": 5,
+          "WorkingSetMiB": {
+            "min": 80.3359375,
+            "median": 80.60546875,
+            "max": 80.66796875
+          },
+          "PrivateMiB": {
+            "min": 109.9609375,
+            "median": 110.2734375,
+            "max": 110.3125
+          },
+          "PeakWorkingSetMiB": {
+            "min": 80.3359375,
+            "median": 80.60546875,
+            "max": 80.66796875
+          },
+          "CpuSeconds": {
+            "min": 4.953125,
+            "median": 5.015625,
+            "max": 5.015625
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.9866782868525897,
+            "median": 0.9902517275419546,
+            "max": 0.9918182717025904
+          }
+        },
+        {
+          "seconds": 15,
+          "WorkingSetMiB": {
+            "min": 80.33984375,
+            "median": 80.640625,
+            "max": 80.671875
+          },
+          "PrivateMiB": {
+            "min": 109.9609375,
+            "median": 110.2734375,
+            "max": 110.3125
+          },
+          "PeakWorkingSetMiB": {
+            "min": 80.33984375,
+            "median": 80.640625,
+            "max": 80.671875
+          },
+          "CpuSeconds": {
+            "min": 14.65625,
+            "median": 14.953125,
+            "max": 14.984375
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.9763022915001331,
+            "median": 0.995216306156406,
+            "max": 0.9959704220671319
+          }
+        },
+        {
+          "seconds": 30,
+          "WorkingSetMiB": {
+            "min": 80.546875,
+            "median": 80.796875,
+            "max": 80.8515625
+          },
+          "PrivateMiB": {
+            "min": 110.1796875,
+            "median": 110.421875,
+            "max": 110.5
+          },
+          "PeakWorkingSetMiB": {
+            "min": 80.546875,
+            "median": 80.796875,
+            "max": 80.8515625
+          },
+          "CpuSeconds": {
+            "min": 29.640625,
+            "median": 29.984375,
+            "max": 30.09375
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.985491405392825,
+            "median": 0.9981150760627143,
+            "max": 0.9995931043645785
+          }
+        },
+        {
+          "seconds": 60,
+          "WorkingSetMiB": {
+            "min": 80.46484375,
+            "median": 80.7109375,
+            "max": 80.796875
+          },
+          "PrivateMiB": {
+            "min": 110.0,
+            "median": 110.2421875,
+            "max": 110.3203125
+          },
+          "PeakWorkingSetMiB": {
+            "min": 80.546875,
+            "median": 80.796875,
+            "max": 80.859375
+          },
+          "CpuSeconds": {
+            "min": 59.53125,
+            "median": 59.578125,
+            "max": 59.921875
+          },
+          "CpuCoreEquivalent": {
+            "min": 0.9921709638172698,
+            "median": 0.9923072118587608,
+            "max": 0.9984815789912186
+          }
+        }
+      ]
+    }
+  }
+}
