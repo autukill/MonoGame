@@ -6,7 +6,7 @@
 | ID | 修复 | 3.8.6 状态 |
 |---|---|---|
 | [MGE-DX12-001](001-unused-constant-buffers.md) | 闲置常量缓冲 | 已迁入，待最终GPU验证 |
-| MGE-DX12-002 | DX12 Vulkan窗口标志 | 待迁入 |
+| [MGE-DX12-002](002-dx12-window-flags.md) | DX12 Vulkan窗口标志 | 已迁入，待最终GPU验证 |
 | MGE-DX12-003 | mip临时COM blob | 待迁入 |
 | MGE-DX12-004 | mip管线延迟创建 | 待迁入 |
 | MGE-DX12-005 | CPU SRV描述符分页 | 待迁入 |

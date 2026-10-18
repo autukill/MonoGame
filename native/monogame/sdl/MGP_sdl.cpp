@@ -793,8 +793,11 @@ static mgbyte MGP_Window_CreateNativeWindowInternal(
 
 	Uint32 flags = SDL_WINDOW_HIDDEN;// | SDL_WINDOW_FULLSCREEN_DESKTOP;
 
-#if defined(MG_VULKAN) || defined(MG_DIRECTX12)
+#if defined(MG_VULKAN)
 	flags |= SDL_WINDOW_VULKAN;
+#elif defined(MG_DIRECTX12)
+    // DX12 uses SDL_GetWindowWMInfo/ HWND, never a Vulkan surface.
+    // SDL_WINDOW_VULKAN eagerly loads unrelated graphics drivers.
 #elif defined(MG_OPENGL)
 
     if (!MGP_Window_DetectOpenGLVersion(window->contextMajorVersion, window->contextMinorVersion))
