@@ -7,8 +7,10 @@ $pin=Get-Content "$PSScriptRoot/upstream.json" -Raw|ConvertFrom-Json
 if($LASTEXITCODE){throw 'Author fetch failed'}
 & git -c http.proxy= -c http.sslBackend=openssl -C $root fetch --no-tags upstream refs/pull/9559/head:refs/remotes/upstream/pr/9559
 if($LASTEXITCODE){throw 'Official PR fetch failed'}
-$author=(& git -C $root rev-parse webgl-upstream/webgl2).Trim()
-$official=(& git -C $root rev-parse upstream/pr/9559).Trim()
+$author=(& git -C $root rev-parse --verify refs/remotes/webgl-upstream/webgl2).Trim()
+if($LASTEXITCODE){throw 'Cannot resolve author reference'}
+$official=(& git -C $root rev-parse --verify refs/remotes/upstream/pr/9559).Trim()
+if($LASTEXITCODE){throw 'Cannot resolve official PR reference'}
 if($author -ne $official){throw 'Author branch and official PR differ; review the source before merging'}
 & git -C $root merge-base --is-ancestor $pin.commit $author
 if($LASTEXITCODE){throw 'Upstream rewrote history; preserve pins and reconcile manually, never force-push'}

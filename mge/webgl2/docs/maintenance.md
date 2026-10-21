@@ -19,4 +19,5 @@ DX12 `mge/3.8.6` 工作树保持原状，本线在独立工作树运行。只有
 
 源码、文档、复现入口先提交，再构建。构建前后拒绝脏源码、未登记子模块和被忽略的原生编译输入。生成 Effect 头文件只进入输出目录，不写入 native/opengl。
 原生 Ninja 构建 `--parallel 1`、`EMCC_CORES=1`；托管构建设置 MSBUILDDISABLENODEREUSE=1、DOTNET_CLI_USE_MSBUILD_SERVER=0，并传 --disable-build-servers -m:1 -nr:false -p:UseSharedCompilation=false -p:BuildInParallel=false -p:RestoreBuildInParallel=false。
+Wasm SDK 内部编译另传 DisableParallelEmccCompile=true、DisableParallelAot=true；不能仅依赖 MSBuild 单节点控制该任务的内部并行。
 只运行已发布产物作后续测试，不反复构建；核对并关闭本任务进程，保留进程身份记录。不要提交大日志、二进制、node_modules、SDK 或 NuGet 缓存。

@@ -1,0 +1,26 @@
+{
+  "ownedProcessChecks": [
+    {
+      "kind": "serverPid",
+      "status": "exited",
+      "pid": 46864
+    },
+    {
+      "kind": "browserPid",
+      "status": "exited",
+      "pid": 26748
+    },
+    {
+      "kind": "serverPid",
+      "status": "exited",
+      "pid": 46792
+    },
+    {
+      "kind": "browserPid",
+      "status": "exited",
+      "pid": 32488
+    }
+  ],
+  "buildWorkers": [],
+  "checkedUtc": "2026-10-21T00:37:26.1515681Z"
+}

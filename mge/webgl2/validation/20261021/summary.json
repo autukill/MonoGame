@@ -1,0 +1,42 @@
+{
+  "baselineSource": "f37ba49d9820f31ab075017c61c02e4ed2d1b390",
+  "os": {
+    "build": "26300",
+    "architecture": "64 位",
+    "caption": "Microsoft Windows 11 专业工作站版",
+    "version": "10.0.26300"
+  },
+  "browser": "155.0.4283.62",
+  "frameworkTreeMaintained": "87c2d22a8155bdb7b7fa5185d435de9e80eb07e9",
+  "fixSource": "c7cb31fbf1b96a4374ee083ac1b3d75bd6fbd20d",
+  "git": "git version 2.49.0.windows.1",
+  "checkedDate": "2026-10-21 Asia/Shanghai",
+  "frameworkTreeBaseline": "87c2d22a8155bdb7b7fa5185d435de9e80eb07e9",
+  "scope": "Browser supported lifecycle only; no same-page runtime reconstruction, public NuGet, engine integration, WeChat device or AOT claim.",
+  "baselinePassed": 9,
+  "nativeArchives": [
+    {
+      "file": "mgruntime.a",
+      "equal": true,
+      "baseline": "5AB3D65034D8BAB551429B870117C8BE74758DAA834A08B93E7DCDC936F26CE2",
+      "maintained": "5AB3D65034D8BAB551429B870117C8BE74758DAA834A08B93E7DCDC936F26CE2"
+    },
+    {
+      "file": "libFAudio.a",
+      "equal": true,
+      "baseline": "DF109A9977C7D571D9E3E8292D368DB479734A30E3A051C9E70A1F1B62D33F49",
+      "maintained": "DF109A9977C7D571D9E3E8292D368DB479734A30E3A051C9E70A1F1B62D33F49"
+    },
+    {
+      "file": "libSDL2.a",
+      "equal": true,
+      "baseline": "5CDD86A53DB23EF6E61A43F237A1D97066620B3D3623657BFAD8F7D681FE8D41",
+      "maintained": "5CDD86A53DB23EF6E61A43F237A1D97066620B3D3623657BFAD8F7D681FE8D41"
+    }
+  ],
+  "maintainedPassed": 11,
+  "baselineTotal": 11,
+  "ignoredHeaderRejected": true,
+  "powershell": "7.6.7",
+  "maintainedTotal": 11
+}
