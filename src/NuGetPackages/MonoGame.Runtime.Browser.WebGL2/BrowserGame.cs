@@ -23,6 +23,7 @@ public static partial class BrowserGame
     private static TaskCompletionSource<bool>? _runCompletion;
     private static bool _mainLoopStarted;
     private static bool _stopRequested;
+    private static bool _isTicking;
 
     /// <summary>
     /// Runs <paramref name="game"/> until it exits, then disposes it.
@@ -71,13 +72,31 @@ public static partial class BrowserGame
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
     private static void TickFromEmscripten()
     {
+        TickGame();
+    }
+
+    private static void TickGame()
+    {
+        if (_game == null || _isTicking)
+        {
+            return;
+        }
+
+        _isTicking = true;
         try
         {
-            _game?.Tick();
-            if (!_firstFrameReported)
+            _game.Tick();
+            if (!_firstFrameReported && !_stopRequested)
             {
                 _firstFrameReported = true;
                 NotifyManagedFirstFrame();
+            }
+
+            // A first-frame callback may request stop after Game.Tick has ended.
+            // Process that exit here, without reentering an in-progress tick.
+            if (_stopRequested && _game != null && _runCompletion?.Task.IsCompleted == false)
+            {
+                _game.Tick();
             }
         }
         catch (Exception exception)
@@ -86,6 +105,10 @@ public static partial class BrowserGame
             NotifyManagedFailure(exception.Message, exception.ToString());
             _runCompletion?.TrySetException(exception);
         }
+        finally
+        {
+            _isTicking = false;
+        }
     }
 
     [JSExport]
@@ -93,6 +116,9 @@ public static partial class BrowserGame
     {
         _stopRequested = true;
         _game?.Exit();
+        // Hidden pages pause Emscripten's animation-frame loop. Game.Exit only
+        // sets a flag; a final tick must run its normal Exiting/UnloadContent path.
+        TickGame();
     }
 
     [JSExport]
