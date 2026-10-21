@@ -18,7 +18,7 @@ probe.host.ready.then(() => { probe.readyState = 'resolved'; }, e => { probe.rea
 (async () => {
   while (!probe.host.runtime && !probe.host.isDisposed) await new Promise(r => setTimeout(r, 10));
   if (probe.host.runtime) {
-    const exports = await probe.host.runtime.getAssemblyExports('Probe.dll'); probe.control = exports.ProbeControl;
+    const exports = await probe.host.runtime.getAssemblyExports('Probe.dll'); probe.control = exports.Mge.WebGL2.Probe.ProbeControl;
   }
 })().catch(e => log('page-error', String(e)));
 document.addEventListener('visibilitychange', () => log('visibility', document.visibilityState));

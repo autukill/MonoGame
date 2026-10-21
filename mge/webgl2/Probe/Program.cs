@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Runtime.Browser.WebGL2;
 
+namespace Mge.WebGL2.Probe;
+
 [SupportedOSPlatform("browser")]
 public static partial class ProbeControl
 {

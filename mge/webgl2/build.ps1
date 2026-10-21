@@ -30,7 +30,11 @@ try{
   }
   Run $cmake @('-S',$PSScriptRoot,'-B',"$out/native-build",'-G','Ninja',"-DCMAKE_MAKE_PROGRAM=$ninja",'-DCMAKE_BUILD_TYPE=Release',"-DCMAKE_TOOLCHAIN_FILE=$root/native/monogame/browser-wasm/DotNetEmscripten.cmake",'-DDOTNET_EMSCRIPTEN_PACK_VERSION=11.0.0-rc.2.26504.105',"-DDOTNET_EMSCRIPTEN_ROOT_PATH=$ToolchainRoot/upstream/emscripten", "-DDOTNET_EMSCRIPTEN_NODE_JS=$NodeExecutable", "-DDOTNET_EMSCRIPTEN_PYTHON=$python", "-DDOTNET_EMSCRIPTEN_SEED_CACHE_ROOT=$ToolchainRoot/seed-cache/emscripten/cache", "-DMONOGAME_BROWSER_OUTPUT_ROOT=$out/native", "-DMGE_EFFECTS=$out/effects")
   Run $cmake @('--build',"$out/native-build",'--parallel','1')
+  @{sourceCommit=$commit;completedUtc=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$out/native-source.json"
  }
+ $nativeSource=Get-Content "$out/native-source.json" -Raw|ConvertFrom-Json
+ & git -C $root diff --quiet $nativeSource.sourceCommit HEAD -- native external ThirdParty MonoGame.Framework/Platform/Graphics/Effect/Resources mge/webgl2/CMakeLists.txt
+ if($LASTEXITCODE){throw 'Native source changed; use a fresh full build'}
  $config="<?xml version=`"1.0`"?><configuration><packageSources><clear/><add key=`"local`" value=`"$($out.Replace('&','&amp;'))/packages`"/><add key=`"nuget.org`" value=`"https://api.nuget.org/v3/index.json`"/></packageSources></configuration>"
  [IO.File]::WriteAllText("$out/NuGet.Config",$config)
  foreach($project in @("$root/MonoGame.Framework/MonoGame.Framework.Native.csproj","$PSScriptRoot/Runtime.csproj")){
@@ -41,5 +45,5 @@ try{
  if((& git -C $root rev-parse HEAD).Trim() -ne $commit){throw 'Source changed during build'}
  $tools=@($dotnet,$NodeExecutable,$cmake,$ninja,$python,"$ToolchainRoot/upstream/emscripten/emcc.py")|ForEach-Object{@{path=$_;sha256=(Get-FileHash -LiteralPath $_).Hash}}
  $payload=Get-ChildItem "$out/publish/wwwroot/_framework" -File|Where-Object Extension -in '.wasm','.js','.webcil'|ForEach-Object{@{file=$_.Name;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}}
- @{sourceCommit=$commit;upstream=(Get-Content "$PSScriptRoot/upstream.json" -Raw|ConvertFrom-Json);dotnetRoot=$DotNetRoot;sdk=(& $dotnet --version);nodeVersion=(& $NodeExecutable --version);tools=$tools;payload=$payload;packageVersion=$PackageVersion;outputRoot=$out;buildPid=$PID;completedUtc=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json -Depth 8|Set-Content "$out/provenance.json"
+ @{sourceCommit=$commit;nativeSource=$nativeSource;upstream=(Get-Content "$PSScriptRoot/upstream.json" -Raw|ConvertFrom-Json);dotnetRoot=$DotNetRoot;sdk=(& $dotnet --version);nodeVersion=(& $NodeExecutable --version);tools=$tools;payload=$payload;packageVersion=$PackageVersion;outputRoot=$out;buildPid=$PID;completedUtc=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json -Depth 8|Set-Content "$out/provenance.json"
 }finally{Pop-Location}
