@@ -1,0 +1,22 @@
+{
+  "sdk": "11.0.100-rc.2.26504.105",
+  "workloadToolchainName": "Emscripten.6.0.2",
+  "officialRepository": "https://github.com/MonoGame/MonoGame",
+  "pullRequest": "https://github.com/MonoGame/MonoGame/pull/9559",
+  "branch": "webgl2",
+  "historicalCommit": "7b3e80bb048af598ce0a5e87c448709037d5079b",
+  "sourceRepository": "https://github.com/AristurtleDev/MonoGame",
+  "checkedDate": "2026-10-21 Asia/Shanghai",
+  "submodules": {
+    "external/stb": "f58f558c120e9b32c217290b80bad1a0729fbb2c",
+    "ThirdParty/StbImageSharp": "0ec6394bb7184e0576a3fa2e382a487c7ee82e9b",
+    "ThirdParty/StbImageWriteSharp": "c14f96af618175c73c1cbedbf613c6a0d3c996ee",
+    "native/monogame/external/faudio": "8a87fdc9242a7b507cf5c96c539334a1760c1ec7",
+    "native/monogame/external/sdl2": "843c4069fdd8d48c02506f8c299cf3007aa55f04",
+    "native/monogame/external/sdl2/sdl": "4478ad67d28bb7a586bf352c42c210f36fd03fc0",
+    "native/monogame/external/sdl2/buildscripts": "8fb6d837f5100a3b25218ea17bb22e9d5f78a76f"
+  },
+  "commit": "dded52074d8358504f93d9da8c3ddd9241d2fd46",
+  "emccReportedVersion": "6.0.3",
+  "workloadPack": "11.0.0-rc.2.26504.105"
+}

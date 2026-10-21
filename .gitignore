@@ -102,3 +102,9 @@ vsxmake2022
 /native/**/Makefile
 /native/**/*.mgfxo.h
 /native/monogame/build/**/*
+
+/mge/webgl2/node_modules/
+/mge/webgl2/bin/
+/mge/webgl2/obj/
+/mge/webgl2/Probe/bin/
+/mge/webgl2/Probe/obj/

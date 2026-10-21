@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework><EnableDefaultItems>false</EnableDefaultItems>
+    <IncludeBuildOutput>false</IncludeBuildOutput><PackageId>MonoGame.Runtime.Browser.WebGL2</PackageId>
+    <PackageLicenseExpression>MS-PL</PackageLicenseExpression><RepositoryUrl>https://github.com/autukill/MonoGame</RepositoryUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../src/NuGetPackages/MonoGame.Runtime.Browser.WebGL2/*.cs" Pack="true" PackagePath="buildTransitive" />
+    <None Include="../../src/NuGetPackages/MonoGame.Runtime.Browser.WebGL2/*.props" Pack="true" PackagePath="buildTransitive" />
+    <None Include="../../src/NuGetPackages/MonoGame.Runtime.Browser.WebGL2/*.targets" Pack="true" PackagePath="buildTransitive" />
+    <None Include="../../src/NuGetPackages/MonoGame.Runtime.Browser.WebGL2/Host/*" Pack="true" PackagePath="buildTransitive/Host" />
+    <None Include="$(MgeNativeOutput)/*.a" Pack="true" PackagePath="runtimes/browser-wasm/native" />
+    <None Include="../../LICENSE.txt" Pack="true" PackagePath="licenses" />
+    <None Include="../../THIRD-PARTY-NOTICES.txt" Pack="true" PackagePath="licenses" />
+  </ItemGroup>
+</Project>

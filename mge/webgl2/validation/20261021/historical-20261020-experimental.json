@@ -1,0 +1,985 @@
+{
+  "startedUtc": "2026-10-20T15:15:52.739Z",
+  "serverPid": 4452,
+  "root": "D:\\Projects\\Games\\MyGameEnginePlaygrounds\\monogame-webgl2-probe\\artifacts\\publish-patched\\wwwroot",
+  "url": "http://127.0.0.1:62416",
+  "tests": [
+    {
+      "name": "startup-draw-foreground-background-exit",
+      "startedUtc": "2026-10-20T15:15:53.273Z",
+      "evidence": {
+        "before": {
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 21,
+          "Draw": 21,
+          "Simulation": 21,
+          "Activated": 1,
+          "Deactivated": 0,
+          "Exiting": 0,
+          "Dispose": 0,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 64.6
+        },
+        "hiddenStart": {
+          "state": {
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 21,
+            "Draw": 21,
+            "Simulation": 21,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 0,
+            "Dispose": 0,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 64.6
+          },
+          "visibility": "hidden",
+          "focus": false
+        },
+        "hiddenEnd": {
+          "state": {
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 21,
+            "Draw": 21,
+            "Simulation": 21,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 0,
+            "Dispose": 0,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 64.6
+          },
+          "visibility": "hidden"
+        },
+        "resumed": {
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 25,
+          "Draw": 25,
+          "Simulation": 25,
+          "Activated": 2,
+          "Deactivated": 1,
+          "Exiting": 0,
+          "Dispose": 0,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 64.6
+        },
+        "stopped": {
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 26,
+          "Draw": 25,
+          "Simulation": 26,
+          "Activated": 2,
+          "Deactivated": 1,
+          "Exiting": 1,
+          "Dispose": 1,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 64.6
+        },
+        "after": {
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 26,
+          "Draw": 25,
+          "Simulation": 26,
+          "Activated": 2,
+          "Deactivated": 1,
+          "Exiting": 1,
+          "Dispose": 1,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 64.6
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "same-runtime-three-games",
+      "startedUtc": "2026-10-20T15:15:56.421Z",
+      "evidence": [
+        [
+          {
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 13,
+            "Draw": 12,
+            "Simulation": 13,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 49.4
+          }
+        ],
+        [
+          {
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 13,
+            "Draw": 12,
+            "Simulation": 13,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 49.4
+          },
+          {
+            "Session": 2,
+            "Initialize": 1,
+            "Update": 9,
+            "Draw": 8,
+            "Simulation": 9,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 13.5
+          }
+        ],
+        [
+          {
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 13,
+            "Draw": 12,
+            "Simulation": 13,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 49.4
+          },
+          {
+            "Session": 2,
+            "Initialize": 1,
+            "Update": 9,
+            "Draw": 8,
+            "Simulation": 9,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 13.5
+          },
+          {
+            "Session": 3,
+            "Initialize": 1,
+            "Update": 9,
+            "Draw": 8,
+            "Simulation": 9,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 13.5
+          }
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "name": "same-page-three-hosts",
+      "startedUtc": "2026-10-20T15:15:57.222Z",
+      "evidence": [
+        {
+          "stats": [
+            {
+              "Session": 1,
+              "Initialize": 1,
+              "Update": 15,
+              "Draw": 14,
+              "Simulation": 15,
+              "Activated": 1,
+              "Deactivated": 0,
+              "Exiting": 1,
+              "Dispose": 1,
+              "Active": true,
+              "PixelsPassed": true,
+              "PixelError": null,
+              "MaxActiveElapsedMs": 49.4
+            }
+          ],
+          "disposed": true,
+          "activeHostNull": true
+        },
+        {
+          "stats": [
+            {
+              "Session": 1,
+              "Initialize": 1,
+              "Update": 16,
+              "Draw": 15,
+              "Simulation": 16,
+              "Activated": 1,
+              "Deactivated": 0,
+              "Exiting": 1,
+              "Dispose": 1,
+              "Active": true,
+              "PixelsPassed": true,
+              "PixelError": null,
+              "MaxActiveElapsedMs": 38.2
+            }
+          ],
+          "disposed": true,
+          "activeHostNull": true
+        },
+        {
+          "stats": [
+            {
+              "Session": 1,
+              "Initialize": 1,
+              "Update": 16,
+              "Draw": 15,
+              "Simulation": 16,
+              "Activated": 1,
+              "Deactivated": 0,
+              "Exiting": 1,
+              "Dispose": 1,
+              "Active": true,
+              "PixelsPassed": true,
+              "PixelError": null,
+              "MaxActiveElapsedMs": 37.5
+            }
+          ],
+          "disposed": true,
+          "activeHostNull": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "direct-js-dispose-stops-managed-loop",
+      "startedUtc": "2026-10-20T15:15:58.564Z",
+      "evidence": {
+        "before": {
+          "stats": [
+            {
+              "Session": 1,
+              "Initialize": 1,
+              "Update": 12,
+              "Draw": 11,
+              "Simulation": 12,
+              "Activated": 1,
+              "Deactivated": 0,
+              "Exiting": 1,
+              "Dispose": 1,
+              "Active": true,
+              "PixelsPassed": true,
+              "PixelError": null,
+              "MaxActiveElapsedMs": 50.5
+            }
+          ],
+          "hostDisposed": true
+        },
+        "after": [
+          {
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 12,
+            "Draw": 11,
+            "Simulation": 12,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 50.5
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "context-loss-terminal-shutdown",
+      "startedUtc": "2026-10-20T15:16:00.008Z",
+      "evidence": {
+        "before": {
+          "stats": [
+            {
+              "Session": 1,
+              "Initialize": 1,
+              "Update": 11,
+              "Draw": 11,
+              "Simulation": 11,
+              "Activated": 1,
+              "Deactivated": 0,
+              "Exiting": 0,
+              "Dispose": 1,
+              "Active": true,
+              "PixelsPassed": true,
+              "PixelError": null,
+              "MaxActiveElapsedMs": 49.4
+            }
+          ],
+          "events": [
+            {
+              "time": 31.599999994039536,
+              "type": "status",
+              "data": {
+                "stage": "HostBootstrap",
+                "message": "Bootstrapping browser host."
+              }
+            },
+            {
+              "time": 31.799999997019768,
+              "type": "status",
+              "data": {
+                "stage": "CanvasCreation",
+                "message": "Resolving host canvas."
+              }
+            },
+            {
+              "time": 31.900000005960464,
+              "type": "status",
+              "data": {
+                "stage": "CanvasCreation",
+                "message": "Canvas 'canvas' ready at 640x360."
+              }
+            },
+            {
+              "time": 32,
+              "type": "status",
+              "data": {
+                "stage": "WasmLoad",
+                "message": "Loading managed runtime."
+              }
+            },
+            {
+              "time": 206,
+              "type": "status",
+              "data": {
+                "stage": "ContentStaging",
+                "message": "Staging startup content."
+              }
+            },
+            {
+              "time": 207.5,
+              "type": "status",
+              "data": {
+                "stage": "ContentStaging",
+                "message": "Startup content staged."
+              }
+            },
+            {
+              "time": 207.59999999403954,
+              "type": "status",
+              "data": {
+                "stage": "ManagedExports",
+                "message": "Initializing managed host exports."
+              }
+            },
+            {
+              "time": 217.90000000596046,
+              "type": "status",
+              "data": {
+                "stage": "ManagedExports",
+                "message": "Managed host exports initialized."
+              }
+            },
+            {
+              "time": 218,
+              "type": "status",
+              "data": {
+                "stage": "RuntimeBoundary",
+                "message": "Launching managed application."
+              }
+            },
+            {
+              "time": 218.09999999403954,
+              "type": "status",
+              "data": {
+                "stage": "RuntimeBoundary",
+                "message": "Managed application launched."
+              }
+            },
+            {
+              "time": 276.5,
+              "type": "first-frame",
+              "data": null
+            },
+            {
+              "time": 277.40000000596046,
+              "type": "exports-ready",
+              "data": null
+            },
+            {
+              "time": 433.20000000298023,
+              "type": "error",
+              "data": {
+                "stage": "ContextLoss",
+                "code": "webgl_context_lost",
+                "message": "The WebGL2 context was lost. MonoGame.Web cannot recover this application; reload the page."
+              }
+            },
+            {
+              "time": 433.5,
+              "type": "status",
+              "data": {
+                "stage": "RuntimeBoundary",
+                "message": "Browser host disposed."
+              }
+            }
+          ]
+        },
+        "after": [
+          {
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 11,
+            "Draw": 11,
+            "Simulation": 11,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 0,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 49.4
+          }
+        ]
+      },
+      "passed": true
+    }
+  ],
+  "console": [
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] HostBootstrap Bootstrapping browser host.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Resolving host canvas.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Canvas 'canvas' ready at 640x360.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] WasmLoad Loading managed runtime.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Staging startup content.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Startup content staged.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Initializing managed host exports.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Managed host exports initialized.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Launching managed application.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Managed application launched.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Browser host disposed.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] HostBootstrap Bootstrapping browser host.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Resolving host canvas.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Canvas 'canvas' ready at 640x360.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] WasmLoad Loading managed runtime.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Staging startup content.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Startup content staged.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Initializing managed host exports.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Managed host exports initialized.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Launching managed application.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Managed application launched.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Browser host disposed.",
+      "url": "http://127.0.0.1:62416/?sessions=3"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] HostBootstrap Bootstrapping browser host.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Resolving host canvas.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Canvas 'canvas' ready at 640x360.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] WasmLoad Loading managed runtime.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Staging startup content.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Startup content staged.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Initializing managed host exports.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Managed host exports initialized.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Launching managed application.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Managed application launched.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Browser host disposed.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] HostBootstrap Bootstrapping browser host.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Resolving host canvas.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Canvas 'canvas' ready at 640x360.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] WasmLoad Loading managed runtime.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Staging startup content.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Startup content staged.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Initializing managed host exports.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Managed host exports initialized.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Launching managed application.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Managed application launched.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Browser host disposed.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] HostBootstrap Bootstrapping browser host.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Resolving host canvas.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Canvas 'canvas' ready at 640x360.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] WasmLoad Loading managed runtime.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Staging startup content.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Startup content staged.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Initializing managed host exports.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Managed host exports initialized.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Launching managed application.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Managed application launched.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Browser host disposed.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] HostBootstrap Bootstrapping browser host.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Resolving host canvas.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Canvas 'canvas' ready at 640x360.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] WasmLoad Loading managed runtime.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Staging startup content.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Startup content staged.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Initializing managed host exports.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Managed host exports initialized.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Launching managed application.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Managed application launched.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Browser host disposed.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] HostBootstrap Bootstrapping browser host.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Resolving host canvas.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] CanvasCreation Canvas 'canvas' ready at 640x360.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] WasmLoad Loading managed runtime.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Staging startup content.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ContentStaging Startup content staged.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Initializing managed host exports.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] ManagedExports Managed host exports initialized.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Launching managed application.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Managed application launched.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "error",
+      "text": "[MonoGame.Web Host] ContextLoss: webgl_context_lost - The WebGL2 context was lost. MonoGame.Web cannot recover this application; reload the page. BrowserHostError: The WebGL2 context was lost. MonoGame.Web cannot recover this application; reload the page.\n    at MonoGameWebHost.handleContextLost (http://127.0.0.1:62416/_monogame/monogame-web-host.js:399:32)\n    at http://127.0.0.1:62416/_monogame/monogame-web-host.js:178:55\n    at canvas.addEventListener.signal (http://127.0.0.1:62416/_monogame/browser-window.js:113:13) undefined",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    },
+    {
+      "type": "info",
+      "text": "[MonoGame.Web Host] RuntimeBoundary Browser host disposed.",
+      "url": "http://127.0.0.1:62416/?sessions=1"
+    }
+  ],
+  "browserPid": 42716,
+  "browser": {
+    "headless": false,
+    "executable": "Microsoft Edge"
+  },
+  "hostRestarts": [
+    {
+      "stats": [
+        {
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 11,
+          "Draw": 11,
+          "Simulation": 11,
+          "Activated": 1,
+          "Deactivated": 0,
+          "Exiting": 0,
+          "Dispose": 0,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 49.4
+        }
+      ],
+      "runtimeId": 0
+    },
+    {
+      "stats": [
+        {
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 12,
+          "Draw": 12,
+          "Simulation": 12,
+          "Activated": 1,
+          "Deactivated": 0,
+          "Exiting": 0,
+          "Dispose": 0,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 38.2
+        }
+      ],
+      "runtimeId": 1
+    },
+    {
+      "stats": [
+        {
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 12,
+          "Draw": 12,
+          "Simulation": 12,
+          "Activated": 1,
+          "Deactivated": 0,
+          "Exiting": 0,
+          "Dispose": 0,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 37.5
+        }
+      ],
+      "runtimeId": 2
+    }
+  ],
+  "directDispose": {
+    "before": {
+      "stats": [
+        {
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 12,
+          "Draw": 11,
+          "Simulation": 12,
+          "Activated": 1,
+          "Deactivated": 0,
+          "Exiting": 1,
+          "Dispose": 1,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 50.5
+        }
+      ],
+      "hostDisposed": true
+    },
+    "after": [
+      {
+        "Session": 1,
+        "Initialize": 1,
+        "Update": 12,
+        "Draw": 11,
+        "Simulation": 12,
+        "Activated": 1,
+        "Deactivated": 0,
+        "Exiting": 1,
+        "Dispose": 1,
+        "Active": true,
+        "PixelsPassed": true,
+        "PixelError": null,
+        "MaxActiveElapsedMs": 50.5
+      }
+    ]
+  },
+  "finishedUtc": "2026-10-20T15:16:01.515Z"
+}

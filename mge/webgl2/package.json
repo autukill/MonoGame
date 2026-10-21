@@ -1,0 +1,1 @@
+{"name":"mge-monogame-webgl2-reproductions","private":true,"type":"module","scripts":{"postinstall":"node prepare-playwright.mjs"},"dependencies":{"playwright":"1.56.1"}}

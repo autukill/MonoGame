@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net11.0</TargetFramework><RuntimeIdentifier>browser-wasm</RuntimeIdentifier><OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WasmMainJSPath>wwwroot/main.js</WasmMainJSPath><WasmBuildNative>true</WasmBuildNative>
+    <RunAOTCompilation>false</RunAOTCompilation><PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.Native" Version="$(MgePackageVersion)" />
+    <PackageReference Include="MonoGame.Runtime.Browser.WebGL2" Version="$(MgePackageVersion)" />
+  </ItemGroup>
+  <!-- SDK assumes Node is in tools/bin; use the existing machine Node without copying it or changing SDK files. -->
+  <Target Name="MgeUseInstalledNode" AfterTargets="_SetupEmscripten">
+    <ItemGroup>
+      <_MgeDefaultNode Include="@(EmscriptenEnvVars)" Condition="$([System.String]::Copy('%(Identity)').StartsWith('DOTNET_EMSCRIPTEN_NODE_JS='))" />
+      <EmscriptenEnvVars Remove="@(_MgeDefaultNode)" />
+      <EmscriptenEnvVars Include="DOTNET_EMSCRIPTEN_NODE_JS=$(MgeNodeExecutable)" />
+    </ItemGroup>
+  </Target>
+</Project>

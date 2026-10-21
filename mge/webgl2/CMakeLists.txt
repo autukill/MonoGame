@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.20)
+project(MgeWebGL2 LANGUAGES C CXX)
+get_filename_component(MGE_SOURCE_ROOT "${CMAKE_CURRENT_LIST_DIR}/../.." ABSOLUTE)
+if(NOT EXISTS "${MGE_EFFECTS}/SpriteEffect.ogl.mgfxo.h")
+  message(FATAL_ERROR "MGE_EFFECTS must contain exact tracked Effect bytecode headers")
+endif()
+add_subdirectory("${MGE_SOURCE_ROOT}/native/monogame/browser-wasm" monogame)
+target_include_directories(mgruntime PRIVATE "${MGE_EFFECTS}")
