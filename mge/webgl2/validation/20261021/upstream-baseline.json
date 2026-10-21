@@ -1,0 +1,538 @@
+{
+  "startedUtc": "2026-10-21T00:31:09.979Z",
+  "root": "D:\\Projects\\Games\\MyGameEnginePlaygrounds\\monogame-webgl2-maintenance-evidence\\baseline\\publish\\wwwroot",
+  "serverPid": 46864,
+  "tests": [
+    {
+      "name": "startup-gpu-and-game-exit",
+      "evidence": {
+        "start": {
+          "stats": [
+            {
+              "FixedStep": false,
+              "Session": 1,
+              "Initialize": 1,
+              "Update": 9,
+              "Draw": 9,
+              "Simulation": 9,
+              "Activated": 1,
+              "Deactivated": 0,
+              "Exiting": 0,
+              "Dispose": 0,
+              "Active": true,
+              "PixelsPassed": true,
+              "PixelError": null,
+              "MaxActiveElapsedMs": 13.5
+            }
+          ],
+          "events": [
+            {
+              "time": 30.399999999906868,
+              "type": "status",
+              "data": {
+                "stage": "HostBootstrap",
+                "message": "Bootstrapping browser host."
+              }
+            },
+            {
+              "time": 30.5,
+              "type": "status",
+              "data": {
+                "stage": "CanvasCreation",
+                "message": "Resolving host canvas."
+              }
+            },
+            {
+              "time": 30.59999999962747,
+              "type": "status",
+              "data": {
+                "stage": "CanvasCreation",
+                "message": "Canvas 'canvas' ready at 640x360."
+              }
+            },
+            {
+              "time": 30.699999999720603,
+              "type": "status",
+              "data": {
+                "stage": "WasmLoad",
+                "message": "Loading managed runtime."
+              }
+            },
+            {
+              "time": 252.5,
+              "type": "status",
+              "data": {
+                "stage": "ContentStaging",
+                "message": "Staging startup content."
+              }
+            },
+            {
+              "time": 254.39999999990687,
+              "type": "status",
+              "data": {
+                "stage": "ContentStaging",
+                "message": "Startup content staged."
+              }
+            },
+            {
+              "time": 254.5,
+              "type": "status",
+              "data": {
+                "stage": "ManagedExports",
+                "message": "Initializing managed host exports."
+              }
+            },
+            {
+              "time": 264.79999999981374,
+              "type": "status",
+              "data": {
+                "stage": "ManagedExports",
+                "message": "Managed host exports initialized."
+              }
+            },
+            {
+              "time": 264.79999999981374,
+              "type": "status",
+              "data": {
+                "stage": "RuntimeBoundary",
+                "message": "Launching managed application."
+              }
+            },
+            {
+              "time": 265,
+              "type": "status",
+              "data": {
+                "stage": "RuntimeBoundary",
+                "message": "Managed application launched."
+              }
+            },
+            {
+              "time": 372.29999999981374,
+              "type": "first-frame",
+              "data": null
+            }
+          ],
+          "ready": "resolved"
+        },
+        "stop": {
+          "before": {
+            "FixedStep": false,
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 14,
+            "Draw": 13,
+            "Simulation": 14,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 13.5
+          },
+          "after": {
+            "FixedStep": false,
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 14,
+            "Draw": 13,
+            "Simulation": 14,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 13.5
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "real-background-foreground",
+      "evidence": {
+        "before": {
+          "stats": {
+            "FixedStep": false,
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 17,
+            "Draw": 17,
+            "Simulation": 17,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 0,
+            "Dispose": 0,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 58.7
+          },
+          "visibility": "hidden",
+          "focus": false
+        },
+        "hidden": {
+          "FixedStep": false,
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 17,
+          "Draw": 17,
+          "Simulation": 17,
+          "Activated": 1,
+          "Deactivated": 0,
+          "Exiting": 0,
+          "Dispose": 0,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 58.7
+        },
+        "resumed": {
+          "FixedStep": false,
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 20,
+          "Draw": 20,
+          "Simulation": 20,
+          "Activated": 2,
+          "Deactivated": 1,
+          "Exiting": 0,
+          "Dispose": 0,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 58.7
+        },
+        "stop": {
+          "before": {
+            "FixedStep": false,
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 21,
+            "Draw": 20,
+            "Simulation": 21,
+            "Activated": 2,
+            "Deactivated": 1,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 58.7
+          },
+          "after": {
+            "FixedStep": false,
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 21,
+            "Draw": 20,
+            "Simulation": 21,
+            "Activated": 2,
+            "Deactivated": 1,
+            "Exiting": 1,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 58.7
+          }
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "host-stop-idempotent",
+      "evidence": {
+        "before": {
+          "FixedStep": false,
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 12,
+          "Draw": 11,
+          "Simulation": 12,
+          "Activated": 1,
+          "Deactivated": 0,
+          "Exiting": 1,
+          "Dispose": 1,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 49.8
+        },
+        "after": {
+          "FixedStep": false,
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 12,
+          "Draw": 11,
+          "Simulation": 12,
+          "Activated": 1,
+          "Deactivated": 0,
+          "Exiting": 1,
+          "Dispose": 1,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 49.8
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "stop-from-first-frame-callback",
+      "evidence": {
+        "FixedStep": false,
+        "Session": 1,
+        "Initialize": 1,
+        "Update": 2,
+        "Draw": 1,
+        "Simulation": 2,
+        "Activated": 1,
+        "Deactivated": 0,
+        "Exiting": 1,
+        "Dispose": 1,
+        "Active": true,
+        "PixelsPassed": false,
+        "PixelError": null,
+        "MaxActiveElapsedMs": 9
+      },
+      "passed": true
+    },
+    {
+      "name": "stop-from-first-frame-callback-fixed",
+      "evidence": {
+        "FixedStep": true,
+        "Session": 1,
+        "Initialize": 1,
+        "Update": 1,
+        "Draw": 1,
+        "Simulation": 1,
+        "Activated": 1,
+        "Deactivated": 0,
+        "Exiting": 1,
+        "Dispose": 1,
+        "Active": true,
+        "PixelsPassed": false,
+        "PixelError": null,
+        "MaxActiveElapsedMs": 0
+      },
+      "passed": true
+    },
+    {
+      "name": "stop-before-managed-first-frame",
+      "evidence": {
+        "stats": [
+          {
+            "FixedStep": false,
+            "Session": 1,
+            "Initialize": 0,
+            "Update": 0,
+            "Draw": 0,
+            "Simulation": 0,
+            "Activated": 0,
+            "Deactivated": 0,
+            "Exiting": 0,
+            "Dispose": 1,
+            "Active": false,
+            "PixelsPassed": false,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 0
+          }
+        ],
+        "ready": "rejected",
+        "readyError": {
+          "code": "host_stopped",
+          "message": "The browser host was stopped before its first frame."
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "stop-during-runtime-load",
+      "evidence": {
+        "pending": true,
+        "stats": [],
+        "ready": "rejected",
+        "readyError": {
+          "code": "host_stopped",
+          "message": "The browser host was stopped before its first frame."
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "stop-during-content-staging",
+      "evidence": {
+        "pending": true,
+        "stats": [],
+        "ready": "rejected",
+        "readyError": {
+          "code": "host_stopped",
+          "message": "The browser host was stopped before its first frame."
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "host-stop-while-hidden",
+      "passed": false,
+      "error": "page.waitForFunction: Timeout 5000ms exceeded.\n    at stopped (D:\\Projects\\Games\\MyGameEnginePlaygrounds\\monogame-webgl2-maintenance\\mge\\webgl2\\run.mjs:47:14)\n    at async file:///D:/Projects/Games/MyGameEnginePlaygrounds/monogame-webgl2-maintenance/mge/webgl2/run.mjs:109:20\n    at async test (D:\\Projects\\Games\\MyGameEnginePlaygrounds\\monogame-webgl2-maintenance\\mge\\webgl2\\run.mjs:30:27)\n    at async file:///D:/Projects/Games/MyGameEnginePlaygrounds/monogame-webgl2-maintenance/mge/webgl2/run.mjs:103:38"
+    },
+    {
+      "name": "host-stop-while-hidden-fixed",
+      "passed": false,
+      "error": "page.waitForFunction: Timeout 5000ms exceeded.\n    at stopped (D:\\Projects\\Games\\MyGameEnginePlaygrounds\\monogame-webgl2-maintenance\\mge\\webgl2\\run.mjs:47:14)\n    at async file:///D:/Projects/Games/MyGameEnginePlaygrounds/monogame-webgl2-maintenance/mge/webgl2/run.mjs:109:20\n    at async test (D:\\Projects\\Games\\MyGameEnginePlaygrounds\\monogame-webgl2-maintenance\\mge\\webgl2\\run.mjs:30:27)\n    at async file:///D:/Projects/Games/MyGameEnginePlaygrounds/monogame-webgl2-maintenance/mge/webgl2/run.mjs:103:38"
+    },
+    {
+      "name": "context-loss-terminal",
+      "evidence": {
+        "before": {
+          "stats": {
+            "FixedStep": false,
+            "Session": 1,
+            "Initialize": 1,
+            "Update": 11,
+            "Draw": 11,
+            "Simulation": 11,
+            "Activated": 1,
+            "Deactivated": 0,
+            "Exiting": 0,
+            "Dispose": 1,
+            "Active": true,
+            "PixelsPassed": true,
+            "PixelError": null,
+            "MaxActiveElapsedMs": 59
+          },
+          "errors": [
+            {
+              "time": 461,
+              "type": "error",
+              "data": {
+                "stage": "ContextLoss",
+                "code": "webgl_context_lost",
+                "message": "The WebGL2 context was lost. MonoGame.Web cannot recover this application; reload the page."
+              }
+            }
+          ]
+        },
+        "after": {
+          "FixedStep": false,
+          "Session": 1,
+          "Initialize": 1,
+          "Update": 11,
+          "Draw": 11,
+          "Simulation": 11,
+          "Activated": 1,
+          "Deactivated": 0,
+          "Exiting": 0,
+          "Dispose": 1,
+          "Active": true,
+          "PixelsPassed": true,
+          "PixelError": null,
+          "MaxActiveElapsedMs": 59
+        }
+      },
+      "passed": true
+    }
+  ],
+  "console": [
+    {
+      "type": "error",
+      "text": "[MonoGame.Web Host] ContextLoss: webgl_context_lost - The WebGL2 context was lost. MonoGame.Web cannot recover this application; reload the page. BrowserHostError: The WebGL2 context was lost. MonoGame.Web cannot recover this application; reload the page.\n    at MonoGameWebHost.handleContextLost (http://127.0.0.1:61249/_monogame/monogame-web-host.js:424:32)\n    at http://127.0.0.1:61249/_monogame/monogame-web-host.js:180:55\n    at canvas.addEventListener.signal (http://127.0.0.1:61249/_monogame/browser-window.js:108:13) undefined"
+    }
+  ],
+  "browserPid": 26748,
+  "browserVersion": "155.0.4283.62",
+  "hiddenStopBefore": {
+    "hidden": true,
+    "stats": [
+      {
+        "FixedStep": false,
+        "Session": 1,
+        "Initialize": 1,
+        "Update": 12,
+        "Draw": 12,
+        "Simulation": 11,
+        "Activated": 1,
+        "Deactivated": 1,
+        "Exiting": 0,
+        "Dispose": 0,
+        "Active": false,
+        "PixelsPassed": true,
+        "PixelError": null,
+        "MaxActiveElapsedMs": 50.3
+      }
+    ]
+  },
+  "hiddenStopAfter": {
+    "hidden": true,
+    "settled": false,
+    "disposed": false,
+    "stats": [
+      {
+        "FixedStep": false,
+        "Session": 1,
+        "Initialize": 1,
+        "Update": 12,
+        "Draw": 12,
+        "Simulation": 11,
+        "Activated": 1,
+        "Deactivated": 1,
+        "Exiting": 0,
+        "Dispose": 0,
+        "Active": false,
+        "PixelsPassed": true,
+        "PixelError": null,
+        "MaxActiveElapsedMs": 50.3
+      }
+    ]
+  },
+  "hiddenStopBeforeFixed": {
+    "hidden": true,
+    "stats": [
+      {
+        "FixedStep": true,
+        "Session": 1,
+        "Initialize": 1,
+        "Update": 14,
+        "Draw": 12,
+        "Simulation": 14,
+        "Activated": 1,
+        "Deactivated": 0,
+        "Exiting": 0,
+        "Dispose": 0,
+        "Active": true,
+        "PixelsPassed": true,
+        "PixelError": null,
+        "MaxActiveElapsedMs": 16.6667
+      }
+    ]
+  },
+  "hiddenStopAfterFixed": {
+    "hidden": true,
+    "settled": false,
+    "disposed": false,
+    "stats": [
+      {
+        "FixedStep": true,
+        "Session": 1,
+        "Initialize": 1,
+        "Update": 14,
+        "Draw": 12,
+        "Simulation": 14,
+        "Activated": 1,
+        "Deactivated": 0,
+        "Exiting": 0,
+        "Dispose": 0,
+        "Active": true,
+        "PixelsPassed": true,
+        "PixelError": null,
+        "MaxActiveElapsedMs": 16.6667
+      }
+    ]
+  },
+  "finishedUtc": "2026-10-21T00:31:29.561Z"
+}

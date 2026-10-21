@@ -1,0 +1,11 @@
+{
+  "authorRef": "dded52074d8358504f93d9da8c3ddd9241d2fd46",
+  "ninja": "D:\\Apps\\Development\\Emscripten-6.0.2-dotnet11-rc2\\ninja\\ninja.exe",
+  "python": "D:\\Apps\\Development\\Emscripten-6.0.2-dotnet11-rc2\\python\\python.exe",
+  "cmake": "D:\\Apps\\Development\\Emscripten-6.0.2-dotnet11-rc2\\cmake\\bin\\cmake.exe",
+  "isShallow": "false",
+  "officialPrRef": "dded52074d8358504f93d9da8c3ddd9241d2fd46",
+  "dx12Head": "edda53be5bc5200a756256e203726589dad760d2",
+  "upstreamHistoryCount": "13855",
+  "officialPrFetchRefspec": "+refs/pull/9559/head:refs/remotes/upstream/pr/9559"
+}
