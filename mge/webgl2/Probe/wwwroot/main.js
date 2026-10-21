@@ -6,6 +6,7 @@ const gated = new URLSearchParams(location.search).has('managedGate');
 globalThis.probe = {
   events, host: null, control: null, stopSettled: false, readyState: 'pending',
   waitManagedStart: () => gated ? managedGate : Promise.resolve(), releaseManaged,
+  fixedStep: () => new URLSearchParams(location.search).has('fixed'),
   snapshot: () => probe.control ? JSON.parse(probe.control.Snapshot()) : [],
   stop() { const p = probe.host.stop(); p.then(() => { probe.stopSettled = true; }); return p; },
   exit: () => probe.control.ExitCurrent(),

@@ -71,8 +71,8 @@ try {
   await test('host-stop-idempotent', async () => {
     const p = await pageFor(); try { await running(p); const identity = await p.evaluate(() => { const a = probe.host.stop(); const b = probe.host.stop(); return a === b; }); assert(identity, 'Repeated stop promises differ'); return await stopped(p); } finally { await p.close(); }
   });
-  await test('stop-from-first-frame-callback', async () => {
-    const p = await pageFor('?stopFirstFrame=1'); try {
+  for (const fixed of [false, true]) await test('stop-from-first-frame-callback' + (fixed ? '-fixed' : ''), async () => {
+    const p = await pageFor('?stopFirstFrame=1' + (fixed ? '&fixed=1' : '')); try {
       await p.waitForFunction(() => probe.host.isDisposed, null, { timeout: 10000, polling: 50 });
       const s = await p.evaluate(() => probe.snapshot()[0]); assert(s?.Dispose === 1 && s.Exiting === 1, JSON.stringify(s)); return s;
     } finally { await p.close(); }
@@ -100,14 +100,14 @@ try {
       } finally { release(); await p.close(); }
     });
   }
-  await test('host-stop-while-hidden', async () => {
-    const p = await pageFor(); let other;
+  for (const fixed of [false, true]) await test('host-stop-while-hidden' + (fixed ? '-fixed' : ''), async () => {
+    const p = await pageFor(fixed ? '?fixed=1' : ''); let other;
     try {
       await running(p); other = await context.newPage(); await other.goto('about:blank'); await other.bringToFront();
       await p.waitForFunction(() => document.hidden, null, { polling: 100 }); await delay(200);
-      report.hiddenStopBefore = await p.evaluate(() => ({ hidden: document.hidden, stats: probe.snapshot() }));
+      report['hiddenStopBefore' + (fixed ? 'Fixed' : '')] = await p.evaluate(() => ({ hidden: document.hidden, stats: probe.snapshot() }));
       try { return await stopped(p); }
-      finally { report.hiddenStopAfter = await p.evaluate(() => ({ hidden: document.hidden, settled: probe.stopSettled, disposed: probe.host.isDisposed, stats: probe.snapshot() })); }
+      finally { report['hiddenStopAfter' + (fixed ? 'Fixed' : '')] = await p.evaluate(() => ({ hidden: document.hidden, settled: probe.stopSettled, disposed: probe.host.isDisposed, stats: probe.snapshot() })); }
     } finally { await other?.close(); await p.close(); }
   });
   await test('context-loss-terminal', async () => {

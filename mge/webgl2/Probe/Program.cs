@@ -15,17 +15,20 @@ public static partial class ProbeControl
     public static async Task Main()
     {
         await WaitManagedStart();
-        current = new ProbeGame(1);
+        current = new ProbeGame(1, FixedStep());
         history.Add(current.Stats);
         await BrowserGame.RunAsync(current);
     }
     [JSImport("globalThis.probe.waitManagedStart")]
     private static partial Task WaitManagedStart();
+    [JSImport("globalThis.probe.fixedStep")]
+    private static partial bool FixedStep();
     [JSExport] public static string Snapshot() => JsonSerializer.Serialize(history);
     [JSExport] public static void ExitCurrent() => current?.Exit();
 }
 public sealed class ProbeStats
 {
+    public bool FixedStep { get; set; }
     public int Session { get; set; }
     public int Initialize { get; set; }
     public long Update { get; set; }
@@ -49,9 +52,9 @@ public sealed class ProbeGame : Game
     private bool resumed = true;
     public ProbeStats Stats { get; }
 
-    public ProbeGame(int session)
+    public ProbeGame(int session, bool fixedStep)
     {
-        Stats = new() { Session = session };
+        Stats = new() { Session = session, FixedStep = fixedStep };
         _ = new GraphicsDeviceManager(this)
         {
             PreferredBackBufferWidth = 640,
@@ -59,8 +62,8 @@ public sealed class ProbeGame : Game
             GraphicsProfile = GraphicsProfile.HiDef,
             SynchronizeWithVerticalRetrace = true
         };
-        IsFixedTimeStep = false;
-        InactiveSleepTime = TimeSpan.Zero;
+        IsFixedTimeStep = fixedStep;
+        InactiveSleepTime = fixedStep ? TimeSpan.FromMilliseconds(20) : TimeSpan.Zero;
         IsMouseVisible = true;
         Activated += (_, _) => { Stats.Activated++; resumed = true; ResetElapsedTime(); };
         Deactivated += (_, _) => Stats.Deactivated++;

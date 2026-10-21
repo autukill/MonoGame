@@ -17,7 +17,7 @@ $env:DOTNET_CLI_TELEMETRY_OPTOUT='1';$env:DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISA
 $env:NUGET_PACKAGES=Join-Path (Split-Path $out) 'nuget'
 $dotnet=Join-Path $DotNetRoot 'dotnet.exe';$cmake=Join-Path $ToolchainRoot 'cmake/bin/cmake.exe'
 $ninja=Join-Path $ToolchainRoot 'ninja/ninja.exe';$python=Join-Path $ToolchainRoot 'python/python.exe'
-$bounded=@('--disable-build-servers','-m:1','-nr:false','-p:UseSharedCompilation=false','-p:BuildInParallel=false','-p:RestoreBuildInParallel=false')
+$bounded=@('--disable-build-servers','-m:1','-nr:false','-p:UseSharedCompilation=false','-p:BuildInParallel=false','-p:RestoreBuildInParallel=false','-p:DisableParallelEmccCompile=true','-p:DisableParallelAot=true')
 function Run([string]$Exe,[string[]]$Arguments){ & $Exe @Arguments; if($LASTEXITCODE){throw "Exit $LASTEXITCODE from $Exe"} }
 Push-Location $root
 try{
