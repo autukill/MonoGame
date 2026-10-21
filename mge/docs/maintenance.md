@@ -40,3 +40,8 @@
 包 MyGameEngine.MonoGame.Runtime.Windows.DX12，首版3.8.6-mge.1。
 仅Windows x64 DX12；Framework官方3.8.6。每次交付记录源码提交、子模块、工具链、
 构建参数、DLL SHA256和回归结果。不修改官方NuGet缓存，不在消费者构建时编译原生源码。
+
+
+## WebGL2 实验线状态
+
+本机官方进展、独立工作树和 Monster 接入时机见 [WebGL2 状态记录](webgl2-status.md)。该记录与 DX12 发行线基线及发布包分开维护。

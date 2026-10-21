@@ -1,0 +1,104 @@
+{
+  "checkedAt": "2026-10-21T20:50:47+08:00",
+  "timezone": "Asia/Shanghai",
+  "scope": "Read-only upstream inspection and local documentation only; no builds, source merges, dependency changes or product validation",
+  "sources": {
+    "pullRequest": "https://api.github.com/repos/MonoGame/MonoGame/pulls/9559",
+    "pullRequestRef": "https://api.github.com/repos/MonoGame/MonoGame/git/ref/pull/9559/head",
+    "authorBranch": "https://api.github.com/repos/AristurtleDev/MonoGame/branches/webgl2",
+    "comparison": "https://github.com/AristurtleDev/MonoGame/compare/dded52074d8358504f93d9da8c3ddd9241d2fd46...8a9388463e9e9dc63d1a3bad6b3a75964bd3a86b",
+    "reviews": "https://api.github.com/repos/MonoGame/MonoGame/pulls/9559/reviews",
+    "checkRuns": "https://api.github.com/repos/MonoGame/MonoGame/commits/8a9388463e9e9dc63d1a3bad6b3a75964bd3a86b/check-runs",
+    "statuses": "https://api.github.com/repos/MonoGame/MonoGame/commits/8a9388463e9e9dc63d1a3bad6b3a75964bd3a86b/status",
+    "releases": "https://api.github.com/repos/MonoGame/MonoGame/releases?per_page=5"
+  },
+  "pullRequest": {
+    "number": 9559,
+    "url": "https://github.com/MonoGame/MonoGame/pull/9559",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": false,
+    "mergeableState": "dirty",
+    "updatedAt": "2026-10-21T05:20:02Z",
+    "head": "8a9388463e9e9dc63d1a3bad6b3a75964bd3a86b",
+    "base": "9cce5c73ad5869a8abe54dad9ed201d0678fa8fe",
+    "commits": 122,
+    "changedFiles": 95,
+    "labels": [
+      "needs-review"
+    ],
+    "milestone": "3.8.7",
+    "reviews": [],
+    "headCheckRunCount": 0,
+    "headStatuses": [],
+    "pullRequestWorkflowRuns": [],
+    "ciConclusion": "No current-head checks/statuses/runs returned by the queried endpoints; not a passing CI result",
+    "combinedStatusState": "pending",
+    "combinedStatusCount": 0
+  },
+  "authorBranchHead": "8a9388463e9e9dc63d1a3bad6b3a75964bd3a86b",
+  "officialPullRefHead": "8a9388463e9e9dc63d1a3bad6b3a75964bd3a86b",
+  "latestStableRelease": {
+    "tag": "v3.8.6",
+    "url": "https://github.com/MonoGame/MonoGame/releases/tag/v3.8.6",
+    "publishedAt": "2026-10-07T14:16:03Z"
+  },
+  "local": {
+    "repository": "D:/Projects/Zhao/MyGameEngine-MonoGame",
+    "primaryBranch": "mge/3.8.6",
+    "primaryHead": "edda53be5bc5200a756256e203726589dad760d2",
+    "webglWorktree": "D:/Projects/Games/MyGameEnginePlaygrounds/monogame-webgl2-maintenance",
+    "branch": "mge/webgl2",
+    "head": "7bc100e013d82846e089492bb91e40d4c080eabc",
+    "validatedUpstream": "dded52074d8358504f93d9da8c3ddd9241d2fd46",
+    "remoteTrackingPr": "dded52074d8358504f93d9da8c3ddd9241d2fd46",
+    "remoteTrackingAuthor": "dded52074d8358504f93d9da8c3ddd9241d2fd46",
+    "packageVersion": "3.8.7-webgl-mge.1",
+    "validatedFix": "c7cb31fbf1b96a4374ee083ac1b3d75bd6fbd20d",
+    "priorBrowserTests": {
+      "baselinePassed": 9,
+      "maintainedPassed": 11,
+      "total": 11,
+      "scope": "Historical supported-lifecycle browser probe only; not latest-head, Monster or NativeAOT-LLVM certification"
+    },
+    "browserGameBlobBefore": "8b8342a8be4818b44edd60c90daa79072398c967",
+    "browserGameBlobLatest": "8b8342a8be4818b44edd60c90daa79072398c967"
+  },
+  "delta": {
+    "status": "ahead",
+    "aheadBy": 1,
+    "behindBy": 0,
+    "commits": [
+      {
+        "sha": "8a9388463e9e9dc63d1a3bad6b3a75964bd3a86b",
+        "date": "2026-10-21T05:19:41Z",
+        "message": "defer adaptive canvas resizing until first frame",
+        "url": "https://github.com/AristurtleDev/MonoGame/commit/8a9388463e9e9dc63d1a3bad6b3a75964bd3a86b"
+      }
+    ],
+    "files": [
+      {
+        "path": "src/NuGetPackages/MonoGame.Runtime.Browser.WebGL2/Host/browser-window.js",
+        "additions": 27,
+        "deletions": 4,
+        "patch": "@@ -23,6 +23,8 @@ export class BrowserWindow {\n         this.host = host;\n         this.canvas = null;\n         this.canvasResizeObserver = null;\n+        this.initialCanvasWidth = 0;\n+        this.initialCanvasHeight = 0;\n         this.eventAbortController = new AbortController();\n         this.isDisposed = false;\n         this.dropFileSystem = null;\n@@ -91,6 +93,13 @@ export class BrowserWindow {\n         this.host.native.setPointerLockEnabled(this.host.config.pointerLockEnabled ? 1 : 0);\n     }\n \n+    /** Prevents SDL browser callbacks from overriding Adaptive canvas sizing. */\n+    configureCanvasSize() {\n+        if (this.host.config.canvasResizePolicy === CanvasResizePolicy.Adaptive) {\n+            this.host.native.setCanvasResizeManaged(1);\n+        }\n+    }\n+\n     /**\n      * Stops the host when the browser loses the WebGL context.\n      *\n@@ -110,7 +119,7 @@ export class BrowserWindow {\n     }\n \n     /**\n-     * Forwards device-pixel canvas size changes when the `Adaptive` policy is selected.\n+     * Starts forwarding device-pixel canvas size changes after the managed initial presentation when the `Adaptive` policy is selected.\n      *\n      * @throws {BrowserHostError} When the runtime or browser cannot report canvas size changes.\n      */\n@@ -119,14 +128,27 @@ export class BrowserWindow {\n             return;\n         }\n \n-        this.host.native.setCanvasResizeManaged(1);\n+        const initialCanvasBounds = this.canvas.getBoundingClientRect();\n+        this.initialCanvasWidth = Math.round(initialCanvasBounds.width * globalThis.devicePixelRatio);\n+        this.initialCanvasHeight = Math.round(initialCanvasBounds.height * globalThis.devicePixelRatio);\n \n         const reportCanvasSize = (width, height) => {\n             const normalizedWidth = Math.round(width);\n             const normalizedHeight = Math.round(height);\n-            if (normalizedWidth > 0 && normalizedHeight > 0) {\n-                this.host.native?.notifyCanvasResize(normalizedWidth, normalizedHeight);\n+            if (normalizedWidth <= 0 || normalizedHeight <= 0) {\n+                return;\n             }\n+\n+            if (normalizedWidth === this.initialCanvasWidth\n+                && normalizedHeight === this.initialCanvasHeight) {\n+                this.initialCanvasWidth = 0;\n+                this.initialCanvasHeight = 0;\n+                return;\n+            }\n+\n+            this.initialCanvasWidth = 0;\n+            this.initialCanvasHeight = 0;\n+            this.host.native?.notifyCanvasResize(normalizedWidth, normalizedHeight);\n         };\n \n         const getDevicePixelContentBoxSize = (entry) => {\n@@ -153,6 +175,7 @@ export class BrowserWindow {\n             for (const entry of entries) {\n                 if (entry.target === this.canvas) {\n                     const devicePixelSize = getDevicePixelContentBoxSize(entry);\n+\n                     if (devicePixelSize != null) {\n                         reportCanvasSize(devicePixelSize.inlineSize, devicePixelSize.blockSize);\n                     }"
+      },
+      {
+        "path": "src/NuGetPackages/MonoGame.Runtime.Browser.WebGL2/Host/monogame-web-host.js",
+        "additions": 2,
+        "deletions": 1,
+        "patch": "@@ -238,8 +238,8 @@ class MonoGameWebHost {\n         }\n \n         this.native = this.resolveNativeExports(this.runtime.Module);\n+        this.window.configureCanvasSize();\n         this.window.configurePointerLock();\n-        this.window.observeCanvasSize();\n         this.window.observeBrowserLifecycle();\n         this.window.observeFullscreen();\n         this.window.observeFileDrop(this.native.fileSystem);\n@@ -394,6 +394,7 @@ class MonoGameWebHost {\n \n         this.firstFrameReported = true;\n         this.resolveReady();\n+        this.window.observeCanvasSize();\n         this.notify(this.callbacks.onFirstFrame, undefined, \"onFirstFrame\");\n     }\n "
+      }
+    ],
+    "validation": "STATIC_INSPECTION_ONLY_NOT_MERGED_OR_EXECUTED"
+  },
+  "readiness": {
+    "officialRelease": "NOT_RELEASED_BY_THIS_PR",
+    "experiment": "REASONABLE_ON_PINNED_MAINTAINED_BASELINE",
+    "monsterBrowser": "NOT_TESTED",
+    "latestHeadBrowser": "NOT_TESTED",
+    "browserNativeAotLlvm": "NOT_TESTED"
+  },
+  "cacheNote": "Public PR HTML showed 117 commits and an older timeline; live API returned 122. Use the timestamped API/ref snapshot."
+}
