@@ -1,10 +1,12 @@
 # WeChat backend 3.8.6-mge.1
 
-One self-maintained NuGet: `MyGameEngine.MonoGame.Runtime.WeChat.WebGL2`. Based on official 3.8.6 c610a529, with target-specific WebGL inputs backported from 7bc100e0. The existing DX12, desktop and Android source inputs are not replaced. The package will contain the matching Framework, runtime glue and native archives; ordinary MonoGame projects will not need MyGameEngine/Monster.
+One self-maintained NuGet: `MyGameEngine.MonoGame.Runtime.WeChat.WebGL2`. Based on official 3.8.6 c610a529, with target-specific WebGL inputs backported from 7bc100e0. The existing DX12, desktop and Android source inputs are not replaced. The published package contains the matching Framework, runtime glue and native archives; ordinary MonoGame projects will not need MyGameEngine/Monster.
 
 This unofficial backend has independent MonoGame and complete-game validation gates. Standard 2D SoundEffect/Song audio uses shared wx WebAudio/file audio. 3D, XACT, dynamic audio streams, microphone and video are outside this release. No silent success substitutes.
 
-Native builds use pinned Emscripten 3.1.56, one worker and immutable source identities. The .NET SDK is 11.0.100-rc.2.26504.105; applications use net10.0 NativeAOT-LLVM/CPP EH. No interpreter fallback. Licenses and notices remain intact. Consumer builds will use package-relative prebuilt inputs.
+Native builds use pinned Emscripten 3.1.56, one worker and immutable source identities. The .NET SDK is 11.0.100-rc.2.26504.105; applications use net10.0 NativeAOT-LLVM/CPP EH. No interpreter fallback. Licenses and notices remain intact. Consumer builds use package-relative prebuilt inputs.
+
+[中文接入、参考提交与跟进状态](../docs/wechat-backend.md) · [维护账本](../docs/fixes.md)
 
 ## Consumer boundary
 
@@ -31,6 +33,34 @@ an explicit AppID, orientation, unique storage namespace, local files and mounts
 The producer bundles its dependencies; consumers do not install npm packages or
 reference local MonoGame repositories. Release evidence records independent and Monster validation separately;
 phone audible-output and lifecycle acceptance remain separate from DevTools.
+
+## Relationship to the browser WebGL2 backend
+
+This package does not reference `MonoGame.Runtime.Browser.WebGL2`, another
+MonoGame Framework NuGet, or a browser WebGL2 ProjectReference. The published
+nuspec has no package dependencies. The application still needs the documented
+LLVM compiler packages and build toolchain; this is not a claim that builds
+have no external inputs.
+
+The source baseline is official MonoGame 3.8.6 `c610a529`. Selected managed
+platform and OpenGL/SDL/web implementation files were backported from the
+maintenance branch `mge/webgl2` at `7bc100e0` and are stored under `mge/wechat`.
+`sources.json` lists their identities. The WeChat CMake project compiles those
+local sources and MonoGame's common Native sources into its own `mgruntime.a`.
+The browser WebGL2 worktree and its published runtime package are not build or
+runtime inputs. Rendering still requires WeChat Canvas/WebGL2 APIs.
+
+Browser WebGL2 fixes do not propagate automatically. Selective backports need
+an explicit source/provenance review, WeChat regression tests and consumer
+validation before a new WeChat package release.
+
+As checked on 2026-10-24, `mge/3.8.6` already contains the WeChat implementation
+through `2cc85f797`; the released package remains frozen at `64cb55b9` with tag
+`wechat-webgl2-3.8.6-mge.1`. The historical isolated branch
+`codex/wechat-backend-386` is not the only checkout containing this code.
+Use `git worktree list` to locate local checkouts; their absolute paths are not
+consumer dependencies. See the [source follow-up ledger](../docs/wechat-backend.md)
+for adopted revisions, pending review and future backport requirements.
 
 ## Build inputs and checks
 

@@ -1,13 +1,22 @@
 # MyGameEngine-maintained MonoGame
 
-本仓库按官方正式发行版维护 MyGameEngine 实际需要的修复。
-当前分支 `mge/3.8.6` 基于官方 NuGet 3.8.6 的源码提交
-`c610a529667336f63da323c6057274258727664b`。
-仅交付 Windows x64 DX12 原生运行库，托管 Framework 继续使用官方 3.8.6。
+本仓库按官方正式发行版维护 MyGameEngine 实际需要的修复与平台接入。
+当前维护分支 `mge/3.8.6` 基于官方 NuGet 3.8.6 的源码提交
+`c610a529667336f63da323c6057274258727664b`。以下为自维护交付，不能视为官方新增平台。
+
+| 交付线 | 包与版本 | Framework 与验证边界 |
+|---|---|---|
+| Windows x64 DX12 | `MyGameEngine.MonoGame.Runtime.Windows.DX12 3.8.6-mge.2` | 仅替换原生运行库，继续使用官方托管 Framework 3.8.6；见[发布记录](mge/docs/release-3.8.6-mge.2.md) |
+| 微信小游戏 | `MyGameEngine.MonoGame.Runtime.WeChat.WebGL2 3.8.6-mge.1` | 单包提供微信目标匹配的 Framework、原生库、JS 适配与导出工具；见[接入、来源及跟进记录](mge/docs/wechat-backend.md) |
+| 浏览器 WebGL2 实验线 | `3.8.7-webgl-mge.1`，分支 `mge/webgl2` | 独立试验与验证范围，参阅[2026-10-21 状态快照](mge/docs/webgl2-status.md)；不是微信包依赖或官方稳定交付 |
 
 - [维护与同步规则](mge/docs/maintenance.md)
 - [修复清单与版本矩阵](mge/docs/fixes.md)
+- [微信后端说明：固定版本接入、参考提交及后续同步](mge/docs/wechat-backend.md)
 - [本仓库贡献规则](MGE-CONTRIBUTING.md)
+
+`mge/3.8.6` 已包含微信后端源码；发布包仍以各自冻结提交和标签为准。
+浏览器实验线的历史状态与工具链不代表微信端的状态，文档中的日期快照不作实时上游结论。
 
 原始 MonoGame 说明、许可证和第三方声明保留如下。
 
