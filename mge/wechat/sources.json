@@ -1,0 +1,31 @@
+{
+  "officialVersion": "3.8.6",
+  "officialCommit": "c610a529667336f63da323c6057274258727664b",
+  "maintenanceBase": "31f04c017b6cc7ccbd8204a4291b5e2ef5348f94",
+  "webglBackport": "7bc100e013d82846e089492bb91e40d4c080eabc",
+  "sdlCommit": "4478ad67d28bb7a586bf352c42c210f36fd03fc0",
+  "emscripten": "3.1.56",
+  "sdk": "11.0.100-rc.2.26504.105",
+  "compiler": "10.0.0-rc.1.26357.1",
+  "packageId": "MyGameEngine.MonoGame.Runtime.WeChat.WebGL2",
+  "packageVersion": "3.8.6-mge.1",
+  "managedBackports": [
+    "Platform/Native/GamePlatform.Native.cs",
+    "Platform/Native/GameWindow.Native.cs",
+    "Platform/Native/Platform.Interop.cs",
+    "Input/Touch/TouchPanelCapabilities.cs",
+    "Platform/Native/GraphicsDevice.Native.cs"
+  ],
+  "nativeBackports": [
+    "opengl/OpenGLContext.cpp",
+    "opengl/OpenGLContext.h",
+    "opengl/MGG_OpenGL.cpp",
+    "sdl/MGP_sdl.cpp",
+    "sdl/MGP_sdl_browser.h",
+    "web/MGP_web.cpp",
+    "web/MGP_web.h",
+    "include/api_MGP.h",
+    "include/api_structs.h",
+    "include/api_enums.h"
+  ]
+}
