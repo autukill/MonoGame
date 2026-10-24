@@ -47,7 +47,8 @@ Native builds use one worker. Run regression tests with `bun test mge/wechat/Tes
 
 Vendored text-encoding 0.7.0 retains its own license in Host/vendor. The SIMD
 fixture is a generated capability check, not game content. SoundEffect accepts
-MonoGame-supported encoded sources and submits decoded PCM to wx WebAudio;
+PCM WAV (8/16-bit integer or 32-bit float) and raw PCM constructors, submitting
+PCM to wx WebAudio. Other encodings must be decoded by the application;
 Song uses local/cache wav or mp3 through wx InnerAudioContext. Actual audible
 output and system interruption behavior require phone validation. Unsupported
 3D/XACT/streaming/video/native graphics handles raise explicit errors.
@@ -61,3 +62,8 @@ UseAppHost=false before its first restore, as shown in Probe.csproj; the SDK
 needs these to include its ILLink preparation targets. Export reads the LLVM
 NativeOutputPath, whose full runtime modules are not all copied by Publish.
 The exporter parses final JavaScript as ES2019, including bundler helpers.
+
+One WebGL clear-state cache is owned by the backend; explicit resize invalidates
+it and stop restores native methods. Resume resets MonoGame elapsed time. An
+optional extension factory receives backend-owned services and installs engine
+policy; it does not create a second audio context, Canvas, filesystem or loop.

@@ -6,6 +6,10 @@
   <ItemGroup><_WeChatConflictingPackage Include="@(PackageReference)" Condition="$([System.String]::Copy('%(Identity)').StartsWith('MonoGame.Framework.')) Or '%(Identity)'=='MonoGame.Runtime.Browser.WebGL2'" /></ItemGroup>
   <Error Condition="'@(_WeChatConflictingPackage)'!=''" Text="Remove official MonoGame platform/Framework packages from the WeChat target. This single package supplies MonoGame.Framework.dll: @(_WeChatConflictingPackage)" />
  </Target>
+ <Target Name="ValidateWeChatReferenceIdentity" AfterTargets="ResolveReferences" BeforeTargets="CoreCompile" Condition="'$(MonoGameWeChat)'=='true'">
+  <ItemGroup><_WeChatFramework Include="@(ReferencePath)" Condition="'%(Filename)'=='MonoGame.Framework'" /></ItemGroup>
+  <Error Condition="'@(_WeChatFramework->Count())'!='1'" Text="WeChat requires exactly one resolved MonoGame.Framework assembly; inspect transitive platform references." />
+ </Target>
  <Target Name="WeChatSimdMetadata" AfterTargets="PrepareDotNetJsApiForLinking" Condition="'$(MonoGameWeChat)'=='true' And '$(OutputType)'=='Exe'">
   <ItemGroup><_WeChatSimd Include="@(EmscriptenEnvVars)" Condition="'%(Identity)'=='WASM_ENABLE_SIMD=0'" /></ItemGroup>
   <Error Condition="'@(_WeChatSimd->Count())'!='1'" Text="Pinned LLVM SIMD metadata layout changed." />

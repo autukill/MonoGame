@@ -180,7 +180,7 @@ static void MGP_Web_QueueBrowserFullscreenFailure()
 
 EM_JS(void, MGP_Web_ReleaseNextDropBatch, (),
 {
-    const host = globalThis.MonoGameWebHost?.getActiveHost?.();
+    const host = globalThis.MonoGameWeChat?.getActiveHost?.();
     globalThis.setTimeout(() => host?.window.releaseNextDropBatch(), 0);
 });
 
@@ -301,7 +301,7 @@ mgbyte MGP_Web_GetBrowserFullscreen(MGP_Window* window)
 
 EM_JS(mgbyte, MGP_Web_RequestFullscreenFromHost, (),
 {
-    const host = globalThis.MonoGameWebHost?.getActiveHost?.();
+    const host = globalThis.MonoGameWeChat?.getActiveHost?.();
     if (host == null)
         return 0;
 
@@ -311,7 +311,7 @@ EM_JS(mgbyte, MGP_Web_RequestFullscreenFromHost, (),
 
 EM_JS(mgbyte, MGP_Web_ExitFullscreenFromHost, (),
 {
-    const host = globalThis.MonoGameWebHost?.getActiveHost?.();
+    const host = globalThis.MonoGameWeChat?.getActiveHost?.();
     if (host == null)
         return 0;
 
@@ -422,7 +422,7 @@ void MGP_Web_RequestBrowserFullscreen(MGP_Window* window, mgbyte fullscreen)
 
 EM_JS(mgbyte, MGP_Web_AccelerometerIsSupportedFromHost, (),
 {
-    const host = globalThis.MonoGameWebHost?.getActiveHost?.();
+    const host = globalThis.MonoGameWeChat?.getActiveHost?.();
     if (host == null)
         return 0;
 
@@ -431,7 +431,7 @@ EM_JS(mgbyte, MGP_Web_AccelerometerIsSupportedFromHost, (),
 
 EM_JS(mgint, MGP_Web_AccelerometerStartFromHost, (),
 {
-    const host = globalThis.MonoGameWebHost?.getActiveHost?.();
+    const host = globalThis.MonoGameWeChat?.getActiveHost?.();
     if (host == null)
         return 0;
 
@@ -440,7 +440,7 @@ EM_JS(mgint, MGP_Web_AccelerometerStartFromHost, (),
 
 EM_JS(void, MGP_Web_AccelerometerStopFromHost, (),
 {
-    const host = globalThis.MonoGameWebHost?.getActiveHost?.();
+    const host = globalThis.MonoGameWeChat?.getActiveHost?.();
     if (host == null)
         return;
 

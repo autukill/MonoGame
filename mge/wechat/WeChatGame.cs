@@ -119,6 +119,9 @@ public static partial class WeChatGame
     public static Task StopAsync() { RequestStop(); return _runCompletion?.Task ?? Task.CompletedTask; }
 
     [JSExport]
+    public static void ResetClock() => _game?.ResetElapsedTime();
+
+    [JSExport]
     public static void RequestStop()
     {
         _stopRequested = true;
@@ -133,7 +136,7 @@ public static partial class WeChatGame
     {
         StopMainLoop();
         _runCompletion?.TrySetException(new InvalidOperationException(
-            "The WebGL2 context was lost. MonoGame.Web cannot recover this application; reload the page."));
+            "The WebGL2 context was lost. The WeChat backend cannot recover this application; reload the page."));
     }
 
     private static void OnGameExiting(object? sender, ExitingEventArgs eventArgs)
