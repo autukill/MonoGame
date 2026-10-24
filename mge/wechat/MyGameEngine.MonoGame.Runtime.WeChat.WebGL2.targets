@@ -15,6 +15,10 @@
   <Error Condition="'@(_WeChatSimd->Count())'!='1'" Text="Pinned LLVM SIMD metadata layout changed." />
   <ItemGroup><EmscriptenEnvVars Remove="WASM_ENABLE_SIMD=0"/><EmscriptenEnvVars Include="WASM_ENABLE_SIMD=1"/></ItemGroup>
  </Target>
+ <Target Name="CopyWeChatRuntimeModules" AfterTargets="Publish" BeforeTargets="ExportMonoGameWeChat" Condition="'$(MonoGameWeChat)'=='true' And '$(OutputType)'=='Exe'">
+  <ItemGroup><_WeChatRuntimeModule Include="$(NativeOutputPath)dotnet.js;$(NativeOutputPath)dotnet.runtime.js;$(NativeOutputPath)dotnet.native.js;$(NativeOutputPath)dotnet.native.wasm" /></ItemGroup>
+  <Copy SourceFiles="@(_WeChatRuntimeModule)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+ </Target>
  <Target Name="ExportMonoGameWeChat" AfterTargets="Publish" Condition="'$(MonoGameWeChat)'=='true' And '$(MonoGameWeChatExportPath)'!=''">
   <Exec Command="&quot;$(MonoGameWeChatNodePath)&quot; &quot;$(MSBuildThisFileDirectory)../tools/export.mjs&quot; &quot;$(NativeOutputPath).&quot; &quot;$(MonoGameWeChatExportPath)&quot; &quot;$(MonoGameWeChatConfiguration)&quot; &quot;$(TargetName)&quot;" />
  </Target>
