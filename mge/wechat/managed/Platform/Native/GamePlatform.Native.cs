@@ -124,7 +124,7 @@ class NativeGamePlatform : GamePlatform
                     break;
 
                 case EventType.WindowResized:
-                { 
+                {
                     var window = NativeGameWindow.FromHandle(event_.Window.Window);
                     if (window != null)
                         window.ClientResize(event_.Window.Data1, event_.Window.Data2);
@@ -140,7 +140,7 @@ class NativeGamePlatform : GamePlatform
                 }
 
                 case EventType.WindowClose:
-                { 
+                {
                     var window = NativeGameWindow.FromHandle(event_.Window.Window);
                     if (Window == window)
                         Game.Exit();
@@ -157,7 +157,7 @@ class NativeGamePlatform : GamePlatform
                         Keyboard.Keys.Add(key);
 
                     if (window != null)
-                    { 
+                    {
                         window.OnKeyDown(new InputKeyEventArgs(key));
 
                         if (event_.Key.Character != 0
@@ -363,11 +363,11 @@ class NativeGamePlatform : GamePlatform
             _window.OnPresentationChanged(pp);
         }
 
-        base.BeforeInitialize();        
+        base.BeforeInitialize();
     }
 
     public override unsafe bool BeforeRun()
-    {        
+    {
         return MGP.Platform_BeforeRun(Handle) == 0 ? false : true;
     }
 
@@ -420,7 +420,7 @@ class NativeGamePlatform : GamePlatform
             _window = null;
             Window = null;
         }
-        
+
         if (_system != null)
         {
             MGG.GraphicsSystem_Destroy(_system);
