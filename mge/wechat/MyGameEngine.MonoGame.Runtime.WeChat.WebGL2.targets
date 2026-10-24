@@ -9,6 +9,9 @@
  <Target Name="ValidateWeChatReferenceIdentity" AfterTargets="ResolveReferences" BeforeTargets="CoreCompile" Condition="'$(MonoGameWeChat)'=='true'">
   <ItemGroup><_WeChatFramework Include="@(ReferencePath)" Condition="'%(Filename)'=='MonoGame.Framework'" /></ItemGroup>
   <Error Condition="'@(_WeChatFramework->Count())'!='1'" Text="WeChat requires exactly one resolved MonoGame.Framework assembly; inspect transitive platform references." />
+  <PropertyGroup><_WeChatExpectedFramework>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../lib/netstandard2.1/MonoGame.Framework.dll'))</_WeChatExpectedFramework></PropertyGroup>
+  <ItemGroup><_WeChatForeignFramework Include="@(_WeChatFramework)" Condition="'%(FullPath)'!='$(_WeChatExpectedFramework)'" /></ItemGroup>
+  <Error Condition="'@(_WeChatForeignFramework)'!=''" Text="The WeChat target resolved MonoGame.Framework from a different platform package: @(_WeChatForeignFramework). Replace its transitive platform references with the WeChat package." />
  </Target>
  <Target Name="WeChatSimdMetadata" AfterTargets="PrepareDotNetJsApiForLinking" Condition="'$(MonoGameWeChat)'=='true' And '$(OutputType)'=='Exe'">
   <ItemGroup><_WeChatSimd Include="@(EmscriptenEnvVars)" Condition="'%(Identity)'=='WASM_ENABLE_SIMD=0'" /></ItemGroup>

@@ -72,3 +72,8 @@ Public/protected metadata signatures have been compared against the official
 3.8.6 Native DLL: 4,161 entries, zero missing or added. The source-only
 Tests/ApiSurface tool uses metadata, without loading native dependencies.
 Resource bytes and extension/backend scripts are included in export identity.
+
+All project references must select the same platform package, including audio
+features. Equal assembly names/versions can let MSBuild choose an official
+Native DLL silently. The target checks both count and resolved Framework path;
+a mismatched platform DLL is an error before AOT compilation.
