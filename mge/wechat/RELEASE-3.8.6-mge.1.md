@@ -35,3 +35,26 @@ No interpreter, Gamma fallback, game code or diagnostic feature cuts are in the
 backend. MyGameEngine/Monster policy and dynamic font engines remain external.
 Evidence: wechat-backend-386-evidence/candidate-08-validation.json plus the
 independent-08 and monster-08 records. Public feed receipt follows separately.
+
+## Public feed acceptance
+
+NuGet validation/indexing completed and the public version was downloaded on
+2026-10-24. Public signed ZIP SHA256:
+`075ceb3975f24ea43dd0fcb03a4767eaf7c17587b6e8945e3721ef8c94cb61ed`.
+All original 46 entries match the frozen upload byte for byte; only NuGet's
+`.signature.p7s` was added. The source tag remains on the actual package commit.
+
+Monster 278c0461 restored the exact version into a fresh package cache from
+https://api.nuget.org/v3/index.json without a candidate feed. Framework identity,
+DLL SHA256, actual AOT reference origin and formal QA isolation passed. Both
+Android and iOS complete exports passed file/size gates (about 17.2 MiB);
+iOS retains iOSHighPerformance=true. The official CLI verified menu round trips,
+normal core assembly, full first-world battle and return, real audio playback,
+stop cleanup, final profile checksum/revision recovery and remote cache reuse.
+The public-build battle sample covered 55.65 seconds (DevTools, not phone).
+No Runtime/Simulation or scene code changed in the consumer integration.
+
+See public-release-3.8.6-mge.1.json for the public release identity and scope.
+The separate new-package physical acceptance remains NOT_TESTED. No game
+preview upload was performed in this task. Build process records confirm owned
+compilation processes exited; no reusable build servers were requested.

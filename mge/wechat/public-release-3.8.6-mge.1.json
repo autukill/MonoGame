@@ -1,0 +1,35 @@
+{
+  "packageId": "MyGameEngine.MonoGame.Runtime.WeChat.WebGL2",
+  "version": "3.8.6-mge.1",
+  "url": "https://www.nuget.org/packages/MyGameEngine.MonoGame.Runtime.WeChat.WebGL2/3.8.6-mge.1",
+  "sourceCommit": "64cb55b90a0f4524378b3d241adc76ed0b3d87b8",
+  "tag": "wechat-webgl2-3.8.6-mge.1",
+  "uploadedSha256": "7d0bedfc36ba34fc4b2dcd3c8876cda98eee63dcef96401365f63188fdc3d86e",
+  "publicSignedSha256": "075ceb3975f24ea43dd0fcb03a4767eaf7c17587b6e8945e3721ef8c94cb61ed",
+  "allOriginalEntriesMatch": true,
+  "addedFiles": [
+    ".signature.p7s"
+  ],
+  "publicDownloadedAt": "2026-10-24T09:40:40.742Z",
+  "consumerBuildRevision": "278c046138e75488f97c350a1a7230540ea3bc61",
+  "independentConsumer": "PASS",
+  "monsterFromFreshNugetOrgCache": {
+    "menu": "PASS",
+    "battle": "FULL_LOOP_PASS",
+    "stopReload": "PASS",
+    "qaIsolation": "PASS",
+    "scope": "DevTools complete first-world loop; not physical phone acceptance"
+  },
+  "tests": {
+    "genericBackend": 53,
+    "enginePolicy": 53,
+    "contentGate": 6,
+    "publicProtectedApiEntries": 4161,
+    "apiMissing": 0,
+    "apiAdded": 0,
+    "assemblyIdentity": "MonoGame.Framework, Version=3.8.6.0, Culture=neutral, PublicKeyToken=null",
+    "foreignAssemblyNegativeGuard": "expected rejection observed"
+  },
+  "physical": "NOT_TESTED for the new package",
+  "previewUploaded": false
+}
