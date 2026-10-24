@@ -6,10 +6,10 @@
   <None Include="$(MgePayload)/MonoGame.Framework.xml" Pack="true" PackagePath="lib/netstandard2.1/"/>
   <None Include="$(MgePayload)/native/*.a" Pack="true" PackagePath="runtimes/browser-wasm/native/"/>
   <None Include="../*.props;../*.targets;../WeChatGame.cs" Pack="true" PackagePath="buildTransitive/"/>
-  <None Include="../Host/**/*" Pack="true" PackagePath="Host/%(RecursiveDir)"/>
+  <None Include="../Host/**/*" Pack="true" PackagePath="Host/"/>
   <None Include="../Tools/*" Pack="true" PackagePath="tools/"/>
   <None Include="$(MgePayload)/tools/*" Pack="true" PackagePath="tools/"/>
-  <None Include="$(MgePayload)/licenses/**/*" Pack="true" PackagePath="licenses/%(RecursiveDir)"/>
+  <None Include="$(MgePayload)/licenses/**/*" Pack="true" PackagePath="licenses/"/>
   <None Include="../README.md" Pack="true" PackagePath="/"/>
   <None Include="$(MgePayload)/provenance.json" Pack="true" PackagePath="/"/>
  </ItemGroup>
