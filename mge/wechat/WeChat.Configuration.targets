@@ -3,7 +3,7 @@
   <AllowUnsafeBlocks>true</AllowUnsafeBlocks><IsAotCompatible>true</IsAotCompatible>
  </PropertyGroup>
  <PropertyGroup Condition="'$(MonoGameWeChat)'=='true' And '$(OutputType)'=='Exe'">
-  <PublishAot>true</PublishAot><PublishTrimmed>true</PublishTrimmed><SelfContained>true</SelfContained><UseAppHost>false</UseAppHost><InvariantGlobalization>true</InvariantGlobalization>
+  <PublishTrimmed>true</PublishTrimmed><SelfContained>true</SelfContained><UseAppHost>false</UseAppHost><InvariantGlobalization>true</InvariantGlobalization>
   <IlcSingleThreaded>true</IlcSingleThreaded><WasmEnableThreads>false</WasmEnableThreads><WasmEnableSIMD>true</WasmEnableSIMD><WasmEnableExceptionHandling>false</WasmEnableExceptionHandling><IlcLlvmExceptionHandlingModel>cpp</IlcLlvmExceptionHandlingModel><DotNetJsApi>true</DotNetJsApi>
   <MSBuildEnableWorkloadResolver>false</MSBuildEnableWorkloadResolver><IlcPgoOptimize>false</IlcPgoOptimize>
   <EmccExtraLDFlags>$(EmccExtraLDFlags) -sMIN_WEBGL_VERSION=2 -sMAX_WEBGL_VERSION=2 -sERROR_ON_UNDEFINED_SYMBOLS=1</EmccExtraLDFlags>

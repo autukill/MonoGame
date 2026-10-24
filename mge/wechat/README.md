@@ -17,8 +17,7 @@ platform package in the same target. Engine scene policy, dynamic font engines,
 profile serialization, asset selection and remote pack deployment stay outside
 this backend.
 
-A net10.0 `browser-wasm` executable declares `MonoGameWeChat=true` and
-`PublishAot=true`, references this fixed package and the two pinned LLVM
+A net10.0 `browser-wasm` executable declares `MonoGameWeChat=true` and references this fixed package and the two pinned LLVM
 compiler packages shown in `Probe/Probe.csproj`, then awaits
 `MonoGame.Runtime.WeChat.WebGL2.WeChatGame.RunAsync(game)`. RunAsync owns and
 disposes the supplied Game. RequestStop/StopAsync follow normal Game.Exit.
@@ -52,3 +51,7 @@ MonoGame-supported encoded sources and submits decoded PCM to wx WebAudio;
 Song uses local/cache wav or mp3 through wx InnerAudioContext. Actual audible
 output and system interruption behavior require phone validation. Unsupported
 3D/XACT/streaming/video/native graphics handles raise explicit errors.
+
+The pinned LLVM package owns the AOT pipeline. Do not set the stock SDK
+PublishAot=true for browser-wasm: .NET SDK rejects that RID before this LLVM
+package can participate in the first restore. This is still native LLVM AOT.
