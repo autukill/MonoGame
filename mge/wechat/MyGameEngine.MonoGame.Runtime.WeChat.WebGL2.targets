@@ -12,6 +12,6 @@
   <ItemGroup><EmscriptenEnvVars Remove="WASM_ENABLE_SIMD=0"/><EmscriptenEnvVars Include="WASM_ENABLE_SIMD=1"/></ItemGroup>
  </Target>
  <Target Name="ExportMonoGameWeChat" AfterTargets="Publish" Condition="'$(MonoGameWeChat)'=='true' And '$(MonoGameWeChatExportPath)'!=''">
-  <Exec Command="&quot;$(MonoGameWeChatNodePath)&quot; &quot;$(MSBuildThisFileDirectory)../tools/export.mjs&quot; &quot;$(PublishDir)&quot; &quot;$(MonoGameWeChatExportPath)&quot; &quot;$(MonoGameWeChatConfiguration)&quot; &quot;$(TargetName)&quot;" />
+  <Exec Command="&quot;$(MonoGameWeChatNodePath)&quot; &quot;$(MSBuildThisFileDirectory)../tools/export.mjs&quot; &quot;$(NativeOutputPath).&quot; &quot;$(MonoGameWeChatExportPath)&quot; &quot;$(MonoGameWeChatConfiguration)&quot; &quot;$(TargetName)&quot;" />
  </Target>
 </Project>

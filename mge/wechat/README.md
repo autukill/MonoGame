@@ -55,3 +55,9 @@ output and system interruption behavior require phone validation. Unsupported
 The pinned LLVM package owns the AOT pipeline. Do not set the stock SDK
 PublishAot=true for browser-wasm: .NET SDK rejects that RID before this LLVM
 package can participate in the first restore. This is still native LLVM AOT.
+
+The executable also declares PublishTrimmed=true, SelfContained=true and
+UseAppHost=false before its first restore, as shown in Probe.csproj; the SDK
+needs these to include its ILLink preparation targets. Export reads the LLVM
+NativeOutputPath, whose full runtime modules are not all copied by Publish.
+The exporter parses final JavaScript as ES2019, including bundler helpers.

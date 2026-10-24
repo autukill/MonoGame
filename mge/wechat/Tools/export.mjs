@@ -1,4 +1,5 @@
 import{readFile,writeFile,mkdir,readdir,copyFile,stat}from'node:fs/promises';import{join,resolve,dirname}from'node:path';import{fileURLToPath}from'node:url';import{createRequire}from'node:module';import{createHash}from'node:crypto';import{brotliCompressSync,brotliDecompressSync,constants}from'node:zlib';
+import {parse} from './acorn.mjs';
 import{replaceOnce}from'./replace.mjs';import{adaptCppStackTrace}from'./cpp-stacktrace.mjs';import{adaptWebGlContext,adaptWebGlObjects,adaptWebGlNullBindings,adaptWebGlQueryArrays}from'./webgl-context.mjs';import{wasmArities}from'../Host/wasm-arities.mjs';
 const here=dirname(fileURLToPath(import.meta.url));process.env.ESBUILD_BINARY_PATH=join(here,'esbuild.exe');const {build,transformSync}=createRequire(import.meta.url)('./esbuild.cjs');
 const sha=b=>createHash('sha256').update(b).digest('hex');
@@ -25,6 +26,7 @@ export async function exportWeChat(publishRoot,out,options){
  }
  await writeFile(join(work,'dotnet.js'),scope(loader,'dotnet.js'));
  await writeFile(join(work,'runtime.js'),scope(runtime,'runtime.js'));
+ const bigintReturns=(source['dotnet.native.js'].match(/return 0n;/g)||[]).length;if(bigintReturns!==4)throw Error('LLVM BigInt compatibility layout changed');source['dotnet.native.js']=source['dotnet.native.js'].replaceAll('return 0n;','return BigInt(0);');
  await writeFile(join(work,'native.js'),scope(adaptWebGlQueryArrays(adaptWebGlNullBindings(adaptWebGlObjects(adaptWebGlContext(adaptCppStackTrace(source['dotnet.native.js']))))),'native.js',true));
  patches.push({name:'wx-native-webgl-query-arrays',matches:1,identity:'cross-realm Array / Float32Array / Uint32Array / Int32Array; no generic array-like objects'});
  patches.push({name:'wx-native-webgl-context',matches:1,identity:'WebGL2 core methods; no DOM constructor'});
@@ -34,7 +36,7 @@ export async function exportWeChat(publishRoot,out,options){
  await writeFile(join(work,'entry.js'),`import {dotnet} from './dotnet.js';import * as native from './native.js';import * as runtime from './runtime.js';
 exports.boot=adapter=>dotnet.withModuleConfig({canvas:adapter.canvas,instantiateWasm:adapter.instantiateWasm,onConfigLoaded(config){config.resources.jsModuleNative[0].moduleExports=native;config.resources.jsModuleRuntime[0].moduleExports=runtime;}}).withConfig(${JSON.stringify({mainAssemblyName:assembly,resources:{assembly:[],jsModuleNative:[{name:'dotnet.native.js'}],jsModuleRuntime:[{name:'dotnet.runtime.js'}],wasmNative:[{name:'dotnet.native.wasm'}],vfs:[],satelliteResources:{}}})}).withResourceLoader(adapter.loadResource).create();`);
 
- async function bundle(entry){return(await build({entryPoints:[entry],bundle:true,write:false,platform:'neutral',format:'cjs',target:'es2019',minify:true,charset:'ascii',define:{__MGE_PROBE__:'false'},external:['fs','path','crypto','node:crypto','url','module']})).outputFiles[0].text;}
+ async function bundle(entry){const code=(await build({entryPoints:[entry],bundle:true,write:false,platform:'node',format:'cjs',target:'es2019',supported:{'dynamic-import':false},minify:true,charset:'ascii',define:{__MGE_PROBE__:'false'},external:['fs','path','crypto','node:crypto','url','module']})).outputFiles[0].text;parse(code,{ecmaVersion:2019,sourceType:'script',allowReturnOutsideFunction:true});return code;}
  await writeFile(join(out,'runtime-loader.js'),await bundle(join(work,'entry.js')));
  await writeFile(join(out,'host.js'),await bundle(join(here,'../Host/session.mjs')));
  const wasm=source['dotnet.native.wasm'],compressed=brotliCompressSync(wasm,{params:{[constants.BROTLI_PARAM_QUALITY]:11}});if(!brotliDecompressSync(compressed).equals(wasm))throw Error('Wasm compression mismatch');
