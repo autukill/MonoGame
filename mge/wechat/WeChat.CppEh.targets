@@ -1,0 +1,16 @@
+<Project>
+  <!-- The locked LLVM package otherwise hardcodes native EH metadata to true. -->
+  <Target Name="CorrectCppEhDotNetJsMetadata" AfterTargets="PrepareDotNetJsApiForLinking"
+          Condition="'$(IlcLlvmExceptionHandlingModel)' == 'cpp'">
+    <Error Condition="'$(WasmEnableExceptionHandling)' != 'false'" Text="CPP EH requires WasmEnableExceptionHandling=false." />
+    <ItemGroup>
+      <_CppEhMetadata Include="@(EmscriptenEnvVars)" Condition="'%(Identity)' == 'WASM_ENABLE_EH=1'" />
+    </ItemGroup>
+    <Error Condition="'@(_CppEhMetadata->Count())' != '1'" Text="Locked LLVM JS EH metadata structure changed; review the adapter." />
+    <ItemGroup>
+      <EmscriptenEnvVars Remove="WASM_ENABLE_EH=1" />
+      <EmscriptenEnvVars Include="WASM_ENABLE_EH=0" />
+    </ItemGroup>
+    <Message Importance="high" Text="CPP EH: linking DotNetJsApi with WASM_ENABLE_EH=0 (actual platform detection remains unchanged)." />
+  </Target>
+</Project>

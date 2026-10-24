@@ -649,15 +649,6 @@ public partial class GraphicsDevice
     /// </summary>
     public unsafe NativeGraphicsHandles GetNativeHandles()
     {
-        MGG.GraphicsDevice_GetNativeHandles(Handle, out var native);
-
-        return new NativeGraphicsHandles(
-            (GraphicsBackend)native.Backend,
-            native.Instance,
-            native.PhysicalDevice,
-            native.LogicalDevice,
-            native.Queue,
-            native.QueueFamilyIndex,
-            native.QueueIndex);
+        throw new PlatformNotSupportedException("Native graphics handles are not exposed by WeChat WebGL2.");
     }
 }

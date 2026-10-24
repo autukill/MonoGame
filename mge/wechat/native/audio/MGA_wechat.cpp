@@ -3,7 +3,7 @@
 #include <emscripten/emscripten.h>
 #include <cmath>
 #include <memory>
-EM_JS(int, WX_AudioReady, (), { return globalThis.MonoGameWeChat.audio.state()===3?1:0; });
+EM_JS(int, WX_AudioReady, (), { const s=globalThis.MonoGameWeChat.audio.state();return s===3||s===4?1:0; });
 EM_JS(int, WX_Buffer, (const unsigned char* p,int size,int format,int channels,int rate), {return globalThis.MonoGameWeChat.audio.createBuffer(HEAPU8.subarray(p,p+size),format,channels,rate);});
 EM_JS(void, WX_Delete, (int id), {globalThis.MonoGameWeChat.audio.deleteBuffer(id);});
 EM_JS(int, WX_Play, (int id,double volume,double pan,double pitch,int loop,double begin,double end), {return globalThis.MonoGameWeChat.audio.play(id,volume,pan,pitch,!!loop,begin,end);});

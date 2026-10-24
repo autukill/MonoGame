@@ -1,0 +1,1 @@
+<Project><PropertyGroup><MonoGameWeChatPackageRoot>$(MSBuildThisFileDirectory)..</MonoGameWeChatPackageRoot></PropertyGroup></Project>

@@ -27,5 +27,13 @@
     "include/api_MGP.h",
     "include/api_structs.h",
     "include/api_enums.h"
+  ],
+  "esbuild": "0.25.12",
+  "textEncoding": "0.7.0",
+  "managedPlatformGuards": [
+    "DynamicSoundEffectInstance.Native.cs",
+    "RenderTarget2D.Native.cs",
+    "SoundEffect.Native.cs",
+    "SoundEffectInstance.Native.cs"
   ]
 }

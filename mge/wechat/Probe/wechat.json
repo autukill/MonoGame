@@ -1,0 +1,1 @@
+{"appId":"wx05ed413f76d35796","orientation":"landscape","iOSHighPerformance":true,"projectName":"MonoGame-386-WeChat-Independent","storageNamespace":"monogame-wechat-independent-probe","files":[{"virtualPath":"/Content/tone.wav","source":"tone.wav"}],"mounts":[{"target":"/Content","root":"runtime/Content","readOnly":true}]}

@@ -1,0 +1,17 @@
+<Project>
+ <Import Project="WeChat.Configuration.targets" />
+ <Import Project="WeChat.CppEh.targets" Condition="'$(MonoGameWeChat)'=='true' And '$(OutputType)'=='Exe'" />
+ <Target Name="ValidateMonoGameWeChatConsumer" BeforeTargets="CoreCompile" Condition="'$(MonoGameWeChat)'=='true'">
+  <Error Condition="'$(TargetFramework)'!='net10.0'" Text="This release supports net10.0 with .NET 11 RC2 NativeAOT-LLVM." />
+  <ItemGroup><_WeChatConflictingPackage Include="@(PackageReference)" Condition="$([System.String]::Copy('%(Identity)').StartsWith('MonoGame.Framework.')) Or '%(Identity)'=='MonoGame.Runtime.Browser.WebGL2'" /></ItemGroup>
+  <Error Condition="'@(_WeChatConflictingPackage)'!=''" Text="Remove official MonoGame platform/Framework packages from the WeChat target. This single package supplies MonoGame.Framework.dll: @(_WeChatConflictingPackage)" />
+ </Target>
+ <Target Name="WeChatSimdMetadata" AfterTargets="PrepareDotNetJsApiForLinking" Condition="'$(MonoGameWeChat)'=='true' And '$(OutputType)'=='Exe'">
+  <ItemGroup><_WeChatSimd Include="@(EmscriptenEnvVars)" Condition="'%(Identity)'=='WASM_ENABLE_SIMD=0'" /></ItemGroup>
+  <Error Condition="'@(_WeChatSimd->Count())'!='1'" Text="Pinned LLVM SIMD metadata layout changed." />
+  <ItemGroup><EmscriptenEnvVars Remove="WASM_ENABLE_SIMD=0"/><EmscriptenEnvVars Include="WASM_ENABLE_SIMD=1"/></ItemGroup>
+ </Target>
+ <Target Name="ExportMonoGameWeChat" AfterTargets="Publish" Condition="'$(MonoGameWeChat)'=='true' And '$(MonoGameWeChatExportPath)'!=''">
+  <Exec Command="&quot;$(MonoGameWeChatNodePath)&quot; &quot;$(MSBuildThisFileDirectory)../tools/export.mjs&quot; &quot;$(PublishDir)&quot; &quot;$(MonoGameWeChatExportPath)&quot; &quot;$(MonoGameWeChatConfiguration)&quot; &quot;$(TargetName)&quot;" />
+ </Target>
+</Project>

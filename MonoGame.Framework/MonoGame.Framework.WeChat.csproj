@@ -61,4 +61,14 @@
     <Compile Include="../mge/wechat/managed/Platform/Native/GraphicsDevice.Native.cs" Link="Platform/Native/GraphicsDevice.Native.cs" />
     <Compile Remove="Platform\Native\GraphicsDevice.Native.cs" />
   </ItemGroup>
+<ItemGroup>
+    <Compile Remove="Platform\Native\DynamicSoundEffectInstance.Native.cs" />
+    <Compile Include="../mge/wechat/managed/Platform/Native/DynamicSoundEffectInstance.Native.cs" Link="Platform/Native/DynamicSoundEffectInstance.Native.cs" />
+    <Compile Remove="Platform\Native\SoundEffectInstance.Native.cs" />
+    <Compile Include="../mge/wechat/managed/Platform/Native/SoundEffectInstance.Native.cs" Link="Platform/Native/SoundEffectInstance.Native.cs" />
+    <Compile Remove="Platform\Native\SoundEffect.Native.cs" />
+    <Compile Include="../mge/wechat/managed/Platform/Native/SoundEffect.Native.cs" Link="Platform/Native/SoundEffect.Native.cs" />
+    <Compile Remove="Platform\Native\RenderTarget2D.Native.cs" />
+    <Compile Include="../mge/wechat/managed/Platform/Native/RenderTarget2D.Native.cs" Link="Platform/Native/RenderTarget2D.Native.cs" />
+  </ItemGroup>
 </Project>
