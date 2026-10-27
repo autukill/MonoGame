@@ -1266,6 +1266,14 @@ namespace
 #else
                 return { GL_R8, GL_RED, GL_UNSIGNED_BYTE, 1, 1, 1, 1, GL_ONE, GL_ONE, GL_ONE, GL_RED, true, false };
 #endif
+            case MGSurfaceFormat::Astc4X4Rgba:
+                return { 0x93B0, 0, 0, 0, 16, 4, 4, GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA, false, true };
+            case MGSurfaceFormat::Astc4X4Srgb:
+                return { 0x93D0, 0, 0, 0, 16, 4, 4, GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA, false, true };
+            case MGSurfaceFormat::Astc6X6Rgba:
+                return { 0x93B4, 0, 0, 0, 16, 6, 6, GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA, false, true };
+            case MGSurfaceFormat::Astc6X6Srgb:
+                return { 0x93D4, 0, 0, 0, 16, 6, 6, GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA, false, true };
             case MGSurfaceFormat::Dxt1:
                 return { GL_COMPRESSED_RGB_S3TC_DXT1_EXT, 0, 0, 0, 8, 4, 4, GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA, false, true };
             case MGSurfaceFormat::Dxt1SRgb:
@@ -1899,7 +1907,11 @@ namespace
             MGGL_FAIL("Unsupported texture depth", "non-3D textures use depth 1; array textures need separate support");
 
         TextureFormatInfo formatInfo = GetTextureFormatInfo(format);
-        if (formatInfo.isCompressed
+        const bool astc = format == MGSurfaceFormat::Astc4X4Rgba || format == MGSurfaceFormat::Astc6X6Rgba
+            || format == MGSurfaceFormat::Astc4X4Srgb || format == MGSurfaceFormat::Astc6X6Srgb;
+        if (astc && !EM_ASM_INT({ var gl=GL.currentContext.GLctx; return !!gl.getExtension('WEBGL_compressed_texture_astc'); }))
+            MGGL_FAIL("Unsupported ASTC format", "ASTC extension is unavailable");
+        if (formatInfo.isCompressed && !astc
             && ((device->context.functions.CompressedTexImage2D == nullptr)
                 || (device->context.functions.CompressedTexSubImage2D == nullptr)
                 || (device->context.functions.GetCompressedTexImage == nullptr)
@@ -4349,4 +4361,24 @@ mgbyte MGG_OcclusionQuery_GetResult(MGG_GraphicsDevice* device, MGG_OcclusionQue
     device->context.functions.GetQueryObjectuiv(query->handle, GL_QUERY_RESULT, &result);
     pixelCount = static_cast<mgint>(result);
     return true;
+}
+
+extern "C" EMSCRIPTEN_KEEPALIVE int MGG_WeChat_ProbeAstc(int block, int srgb, int width, int height)
+{
+    return EM_ASM_INT({
+        var gl=GL.currentContext && GL.currentContext.GLctx;
+        if(!gl || ($0!==4 && $0!==6))return 0;
+        var ext=gl.getExtension('WEBGL_compressed_texture_astc');
+        if(!ext || ext.getSupportedProfiles().indexOf('ldr')<0)return 0;
+        var format=($1?0x93D0:0x93B0)+($0===6?4:0);
+        if(Array.prototype.indexOf.call(gl.getParameter(gl.COMPRESSED_TEXTURE_FORMATS),format)<0)return 0;
+        var old=gl.getParameter(gl.TEXTURE_BINDING_2D), tex=gl.createTexture();
+        var bytes=new Uint8Array(Math.ceil($2/$0)*Math.ceil($3/$0)*16);
+        // Valid LDR void-extent blocks, opaque white. Zero blocks are invalid ASTC.
+        bytes.fill(255);for(var i=0;i<bytes.length;i+=16){bytes[i]=252;bytes[i+1]=253;}
+        var ok=false;
+        try {gl.bindTexture(gl.TEXTURE_2D,tex);gl.compressedTexImage2D(gl.TEXTURE_2D,0,format,$2,$3,0,bytes);ok=gl.getError()===gl.NO_ERROR;}
+        finally {gl.bindTexture(gl.TEXTURE_2D,old);gl.deleteTexture(tex);}
+        return ok?1:0;
+    },block,srgb,width,height);
 }

@@ -207,6 +207,12 @@ namespace Microsoft.Xna.Framework.Graphics
         /// Adaptive scalable texture compression ; 12x12 matrix using rgba channel interpretation
         /// </summary>
         Astc12X12Rgba = 101,
+#if MONOGAME_WECHAT
+        /// <summary>ASTC LDR 4x4 with hardware sRGB sampling (WeChat).</summary>
+        Astc4X4Srgb = 102,
+        /// <summary>ASTC LDR 6x6 with hardware sRGB sampling (WeChat).</summary>
+        Astc6X6Srgb = 103,
+#endif
 
         #endregion
     }

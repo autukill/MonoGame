@@ -1,4 +1,4 @@
-﻿// MonoGame - Copyright (C) MonoGame Foundation, Inc
+// MonoGame - Copyright (C) MonoGame Foundation, Inc
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
@@ -837,6 +837,10 @@ namespace Microsoft.Xna.Framework.Graphics
                 case SurfaceFormat.Astc6X6Rgba:
                 case SurfaceFormat.Astc8X8Rgba:
                 case SurfaceFormat.Astc10X10Rgba:
+#if MONOGAME_WECHAT
+                case SurfaceFormat.Astc4X4Srgb:
+                case SurfaceFormat.Astc6X6Srgb:
+#endif
                 case SurfaceFormat.Astc12X12Rgba:
                 case SurfaceFormat.RgbaPvrtc2Bpp:
                 case SurfaceFormat.RgbaPvrtc4Bpp:
@@ -885,6 +889,10 @@ namespace Microsoft.Xna.Framework.Graphics
                 case SurfaceFormat.Astc6X6Rgba:
                 case SurfaceFormat.Astc8X8Rgba:
                 case SurfaceFormat.Astc10X10Rgba:
+#if MONOGAME_WECHAT
+                case SurfaceFormat.Astc4X4Srgb:
+                case SurfaceFormat.Astc6X6Srgb:
+#endif
                 case SurfaceFormat.Astc12X12Rgba:
                     // One texel in DXT3 and DXT5 is a minimum 4x4 block, which is 16 bytes
                     return 16;
@@ -989,6 +997,9 @@ namespace Microsoft.Xna.Framework.Graphics
                 case SurfaceFormat.SRgb8A8Etc2:
                 case SurfaceFormat.RgbaAtcExplicitAlpha:
                 case SurfaceFormat.RgbaAtcInterpolatedAlpha:
+#if MONOGAME_WECHAT
+                case SurfaceFormat.Astc4X4Srgb:
+#endif
                 case SurfaceFormat.Astc4X4Rgba:
                     width = 4;
                     height = 4;
@@ -997,6 +1008,9 @@ namespace Microsoft.Xna.Framework.Graphics
                     width = 5;
                     height = 5;
                     break;
+#if MONOGAME_WECHAT
+                case SurfaceFormat.Astc6X6Srgb:
+#endif
                 case SurfaceFormat.Astc6X6Rgba:
                     width = 6;
                     height = 6;
