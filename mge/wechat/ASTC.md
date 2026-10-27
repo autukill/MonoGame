@@ -1,4 +1,4 @@
-# ASTC candidate 3.8.6-mge.2-astc.4
+# ASTC candidate 3.8.6-mge.2-astc.5
 
 The WeChat-only native WebGL2 backend maps ASTC LDR 4x4 and 6x6, with
 explicit linear and sRGB surface formats. Existing enum values and other
@@ -18,3 +18,5 @@ this document does not claim physical device acceptance or public publication.
 Candidate .3 fixes the iOS WeChat 3.17.5 extension object without getSupportedProfiles(). Missing profile metadata continues through advertised formats and actual LDR uploads; exceptions return unsupported so the application can choose PNG. Regression coverage includes the missing method in both color spaces, throwing APIs, failed uploads, and binding/texture cleanup.
 
 Candidate .4 records each ASTC probe phase, format list, prior GL errors and storage/upload errors. The probe drains at most 16 prior context errors before testing, so unrelated initialization errors do not become ASTC failures. Success still requires advertised formats and successful real LDR uploads. These capability diagnostics add no player test controls.
+
+Candidate .5 addresses confirmed WeChat iOS format enumeration returning [0,0]. Enumeration is diagnostic only; extension availability, LDR profile when exposed, real ASTC storage/upload and driver errors decide support. Query errors are recorded separately, context loss remains unsupported, and upload errors still choose PNG.

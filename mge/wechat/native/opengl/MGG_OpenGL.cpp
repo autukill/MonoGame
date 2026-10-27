@@ -4401,9 +4401,17 @@ extern "C" EMSCRIPTEN_KEEPALIVE int MGG_WeChat_ProbeAstc(int block, int srgb, in
             }
             var format=($1?0x93D0:0x93B0)+($0===6?4:0);
             detail.phase='formats';detail.format=format;
-            var formats=gl.getParameter(gl.COMPRESSED_TEXTURE_FORMATS);
-            detail.formats=formats?Array.prototype.slice.call(formats):null;
-            if(!formats || Array.prototype.indexOf.call(formats,format)<0){detail.glError=gl.getError();return fail('format-not-advertised');}
+            // WeChat iOS can return [0,0] here even with the extension enabled.
+            // Treat enumeration as a hint; storage and real LDR upload decide support.
+            detail.formatsParameter=gl.COMPRESSED_TEXTURE_FORMATS;
+            detail.formats=null;detail.formatAdvertised=false;
+            try {
+                var formats=gl.getParameter(gl.COMPRESSED_TEXTURE_FORMATS);
+                detail.formats=formats?Array.prototype.slice.call(formats):null;
+                detail.formatAdvertised=!!formats && Array.prototype.indexOf.call(formats,format)>=0;
+            } catch(error) {detail.formatQueryException=String(error);}
+            detail.formatQueryError=gl.getError();
+            if(detail.formatQueryError===0x9242)return fail('context-lost');
             detail.phase='allocate';
             old=gl.getParameter(gl.TEXTURE_BINDING_2D);tex=gl.createTexture();
             if(!tex)return fail('texture-allocation-failed');
