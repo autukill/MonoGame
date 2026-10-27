@@ -4377,18 +4377,33 @@ extern "C" EMSCRIPTEN_KEEPALIVE int MGG_WeChat_ProbeAstc(int block, int srgb, in
 {
     return EM_ASM_INT({
         var gl=GL.currentContext && GL.currentContext.GLctx;
-        if(!gl || ($0!==4 && $0!==6))return 0;
-        var ext=gl.getExtension('WEBGL_compressed_texture_astc');
-        if(!ext || ext.getSupportedProfiles().indexOf('ldr')<0)return 0;
-        var format=($1?0x93D0:0x93B0)+($0===6?4:0);
-        if(Array.prototype.indexOf.call(gl.getParameter(gl.COMPRESSED_TEXTURE_FORMATS),format)<0)return 0;
-        var old=gl.getParameter(gl.TEXTURE_BINDING_2D); var tex=gl.createTexture();
-        var bytes=new Uint8Array(Math.ceil($2/$0)*Math.ceil($3/$0)*16);
-        // Valid LDR void-extent blocks, opaque white. Zero blocks are invalid ASTC.
-        bytes.fill(255);for(var i=0;i<bytes.length;i+=16){bytes[i]=252;bytes[i+1]=253;}
-        var ok=false;
-        try {gl.bindTexture(gl.TEXTURE_2D,tex);gl.texStorage2D(gl.TEXTURE_2D,1,format,$2,$3);gl.compressedTexSubImage2D(gl.TEXTURE_2D,0,0,0,$2,$3,format,bytes);ok=gl.getError()===gl.NO_ERROR;}
-        finally {gl.bindTexture(gl.TEXTURE_2D,old);gl.deleteTexture(tex);}
-        return ok?1:0;
+        var tex=null; var old; var restore=false;
+        try {
+            if(!gl || ($0!==4 && $0!==6))return 0;
+            var ext=gl.getExtension('WEBGL_compressed_texture_astc');
+            if(!ext)return 0;
+            // WeChat iOS exposes the ASTC extension without this desktop WebGL
+            // method. Available format tokens and a real LDR upload remain required.
+            if(typeof ext.getSupportedProfiles==='function'){
+                var profiles=ext.getSupportedProfiles();
+                if(!profiles || Array.prototype.indexOf.call(profiles,'ldr')<0)return 0;
+            }
+            var format=($1?0x93D0:0x93B0)+($0===6?4:0);
+            var formats=gl.getParameter(gl.COMPRESSED_TEXTURE_FORMATS);
+            if(!formats || Array.prototype.indexOf.call(formats,format)<0)return 0;
+            old=gl.getParameter(gl.TEXTURE_BINDING_2D);tex=gl.createTexture();
+            if(!tex)return 0;
+            restore=true;
+            var bytes=new Uint8Array(Math.ceil($2/$0)*Math.ceil($3/$0)*16);
+            // Valid LDR void-extent blocks, opaque white. Zero blocks are invalid ASTC.
+            bytes.fill(255);for(var i=0;i<bytes.length;i+=16){bytes[i]=252;bytes[i+1]=253;}
+            gl.bindTexture(gl.TEXTURE_2D,tex);gl.texStorage2D(gl.TEXTURE_2D,1,format,$2,$3);
+            gl.compressedTexSubImage2D(gl.TEXTURE_2D,0,0,0,$2,$3,format,bytes);
+            return gl.getError()===gl.NO_ERROR?1:0;
+        } catch(error) {return 0;}
+        finally {
+            if(restore)try{gl.bindTexture(gl.TEXTURE_2D,old);}catch(error){}
+            if(tex)try{gl.deleteTexture(tex);}catch(error){}
+        }
     },block,srgb,width,height);
 }
