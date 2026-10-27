@@ -8,7 +8,7 @@
   "sdk": "11.0.100-rc.2.26504.105",
   "compiler": "10.0.0-rc.1.26357.1",
   "packageId": "MyGameEngine.MonoGame.Runtime.WeChat.WebGL2",
-  "packageVersion": "3.8.6-mge.2-astc.3",
+  "packageVersion": "3.8.6-mge.2-astc.4",
   "managedBackports": [
     "Platform/Native/GamePlatform.Native.cs",
     "Platform/Native/GameWindow.Native.cs",
