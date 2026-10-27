@@ -43,7 +43,7 @@ Copy-Item $esbuild "$out/payload/tools/esbuild.exe"
 Copy-Item "$root/LICENSE.txt" "$out/payload/licenses/MonoGame.txt";Copy-Item "$root/THIRD-PARTY-NOTICES.txt" "$out/payload/licenses/ThirdParty.txt";Copy-Item "$PSScriptRoot/.sources/SDL/LICENSE.txt" "$out/payload/licenses/SDL.txt";Copy-Item "$NodeModulesRoot/esbuild/LICENSE.md" "$out/payload/licenses/esbuild.txt"
 Copy-Item "$PSScriptRoot/Tools/probe-simd.wasm" "$out/payload/tools/probe-simd.wasm"
 $payload=Get-ChildItem "$out/payload" -File -Recurse|ForEach-Object {@{path=[IO.Path]::GetRelativePath("$out/payload",$_.FullName).Replace('\','/');sha256=(Get-FileHash $_.FullName).Hash.ToLowerInvariant();bytes=$_.Length}}
-@{packageId='MyGameEngine.MonoGame.Runtime.WeChat.WebGL2';version='3.8.6-mge.2-astc.1';sourceCommit=$revision;inputs=(Get-Content "$PSScriptRoot/sources.json" -Raw|ConvertFrom-Json);payload=$payload;validated=$false;physical='NOT_TESTED';sourceDirty=$false}|ConvertTo-Json -Depth 10|Set-Content "$out/payload/provenance.json"
+@{packageId='MyGameEngine.MonoGame.Runtime.WeChat.WebGL2';version='3.8.6-mge.2-astc.2';sourceCommit=$revision;inputs=(Get-Content "$PSScriptRoot/sources.json" -Raw|ConvertFrom-Json);payload=$payload;validated=$false;physical='NOT_TESTED';sourceDirty=$false}|ConvertTo-Json -Depth 10|Set-Content "$out/payload/provenance.json"
 Invoke-WeChatProcess 'pack' $sdk (@('pack',"$PSScriptRoot/Package/Package.csproj",'-c','Release','-o',"$out/packages","-p:MgePayload=$out/payload","-p:MgeSourceCommit=$revision",'-p:NuGetAudit=false')+$flags) $root $out
 if((& git -C $root rev-parse HEAD).Trim() -ne $revision -or (& git -C $root status --porcelain)){throw 'Source state changed during build'}
-Write-Output "$out/packages/MyGameEngine.MonoGame.Runtime.WeChat.WebGL2.3.8.6-mge.2-astc.1.nupkg"
+Write-Output "$out/packages/MyGameEngine.MonoGame.Runtime.WeChat.WebGL2.3.8.6-mge.2-astc.2.nupkg"

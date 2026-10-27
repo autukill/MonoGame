@@ -1,4 +1,4 @@
-# ASTC candidate 3.8.6-mge.2-astc.1
+# ASTC candidate 3.8.6-mge.2-astc.2
 
 The WeChat-only native WebGL2 backend maps ASTC LDR 4x4 and 6x6, with
 explicit linear and sRGB surface formats. Existing enum values and other
