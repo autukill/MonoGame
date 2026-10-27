@@ -21,6 +21,7 @@ using MGGLGETCOMPRESSEDTEXIMAGEPROC = void (*)(GLenum target, GLint level, void*
 // retain the procedures in the final browser binary.
 extern "C" void glFramebufferTextureLayer(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
 extern "C" void glGetBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, void* data);
+extern "C" void glTexStorage2D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
 #else
 // SDL declares glGetTexImage, but its headers do not expose PFNGLGETTEXIMAGEPROC.
 using MGGLGETTEXIMAGEPROC = decltype(&glGetTexImage);

@@ -2014,7 +2014,15 @@ namespace
             glTexParameteri(texture->target, GL_TEXTURE_SWIZZLE_A, formatInfo.swizzleA);
         }
 
-        for (mgint level = 0; level < mipmaps; ++level)
+        // WebGL2 compressed uploads require actual block data; allocate immutable
+        // ASTC storage rather than passing a null pointer as compressed pixels.
+        if (astc)
+        {
+            if (type != MGTextureType::_2D || slices != 1)
+                MGGL_FAIL("Unsupported ASTC shape", "only independent 2D ASTC textures are supported");
+            glTexStorage2D(texture->target, mipmaps, texture->internalFormat, width, height);
+        }
+        else for (mgint level = 0; level < mipmaps; ++level)
         {
             mgint mipWidth = GetMipExtent(width, level);
             mgint mipHeight = GetMipExtent(height, level);
@@ -4372,7 +4380,7 @@ extern "C" EMSCRIPTEN_KEEPALIVE int MGG_WeChat_ProbeAstc(int block, int srgb, in
         if(!ext || ext.getSupportedProfiles().indexOf('ldr')<0)return 0;
         var format=($1?0x93D0:0x93B0)+($0===6?4:0);
         if(Array.prototype.indexOf.call(gl.getParameter(gl.COMPRESSED_TEXTURE_FORMATS),format)<0)return 0;
-        var old=gl.getParameter(gl.TEXTURE_BINDING_2D), tex=gl.createTexture();
+        var old=gl.getParameter(gl.TEXTURE_BINDING_2D); var tex=gl.createTexture();
         var bytes=new Uint8Array(Math.ceil($2/$0)*Math.ceil($3/$0)*16);
         // Valid LDR void-extent blocks, opaque white. Zero blocks are invalid ASTC.
         bytes.fill(255);for(var i=0;i<bytes.length;i+=16){bytes[i]=252;bytes[i+1]=253;}
