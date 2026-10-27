@@ -3956,7 +3956,9 @@ void MGG_Texture_SetData(MGG_GraphicsDevice* device, MGG_Texture* texture, mgint
             && resolvedHeight == mipHeight
             && resolvedDepth == mipDepth;
 
-        if (isFullLevelRegion)
+        const bool immutableAstc = texture->internalFormat == 0x93B0 || texture->internalFormat == 0x93B4
+            || texture->internalFormat == 0x93D0 || texture->internalFormat == 0x93D4;
+        if (isFullLevelRegion && !immutableAstc)
         {
             device->context.functions.CompressedTexImage2D(
                 imageTarget,
@@ -4385,7 +4387,7 @@ extern "C" EMSCRIPTEN_KEEPALIVE int MGG_WeChat_ProbeAstc(int block, int srgb, in
         // Valid LDR void-extent blocks, opaque white. Zero blocks are invalid ASTC.
         bytes.fill(255);for(var i=0;i<bytes.length;i+=16){bytes[i]=252;bytes[i+1]=253;}
         var ok=false;
-        try {gl.bindTexture(gl.TEXTURE_2D,tex);gl.compressedTexImage2D(gl.TEXTURE_2D,0,format,$2,$3,0,bytes);ok=gl.getError()===gl.NO_ERROR;}
+        try {gl.bindTexture(gl.TEXTURE_2D,tex);gl.texStorage2D(gl.TEXTURE_2D,1,format,$2,$3);gl.compressedTexSubImage2D(gl.TEXTURE_2D,0,0,0,$2,$3,format,bytes);ok=gl.getError()===gl.NO_ERROR;}
         finally {gl.bindTexture(gl.TEXTURE_2D,old);gl.deleteTexture(tex);}
         return ok?1:0;
     },block,srgb,width,height);

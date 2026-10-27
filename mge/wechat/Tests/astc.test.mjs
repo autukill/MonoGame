@@ -10,13 +10,14 @@ test('ASTC probes actual context, valid blocks and both color spaces; restores n
   const gl={TEXTURE_BINDING_2D:1,COMPRESSED_TEXTURE_FORMATS:2,TEXTURE_2D:3,NO_ERROR:0,
    getExtension:name=>{assert.equal(name,'WEBGL_compressed_texture_astc');return {getSupportedProfiles:()=>['ldr']};},
    getParameter:p=>p===1?bound:new Uint32Array([format]),createTexture:()=>texture,bindTexture:(t,v)=>{bound=v;},deleteTexture:t=>{assert.equal(t,texture);deleted=true;},getError:()=>0,
-   compressedTexImage2D:(t,l,f,x,y,z,bytes)=>{assert.equal(f,format);assert.equal(x,w);assert.equal(y,h);assert.equal(bytes.length,Math.ceil(w/block)*Math.ceil(h/block)*16);assert.equal(bytes[0],252);assert.equal(bytes[1],253);}};
+   texStorage2D:(t,l,f,x,y)=>{assert.equal(f,format);assert.equal(x,w);assert.equal(y,h);},
+   compressedTexSubImage2D:(t,l,x,y,w2,h2,f,bytes)=>{assert.equal(f,format);assert.equal(w2,w);assert.equal(h2,h);assert.equal(bytes.length,Math.ceil(w/block)*Math.ceil(h/block)*16);assert.equal(bytes[0],252);assert.equal(bytes[1],253);}};
   assert.equal(probe({currentContext:{GLctx:gl}},block,srgb,w,h),1);assert.equal(bound,old);assert.equal(deleted,true);
  }
 });
 test('missing extension or actual upload error returns unsupported',()=>{
  assert.equal(probe({},4,1,4,4),0);
  assert.equal(probe({currentContext:{GLctx:{getExtension:()=>null}}},6,1,6,6),0);
- const gl={getExtension:()=>({getSupportedProfiles:()=>['ldr']}),getParameter:()=>[0x93B0],createTexture:()=>1,bindTexture(){},deleteTexture(){},compressedTexImage2D(){},getError:()=>1280,NO_ERROR:0};
+ const gl={getExtension:()=>({getSupportedProfiles:()=>['ldr']}),getParameter:()=>[0x93B0],createTexture:()=>1,bindTexture(){},deleteTexture(){},texStorage2D(){},compressedTexSubImage2D(){},getError:()=>1280,NO_ERROR:0};
  assert.equal(probe({currentContext:{GLctx:gl}},4,0,4,4),0);
 });

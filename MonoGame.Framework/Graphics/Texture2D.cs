@@ -830,6 +830,17 @@ namespace Microsoft.Xna.Framework.Graphics
                                     : roundedHeight;
                 }
 
+#if MONOGAME_WECHAT
+                if (Format == SurfaceFormat.Astc4X4Rgba || Format == SurfaceFormat.Astc6X6Rgba ||
+                    Format == SurfaceFormat.Astc4X4Srgb || Format == SurfaceFormat.Astc6X6Srgb)
+                {
+                    if (checkedRect.X % blockWidth != 0 || checkedRect.Y % blockHeight != 0)
+                        throw new ArgumentException("ASTC updates require block-aligned offsets", "rect");
+                    // Payloads contain whole blocks but edge dimensions remain the original image size.
+                    checkedWidth = Math.Min(roundedWidth, textureBounds.Width - checkedRect.X);
+                    checkedHeight = Math.Min(roundedHeight, textureBounds.Height - checkedRect.Y);
+                }
+#endif
                 checkedRect = new Rectangle(
                     checkedRect.X / blockWidth * blockWidth,
                     checkedRect.Y / blockHeight * blockHeight,
