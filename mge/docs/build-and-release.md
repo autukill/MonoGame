@@ -128,6 +128,17 @@ INVALID_CALL／0x887A0001；不能把分配器报错行当成最早错误位置�
 诊断构建的native生命周期与后端矩阵都检查InfoQueue的ERROR／CORRUPTION，不以像素正确
 替代API合法性。此本机复现独立于Yoga在LoadContent之前的早期错误，后者仍需新分组日志。
 
+2026-10-28 三模式诊断包本机复验：保持07c5ac446的探针EXE不变，仅将DLL替换为
+f8db1f6bc，三组均完成五阶段、累计7601445次像素检查，API ERROR／CORRUPTION均为0；
+每组保留6条ID820优化清屏值不同的性能警告。CPU调试层确已启用，实际深度格式分别为
+无DSV、D16_UNORM、D24_UNORM_S8_UINT，三个独立子进程正常退出0。
+另在隔离副本故意令manifest校验失败，确认三组均继续运行并分别保留退出1，不污染交付包。
+NativeAOT／DLL实际加载身份、中文与空格路径及Windows PowerShell 5.1入口通过，
+自有构建／探针进程剩余0。交付为
+`mge/out/backend-startup-isolation-20261028/probe-02-mipfix/Dx12BackendProbe-win-x64-depth-matrix.zip`；
+Yoga后端初始化仍未宣称通过，需新包分组日志定位。详情见
+[三模式验证记录](../validation/20261028/backend-depth-matrix-local.json)。
+
 2026-10-28 18:36 Yoga独立探针真机结果已返回：Intel HD Graphics 5300，驱动
 20.19.15.4642，Windows NT 10.0.22000，实际ResourceBindingTier=1。
 探针EXE哈希与交付一致。原无界根布局CreateRootSignature=E_INVALIDARG，

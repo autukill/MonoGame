@@ -1,0 +1,81 @@
+{
+  "probe": "Dx12BackendProbe depth-isolation matrix",
+  "probeCommit": "07c5ac446c5462b640eedee7f86fe22d9492ec02",
+  "nativeCommit": "f8db1f6bc2716a6e243d139712a39d26d68bd457",
+  "exeSha256": "4D4B4C0AC88F5D2C0DA1B73D895F67E6C2DB575E7C737289643BD5F08757B63D",
+  "nativeSha256": "012ADF908F0D35A7A98946B91A6878C25EDC308A4112D023070AB00608B83144",
+  "sameExeAs243ErrorsPerCaseBaseline": true,
+  "localDebugLayerEnabled": true,
+  "localCases": [
+    {
+      "mode": "none",
+      "passed": true,
+      "localAdapter": "NVIDIA GeForce GTX 970",
+      "localTier": 3,
+      "windowLifetimes": 3,
+      "resizeChecks": 6,
+      "pixelChecks": 2533815,
+      "validationErrors": 0,
+      "warnings": 6,
+      "warningIds": [
+        820
+      ],
+      "observedDepthResourceAndViewFormats": [],
+      "exitCode": 0
+    },
+    {
+      "mode": "depth16",
+      "passed": true,
+      "localAdapter": "NVIDIA GeForce GTX 970",
+      "localTier": 3,
+      "windowLifetimes": 3,
+      "resizeChecks": 6,
+      "pixelChecks": 2533815,
+      "validationErrors": 0,
+      "warnings": 6,
+      "warningIds": [
+        820
+      ],
+      "observedDepthResourceAndViewFormats": [
+        [
+          "55",
+          "55"
+        ]
+      ],
+      "exitCode": 0
+    },
+    {
+      "mode": "depth24stencil8",
+      "passed": true,
+      "localAdapter": "NVIDIA GeForce GTX 970",
+      "localTier": 3,
+      "windowLifetimes": 3,
+      "resizeChecks": 6,
+      "pixelChecks": 2533815,
+      "validationErrors": 0,
+      "warnings": 6,
+      "warningIds": [
+        820
+      ],
+      "observedDepthResourceAndViewFormats": [
+        [
+          "45",
+          "45"
+        ]
+      ],
+      "exitCode": 0
+    }
+  ],
+  "totalPixelChecks": 7601445,
+  "allCasesPass": true,
+  "invalidManifestNegativeContinuedAllThreeCases": true,
+  "zeroOwnedProcessesRemaining": true,
+  "warningsRetained": "ID820 optimized clear color differs; valid clear with performance warning, 6 per case",
+  "yogaEarlyInitializationFailure": "pending new grouped logs; prior reason DXGI_ERROR_INVALID_CALL after bounded root success",
+  "nativeAbiExportsPreserved": 172,
+  "nativeBuiltinEffectsPreserved": 6,
+  "normalPlayerBehaviorOfDiagnostics": "compile-isolated; ordinary build has no debug layer or extra checkpoints",
+  "rawLocalMatrixReportSha256": "76CC53E9DDC954A3AC5B47F101EB2098531E130078832B6982C8B239CA23FFE4",
+  "zipBytes": 2855645,
+  "zipSha256": "5BE5E55C9E8CF5371E121885433F21B2683D66C8EA99093005D00D9ACDA24357"
+}
