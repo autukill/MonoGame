@@ -72,6 +72,14 @@ NuGet 缓存或已经验收的游戏目录。应复制已发布游戏至独立�
 
 ### Tier 1 根签名与描述符表兼容
 
+2026-10-28 用户指定后续验证使用独立探针。优先交付
+`mge/tests/Dx12RootSignatureProbe` 的原生独立项目，不再复制Monster作为复测载体。
+项目直接链接Windows SDK，分别创建两台设备A/B比较原六参数无界根布局与16槽布局，
+记录实际Tier／各调用HRESULT／GetDeviceRemovedReason，并对16槽布局离屏绘制后
+回读全部256像素。构建入口为该项目下 build.ps1；包内 Run-Probe.cmd 自动生成结果目录，
+无MonoGame、引擎、游戏资源、存档、音频或.NET运行时依赖。用户返回 probe-results-*。
+完整流程、结论分类和能力边界见该项目 README.md；旧Monster候选只保留为历史产物。
+
 2026-10-28 Yoga 新诊断在默认根签名创建时返回 E_INVALIDARG (0x80070057)，
 实际 GetDeviceRemovedReason=S_OK。最早已定位的问题是 CreateRootSignature 拒绝输入，
 不能再把此前未检查失败之后的 DEVICE_REMOVED 当成最早原因。
