@@ -17,13 +17,18 @@ $owner=Get-Process -Id $PID
 [ordered]@{pid=$PID;startTime=$owner.StartTime.ToString('o');operation='Standalone MonoGame backend probe NativeAOT build';sourceCommit=$commit;nativeCommit=$nativeProvenance.sourceCommit}|ConvertTo-Json|Set-Content "$out/build-owner.json" -Encoding utf8
 $vswhere=Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
 $vs=(& $vswhere -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath)
-& "$vs/Common7/Tools/Launch-VsDevShell.ps1" -Arch amd64 -HostArch amd64 -SkipAutomaticLocation *> "$out/msvc-environment.log"
-if(!(Get-Command link.exe -ErrorAction SilentlyContinue)){throw 'MSVC NativeAOT linker is not available'}
 '<configuration><packageSources><clear/><add key="nuget.org" value="https://api.nuget.org/v3/index.json"/></packageSources></configuration>'|Set-Content "$out/NuGet.Config" -Encoding utf8
-$oldReuse=$env:MSBUILDDISABLENODEREUSE;$oldServer=$env:DOTNET_CLI_USE_MSBUILD_SERVER
+$oldPath=$env:PATH;$oldReuse=$env:MSBUILDDISABLENODEREUSE;$oldServer=$env:DOTNET_CLI_USE_MSBUILD_SERVER
 $env:MSBUILDDISABLENODEREUSE='1';$env:DOTNET_CLI_USE_MSBUILD_SERVER='0';$env:DOTNET_CLI_TELEMETRY_OPTOUT='1'
 $flags=@('--disable-build-servers','-m:1','-nr:false','-p:UseSharedCompilation=false','-p:BuildInParallel=false','-p:RestoreBuildInParallel=false','-p:NuGetAudit=false')
 try {
+ # VsDevCmd expands PATH through cmd.exe; editor-injected paths can exceed its limit.
+ if($env:PATH.Length -gt 4000){
+  $toolPaths=@('dotnet','git','pwsh','powershell')|ForEach-Object{$tool=Get-Command $_ -CommandType Application -ErrorAction SilentlyContinue|Select-Object -First 1;if($tool){Split-Path $tool.Source -Parent}}
+  $env:PATH=(@($toolPaths)+@((Join-Path $env:SystemRoot 'System32'),$env:SystemRoot,(Join-Path $env:SystemRoot 'System32/Wbem'))|Select-Object -Unique)-join [IO.Path]::PathSeparator
+ }
+ & "$vs/Common7/Tools/Launch-VsDevShell.ps1" -Arch amd64 -HostArch amd64 -SkipAutomaticLocation -NoLogo *> "$out/msvc-environment.log"
+ if(!(Get-Command link.exe -CommandType Application -ErrorAction SilentlyContinue)){throw 'MSVC NativeAOT linker is not available'}
  & dotnet restore "$PSScriptRoot/Dx12BackendProbe.csproj" -r win-x64 --configfile "$out/NuGet.Config" --disable-parallel --ignore-failed-sources @flags *> "$out/restore.log"
  if($LASTEXITCODE){throw "Probe restore failed: $out/restore.log"}
  $assets=Get-Content "$PSScriptRoot/obj/project.assets.json" -Raw|ConvertFrom-Json
@@ -47,4 +52,4 @@ try {
  Get-Content "$out/build-provenance.json"
  # Running and packaging are separate from compilation, so validation can retain
  # native crash logs and run without triggering another build.
-}finally{$env:MSBUILDDISABLENODEREUSE=$oldReuse;$env:DOTNET_CLI_USE_MSBUILD_SERVER=$oldServer}
+}finally{$env:PATH=$oldPath;$env:MSBUILDDISABLENODEREUSE=$oldReuse;$env:DOTNET_CLI_USE_MSBUILD_SERVER=$oldServer}
