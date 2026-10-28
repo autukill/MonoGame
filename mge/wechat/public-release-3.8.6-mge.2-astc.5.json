@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-28",
+  "status": "PUBLIC_SIGNATURE_CLEAN_RESTORE_AND_FULL_MAIN_BUILD_VERIFIED",
+  "packageId": "MyGameEngine.MonoGame.Runtime.WeChat.WebGL2",
+  "version": "3.8.6-mge.2-astc.5",
+  "page": "https://www.nuget.org/packages/MyGameEngine.MonoGame.Runtime.WeChat.WebGL2/3.8.6-mge.2-astc.5",
+  "sourceCommit": "65cdd4345e2c76452f820a70631b647d1b07d1b1",
+  "sourceTag": "wechat-webgl2-3.8.6-mge.2-astc.5",
+  "sourceTagLocalOnly": true,
+  "uploadSha256": "4ea2fcff24f24f1910b8a14f0c1e0d6cdb656a45a179b03914e9245cded8187c",
+  "uploadBytes": 5791889,
+  "publicSignedSha256": "f155b2afbfebe26a89f5190ab71fbfdd82d42fe15d6d48b8e6e949d177783031",
+  "publicSignedBytes": 5804982,
+  "repositorySignatureVerified": true,
+  "allOriginal46MembersMatch": true,
+  "addedFiles": [
+    ".signature.p7s"
+  ],
+  "regressionTests": 58,
+  "consumerMainRevision": "8ce3cea5f3291cbd3f58452f49fa7bc1b5157ad7",
+  "publicBackendRestoreAndFullBuildPassed": true,
+  "explicitLlvmExceptions": {
+    "reason": "Existing fixed LLVM 10.0.0-rc.1.26357.1 compiler/host/target packages are not published on nuget.org; exact identity mapping only",
+    "version": "10.0.0-rc.1.26357.1",
+    "receipt": "artifacts/wechat-astc5-public-20261028/llvm-toolchain-feed/receipt.json",
+    "doesNotServeBackendOrNativeBuildPackages": true,
+    "packageIds": [
+      "microsoft.dotnet.ilcompiler.llvm",
+      "runtime.browser-wasm.microsoft.dotnet.ilcompiler.llvm",
+      "runtime.win-x64.microsoft.dotnet.ilcompiler.llvm"
+    ]
+  },
+  "engineEvidence": "MyGameEngine/docs/content/monster-wechat-astc-public-20261028.json",
+  "physicalAcceptance": "Android and iOS user-accepted astc.5 candidates; same backend bytes",
+  "newPreviewUploadPerformed": false,
+  "gitPushPerformed": false
+}

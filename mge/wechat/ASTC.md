@@ -1,5 +1,12 @@
 # ASTC candidate 3.8.6-mge.2-astc.5
 
+Published unchanged on nuget.org on 2026-10-28. See
+`public-release-3.8.6-mge.2-astc.5.json`: repository signature and all original
+46 members verified; clean MyGameEngine main restored the public backend into
+an empty cache and completed the full LLVM build. Three fixed LLVM toolchain
+packages remain explicitly mapped local exceptions. The package source is
+commit `65cdd4345`; later documentation commits do not change that identity.
+
 The WeChat-only native WebGL2 backend maps ASTC LDR 4x4 and 6x6, with
 explicit linear and sRGB surface formats. Existing enum values and other
 platform packages are unchanged. The additive probe uses the active context,
@@ -12,8 +19,12 @@ The producer builds serially, with MSBUILDDISABLENODEREUSE=1 and
 DOTNET_CLI_USE_MSBUILD_SERVER=0; managed flags are --disable-build-servers
 -m:1 -nr:false -p:UseSharedCompilation=false -p:BuildInParallel=false
 -p:RestoreBuildInParallel=false. Native builds use --parallel 1. Candidate
-validation and physical device results are recorded by the consuming engine;
-this document does not claim physical device acceptance or public publication.
+validation and physical device results are recorded by the consuming engine.
+Both Android and iOS Monster candidates using this exact backend were accepted
+by the user. Publication adds only the NuGet repository signature; it does not
+claim a new phone test of the subsequent clean-main build. The uploaded package
+README retains historical mge.1 headings because the accepted archive was not
+repacked; its nuspec, provenance and runtime/export payload identify astc.5.
 
 Candidate .3 fixes the iOS WeChat 3.17.5 extension object without getSupportedProfiles(). Missing profile metadata continues through advertised formats and actual LDR uploads; exceptions return unsupported so the application can choose PNG. Regression coverage includes the missing method in both color spaces, throwing APIs, failed uploads, and binding/texture cleanup.
 
