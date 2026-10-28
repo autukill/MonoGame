@@ -249,6 +249,7 @@ void CommandContext::GenerateMipmap(Texture* source)
 
     // We leave the resource in the pixel shader resource state as it is the most likely to be used
     source->TransitionBatched(batch, D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+    Texture::SendTransitionBatch(batch, cmdList);
 
     if (cmd)
     {

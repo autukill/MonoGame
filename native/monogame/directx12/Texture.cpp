@@ -70,6 +70,10 @@ Texture::Texture(const Texture& other) {
     impl->m_dimension = other.impl->m_dimension;
     impl->m_depthFormat = other.impl->m_depthFormat;
     impl->m_desc = other.impl->m_desc;
+    // The mip staging copy is an SRV/UAV texture, not a render target. Keeping
+    // ALLOW_RENDER_TARGET would require initializing every placed RT subresource
+    // with Clear/Discard/Copy before its first UAV use.
+    impl->m_desc.Flags &= ~D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
     impl->m_levels = other.impl->m_levels;
     impl->m_currentState = D3D12_RESOURCE_STATE_COPY_DEST;
 }

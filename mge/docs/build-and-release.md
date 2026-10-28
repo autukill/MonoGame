@@ -120,6 +120,14 @@ INVALID_CALL／0x887A0001；不能把分配器报错行当成最早错误位置�
 阻止后续组；每个子进程保留原始退出码及独立日志，顶层汇总API校验错误。
 本机独立SDK实验未复现typed深度资源创建采样视图错误，故此次未凭猜测改动深度资源格式。
 
+启用CPU校验后，07c5ac446的完整后端探针在三组均完成像素检查但各有243条API错误，
+因此矩阵汇总判为失败而非通过。错误ID1422指向mip临时纹理错误继承ALLOW_RENDER_TARGET，
+未初始化的高mip首次UAV使用不合法；ID527指向复制回源纹理后最后一次PIXEL_SHADER_RESOURCE
+转换只更新了CPU记录而没有提交barrier。修复去除临时纹理RT标志并立即提交最后屏障。
+保留原始矩阵于 `mge/out/backend-startup-isolation-20261028/launcher validation-中文`。
+诊断构建的native生命周期与后端矩阵都检查InfoQueue的ERROR／CORRUPTION，不以像素正确
+替代API合法性。此本机复现独立于Yoga在LoadContent之前的早期错误，后者仍需新分组日志。
+
 2026-10-28 18:36 Yoga独立探针真机结果已返回：Intel HD Graphics 5300，驱动
 20.19.15.4642，Windows NT 10.0.22000，实际ResourceBindingTier=1。
 探针EXE哈希与交付一致。原无界根布局CreateRootSignature=E_INVALIDARG，

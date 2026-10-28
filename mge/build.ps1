@@ -30,6 +30,8 @@ try {
  & "$out/build/Release/dx12-lifecycle.exe" --tier1-bindings *> "$out/tier1-lifecycle.log"
  if($LASTEXITCODE){throw "Tier 1 descriptor binding regression failed: $out/tier1-lifecycle.log"}
  if($StartupDiagnostics){
+  $validationErrors=@(Select-String -LiteralPath "$out/lifecycle.log","$out/tier1-lifecycle.log" -Pattern '^\[DX12-VALIDATION\] severity=[01]\b')
+  if($validationErrors.Count){throw "Native API validation errors: $out/lifecycle.log / tier1-lifecycle.log"}
   & "$out/build/Release/dx12-diagnostics.exe" *> "$out/diagnostics.log"
   if($LASTEXITCODE){throw "Device removal diagnostic regression failed: $out/diagnostics.log"}
  }
