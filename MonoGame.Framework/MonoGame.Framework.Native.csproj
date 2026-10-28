@@ -7,8 +7,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>The MonoGame Native platform.</Description>
     <PackageTags>monogame;.net core;core;.net standard;standard;native</PackageTags>
-    <PackageId Condition="'$(MgeBc7Candidate)'!='true'">MonoGame.Framework.Native</PackageId>
-    <PackageId Condition="'$(MgeBc7Candidate)'=='true'">MyGameEngine.MonoGame.Framework.Native</PackageId>
+    <PackageId Condition="'$(MgeMaintainedFramework)'!='true'">MonoGame.Framework.Native</PackageId>
+    <PackageId Condition="'$(MgeMaintainedFramework)'=='true'">MyGameEngine.MonoGame.Framework.Native</PackageId>
     <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
     <CopyContentFiles>True</CopyContentFiles>
     <Configurations>Debug;Release</Configurations>

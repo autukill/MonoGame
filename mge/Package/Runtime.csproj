@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
  <PropertyGroup>
   <TargetFramework>netstandard2.1</TargetFramework><IncludeBuildOutput>false</IncludeBuildOutput><IsPackable>true</IsPackable>
-  <PackageId>MyGameEngine.MonoGame.Runtime.Windows.DX12</PackageId><PackageVersion>3.8.6-mge.2</PackageVersion>
-  <Authors>MyGameEngine</Authors><Description>MyGameEngine-maintained Windows x64 DX12 BC7 candidate. Requires the matching MyGameEngine.MonoGame.Framework.Native candidate. Local validation package, not an official MonoGame release.</Description>
+  <PackageId>MyGameEngine.MonoGame.Runtime.Windows.DX12</PackageId><PackageVersion>3.8.6-mge.3</PackageVersion>
+  <Authors>MyGameEngine</Authors><Description>MyGameEngine-maintained Windows x64 DX12 runtime with BC7 support. Requires MyGameEngine.MonoGame.Framework.Native 3.8.6-mge.3. Unofficial MonoGame maintenance release.</Description>
   <PackageLicenseExpression>MS-PL</PackageLicenseExpression><PackageReadmeFile>README.md</PackageReadmeFile>
   <RepositoryUrl>https://github.com/autukill/MonoGame</RepositoryUrl><PackageProjectUrl>https://github.com/autukill/MonoGame/tree/mge/3.8.6</PackageProjectUrl><RepositoryType>git</RepositoryType><RepositoryCommit>$(MgeSourceCommit)</RepositoryCommit><PackageTags>MonoGame;MyGameEngine;DX12;Windows;native</PackageTags>
   <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking><EnableDefaultItems>false</EnableDefaultItems>

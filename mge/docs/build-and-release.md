@@ -59,6 +59,15 @@ NuGet可能对包追加仓库签名，公开下载nupkg整体哈希须单独记�
 
 ## 自包含复现入口
 
+### BC7 配套维护包（3.8.6-mge.3）
+
+使用 `mge/build-maintained-dx12.ps1 -OutputRoot <新目录> -NuGetConfig <配置文件> -PackagesDirectory <独立缓存>`
+从同一干净提交生产 Runtime 和 Framework 两个包。版本由 `mge/upstream.json` 统一，
+托管编译使用 `MgeMaintainedFramework=true`，默认官方打包入口不变。
+两个包必须配套使用；Framework 程序集身份仍为 MonoGame.Framework 3.8.6.0。
+依次验证本地包、推送生产源码、发布 Framework 和 Runtime，再从公开源空缓存验证。
+最终公开包的签名、归档哈希及 DLL 哈希写入独立发布记录，不能沿用本地候选包的发布状态。
+
 - `mge/tests/Blank`：真实可见1280x720、HiDef、60Hz/VSync空窗口，可Release JIT或NativeAOT + Full Trim。
 - `mge/tests/GraphicsProbe`：常规运行传入DLL SHA256，验证混合mip绘制；
   `--constant-ring OUTPUT SHA256`额外验证5000次跨帧上传及像素。

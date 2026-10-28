@@ -9,7 +9,7 @@ Assert-MgeCleanSource -Root $root -Pins $pin.submodules
 if((& git -C $root rev-parse HEAD).Trim() -ne $provenance.sourceCommit -or $LASTEXITCODE){throw 'Pack exactly the clean source commit that produced the runtime'}
 if((Get-FileHash "$payload/mgruntime.dll").Hash -ne $provenance.sha256){throw 'Payload hash mismatch'}
 if($provenance.packageId -ne $pin.packageId -or $provenance.packageVersion -ne $pin.packageVersion -or $provenance.diagnosticRuntime){throw 'Only the matching non-diagnostic versioned payload may be packed'}
-(Get-Content "$PSScriptRoot/Package/Runtime.targets.in" -Raw).Replace('@@HASH@@',$provenance.sha256)|Set-Content "$payload/MyGameEngine.MonoGame.Runtime.Windows.DX12.targets" -Encoding utf8
+(Get-Content "$PSScriptRoot/Package/Runtime.targets.in" -Raw).Replace('@@HASH@@',$provenance.sha256).Replace('@@FRAMEWORK_VERSION@@',$pin.packageVersion)|Set-Content "$payload/MyGameEngine.MonoGame.Runtime.Windows.DX12.targets" -Encoding utf8
 $env:MSBUILDDISABLENODEREUSE='1';$env:DOTNET_CLI_USE_MSBUILD_SERVER='0';$env:DOTNET_CLI_TELEMETRY_OPTOUT='1'
 $flags=@('--disable-build-servers','-m:1','-nr:false','-p:UseSharedCompilation=false','-p:BuildInParallel=false','-p:RestoreBuildInParallel=false')
 & dotnet restore "$PSScriptRoot/Package/Runtime.csproj" @flags
