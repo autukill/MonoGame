@@ -17,6 +17,8 @@ MGE-DX12-007：[首次上传 Discard](007-virgin-upload-discard.md)，原版负�
 未包含实验性LazyQuery。对“官方未修复”的判断只针对已核查的基线或注明日期的审计，
 不推断其他官方发行版或未来develop状态。
 
+MGE-DX12-009: [BC7 纹理](009-bc7-textures.md)，独立功能与升级移植清单；验证状态见专项报告。
+
 ## 首版源码提交
 
 - MGE-DX12-001: `6b9507039b0dd17d98ebb38bc826f8abfa2d5f46`

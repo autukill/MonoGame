@@ -214,6 +214,11 @@ namespace Microsoft.Xna.Framework.Graphics
         Astc6X6Srgb = 103,
 #endif
 
+        /// <summary>BC7 RGBA, 4x4 texels per 16-byte block (maintained DX12 backend).</summary>
+        Bc7 = 104,
+        /// <summary>BC7 RGBA with hardware sRGB sampling (maintained DX12 backend).</summary>
+        Bc7SRgb = 105,
+
         #endregion
     }
 }

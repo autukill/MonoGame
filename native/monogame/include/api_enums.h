@@ -73,6 +73,8 @@ enum class MGSurfaceFormat : mgint
     Astc8X8Rgba = 99,
     Astc10X10Rgba = 100,
     Astc12X12Rgba = 101,
+    Bc7 = 104,
+    Bc7SRgb = 105,
 };
 
 enum class MGDepthFormat : mgint

@@ -4,6 +4,12 @@ using Microsoft.Xna.Framework.Graphics;
 // Independent public-API regression, not referenced by any engine or player project.
 try
 {
+    if (args is ["--bc7", var bc7Output, var bc7Hash])
+    {
+        using var probe = new Bc7Probe(bc7Output);
+        probe.Run();
+        args = [bc7Hash];
+    }
     if (args is ["--buffers", var bufferHash])
     {
         using var probe = new DynamicBufferProbe();

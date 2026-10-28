@@ -572,6 +572,9 @@ void Graphics::Texture::GetData(DeviceResources* device, uint32_t subResId, uint
     case DXGI_FORMAT_BC5_TYPELESS:
     case DXGI_FORMAT_BC5_UNORM:
     case DXGI_FORMAT_BC5_SNORM:
+      case DXGI_FORMAT_BC7_TYPELESS:
+      case DXGI_FORMAT_BC7_UNORM:
+      case DXGI_FORMAT_BC7_UNORM_SRGB:
         height /= 4;
         break;
     }
