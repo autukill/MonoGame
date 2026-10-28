@@ -167,7 +167,7 @@ struct MGG_GraphicsAdapter
 	std::vector<MGG_DisplayMode> modes;
 };
 
-const int MAX_TEXTURE_SLOTS = 16;
+const int MAX_TEXTURE_SLOTS = GraphicsTextureSlots;
 
 // The current graphics device global.
 static MGG_GraphicsDevice* g_GraphicsDevice = nullptr;
@@ -1235,10 +1235,10 @@ void MGDX_ApplyState(MGG_GraphicsDevice* device)
 				tex->frame = currentFrame;
 			}
 
-			if (maxSlot > -1)
+			if (maxSlot > -1 || heaps->RequiresFullGraphicsTables())
 			{
 				UINT tableIndex = s == (int)MGShaderStage::Pixel ? 3 : 2;
-				D3D12_GPU_DESCRIPTOR_HANDLE handle = heaps->ApplySRVsToShader();
+				D3D12_GPU_DESCRIPTOR_HANDLE handle = heaps->ApplySRVsToShader(true);
 				cl->SetGraphicsRootDescriptorTable(tableIndex, handle);
 			}
 		}
@@ -1252,7 +1252,11 @@ void MGDX_ApplyState(MGG_GraphicsDevice* device)
 		{
 			mgint maxSlot = device->currentShader[s]->maxSamplerSlot;
 			if (maxSlot == -1)
+			{
+				if (heaps->RequiresFullGraphicsTables())
+					cl->SetGraphicsRootDescriptorTable(s == (int)MGShaderStage::Pixel ? 5 : 4, heaps->ApplySamplersToShader());
 				continue;
+			}
 
 			// TODO: We should be using a commutative hash in SetSamplerState.
 			// TODO: Hashing the pointers can be dangerous... use unique ids.

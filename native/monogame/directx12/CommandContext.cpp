@@ -331,35 +331,31 @@ void CommandContext::CreateDefaultRootSignature() {
         | D3D12_ROOT_SIGNATURE_FLAG_DENY_HULL_SHADER_ROOT_ACCESS;
 
     CD3DX12_DESCRIPTOR_RANGE DescRange[4];
-    DescRange[0].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, -1, 0); // t0-unbounded
-    DescRange[1].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, -1, 0); // t0-unbounded
-    DescRange[2].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER, -1, 0); // s0-unbounded
-    DescRange[3].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER, -1, 0); // s0-unbounded
+    const UINT descriptors = m_heaps->RequiresFullGraphicsTables() ? GraphicsTextureSlots : UINT_MAX;
+    MGE_DX12_STEP(m_heaps->RequiresFullGraphicsTables() ? "DefaultRootSignature.Tier1.Bounded16" : "DefaultRootSignature.Unbounded");
+    DescRange[0].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, descriptors, 0);
+    DescRange[1].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, descriptors, 0);
+    DescRange[2].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER, descriptors, 0);
+    DescRange[3].Init(D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER, descriptors, 0);
 
     CD3DX12_ROOT_PARAMETER RP[6];
     RP[0].InitAsConstantBufferView(0, 0, D3D12_SHADER_VISIBILITY_VERTEX); // b0
     RP[1].InitAsConstantBufferView(0, 0, D3D12_SHADER_VISIBILITY_PIXEL); // b0
-    RP[2].InitAsDescriptorTable(1, &DescRange[0], D3D12_SHADER_VISIBILITY_VERTEX); // t0-unbounded
-    RP[3].InitAsDescriptorTable(1, &DescRange[1], D3D12_SHADER_VISIBILITY_PIXEL); // t0-unbounded
-    RP[4].InitAsDescriptorTable(1, &DescRange[2], D3D12_SHADER_VISIBILITY_VERTEX); // s0-unbounded
-    RP[5].InitAsDescriptorTable(1, &DescRange[3], D3D12_SHADER_VISIBILITY_PIXEL); // s0-unbounded
+    RP[2].InitAsDescriptorTable(1, &DescRange[0], D3D12_SHADER_VISIBILITY_VERTEX);
+    RP[3].InitAsDescriptorTable(1, &DescRange[1], D3D12_SHADER_VISIBILITY_PIXEL);
+    RP[4].InitAsDescriptorTable(1, &DescRange[2], D3D12_SHADER_VISIBILITY_VERTEX);
+    RP[5].InitAsDescriptorTable(1, &DescRange[3], D3D12_SHADER_VISIBILITY_PIXEL);
 
     CD3DX12_VERSIONED_ROOT_SIGNATURE_DESC RootSig(6, RP, 0, nullptr, flags);
-    ID3DBlob* pSerializedRootSig = nullptr;
-    ID3DBlob* pErrorBlob = nullptr;
+    ComPtr<ID3DBlob> pSerializedRootSig, pErrorBlob;
     MGE_DX12_STEP("DefaultRootSignature.Serialize");
-    MGE_DX12_CHECK(D3D12SerializeVersionedRootSignature(&RootSig, &pSerializedRootSig, &pErrorBlob));
+    ThrowIfFailed(D3D12SerializeVersionedRootSignature(&RootSig, &pSerializedRootSig, &pErrorBlob));
 
     MGE_DX12_STEP("DefaultRootSignature.Create");
-    MGE_DX12_CHECK(m_deviceRes->GetD3DDevice()->CreateRootSignature(
+    ThrowIfFailed(m_deviceRes->GetD3DDevice()->CreateRootSignature(
         0, pSerializedRootSig->GetBufferPointer(), pSerializedRootSig->GetBufferSize(),
         IID_GRAPHICS_PPV_ARGS(m_rootSig.ReleaseAndGetAddressOf())));
 
-    // Release the blobs.
-    if (pSerializedRootSig)
-        pSerializedRootSig->Release();
-    if (pErrorBlob)
-        pErrorBlob->Release();
 }
 
 void CommandContext::CreateGenerateMipPipelineResources() {

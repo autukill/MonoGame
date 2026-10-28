@@ -26,8 +26,13 @@ static void VerifyMips(DeviceResources& device,Texture& texture,uint32_t expecte
     }
 }
 #include "PagedDescriptorProbe.h"
-int main() {
+#include "Tier1BindingProbe.h"
+int main(int argc, char** argv) {
     try {
+        if (argc == 2 && strcmp(argv[1], "--tier1-bindings") == 0) {
+            ForceTier1BindingsForProbe = true;
+            puts("Native lifecycle: forcing Tier 1 bindings in this test executable only.");
+        } else if (argc != 1) throw std::invalid_argument("Unknown native lifecycle arguments");
         for(int cycle=0;cycle<3;++cycle) {
             ComPtr<IDXGIFactory6> factory; Check(CreateDXGIFactory2(0,IID_PPV_ARGS(&factory)));
             ComPtr<IDXGIAdapter1> adapter;
@@ -61,6 +66,9 @@ int main() {
 #ifdef ENGINE_DX12_PAGED_CPU
             VerifyPagedDescriptors(device,texture);
 #endif
+            if (ForceTier1BindingsForProbe && !heaps->RequiresFullGraphicsTables())
+                throw std::runtime_error("Tier 1 probe did not activate bounded tables");
+            if (heaps->RequiresFullGraphicsTables()) VerifyTier1Bindings(device,texture);
             std::vector<int32_t> indices;
             Sample("query.before");
             begin=std::chrono::steady_clock::now();

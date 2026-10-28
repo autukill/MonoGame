@@ -58,8 +58,9 @@ OutputRoot 必须是尚不存在的目录；源码、维护文档和回归须先
 
 诊断注册暂持有当前设备的 COM 引用，Reset/销毁时按身份释放；查询复制引用以避免
 与清理并发使用悬空指针。阶段属于调用线程，其他工作线程失败会标明本线程阶段未知。
-除诊断编译外，原错误处理、根签名和分配器调用保持现有行为，不增加日志或新 ABI 导出。
-诊断版本对原来未检查的根签名／分配器调用额外检查 HRESULT，以保留最早失败证据。
+诊断开关本身不增加新 ABI 导出；普通构建不包含这些诊断日志。
+诊断版本对原来未检查的分配器调用额外检查 HRESULT，以保留最早失败证据。
+根签名序列化／创建在普通和诊断构建均检查 HRESULT，并用 COM 智能指针清理临时 blob。
 
 构建继续执行 172 导出／六 Effect 核对及三次设备生命周期，额外运行独立
 `dx12-diagnostics.exe`：验证无设备、真实 WARP 设备 S_OK、异常调用位置、
@@ -68,6 +69,29 @@ OutputRoot 必须是尚不存在的目录；源码、维护文档和回归须先
 provenance 的 diagnosticRuntime=true 使正式 pack.ps1 拒绝打包；不得覆盖公开维护包、
 NuGet 缓存或已经验收的游戏目录。应复制已发布游戏至独立诊断目录，仅替换该 DLL，
 携带原 EXE 与新 DLL 哈希、源码提交及启动日志脚本；最终原因仍须故障机器复测。
+
+### Tier 1 根签名与描述符表兼容
+
+2026-10-28 Yoga 新诊断在默认根签名创建时返回 E_INVALIDARG (0x80070057)，
+实际 GetDeviceRemovedReason=S_OK。最早已定位的问题是 CreateRootSignature 拒绝输入，
+不能再把此前未检查失败之后的 DEVICE_REMOVED 当成最早原因。
+当次日志尚未采集 ResourceBindingTier；新诊断注册设备时补记实际查询状态和绑定等级。
+
+后端原本只支持16纹理／采样器槽，却对每个图形阶段声明无界范围。修复查询
+D3D12_OPTIONS，仅在 ResourceBindingTier=1 时使用16个描述符的有界根表，
+并对每张图形表的空洞和尾部填充空SRV／默认采样器，绑定未使用阶段的完整空表。
+相邻图形表保留完整16槽，空表在每帧复用；已使用的描述符与空表不共享可变位置。
+Tier 2/3保留原根签名及动态长度分配，compute的SRV/UAV布局也保持原有长度。
+每帧GPU可见堆容量仍为65536 SRV/UAV及2048采样器，Tier 1下对应最多4096／128张完整表；
+已有采样器集合缓存继续复用表。未实现自动扩堆或超过此容量的中途提交。
+
+`dx12-lifecycle --tier1-bindings` 仅在独立测试可执行文件强制低等级路径，
+正式／诊断DLL不含该参数或强制开关。构建依次运行真实等级及强制Tier 1三次生命周期；
+额外创建有界根签名，GPU回读16槽稀疏表／空洞／尾部／下一张空表，检查compute分配
+保持单槽、相邻表不重叠，以及150次空采样器表复用不耗尽堆。
+保留 mip、CPU描述符分页、query及设备移除检查；故障设备复验仍单独记录。
+限制依据：[Hardware Tiers](https://learn.microsoft.com/en-us/windows/win32/direct3d12/hardware-support)、
+[Creating a Root Signature](https://learn.microsoft.com/en-us/windows/win32/direct3d12/creating-a-root-signature)。
 
 所有托管构建均设置MSBUILDDISABLENODEREUSE=1、DOTNET_CLI_USE_MSBUILD_SERVER=0，
 参数为--disable-build-servers -m:1 -nr:false -p:UseSharedCompilation=false

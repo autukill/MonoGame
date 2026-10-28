@@ -8,6 +8,11 @@
 #include <queue>
 
 namespace Graphics {
+    constexpr uint32_t GraphicsTextureSlots = 16;
+#ifdef MGE_TIER1_BINDING_PROBE
+    // Test executable only; absent from the runtime DLL.
+    extern bool ForceTier1BindingsForProbe;
+#endif
 #define ENGINE_DX12_PAGED_CPU 1
     // CPU-only descriptors keep stable handles. Shader-visible heaps remain contiguous
     // and retain their existing per-backbuffer ownership and 65,536-entry capacity.
@@ -83,6 +88,13 @@ namespace Graphics {
         std::unique_ptr<ShaderVisibleDescHeap> m_samplerShaderHeap[MAX_BACK_BUFFER_COUNT];
         size_t m_samplerShaderHeapPos = 0;
         uint32_t m_samplerSlotUsed = 0;
+        bool m_tier1Bindings = false;
+        uint32_t m_srvWrittenMask = 0;
+        uint32_t m_samplerWrittenMask = 0;
+        D3D12_CPU_DESCRIPTOR_HANDLE m_nullSrv = {};
+        D3D12_CPU_DESCRIPTOR_HANDLE m_defaultSampler = {};
+        D3D12_GPU_DESCRIPTOR_HANDLE m_emptyGraphicsSrvs = {};
+        D3D12_GPU_DESCRIPTOR_HANDLE m_emptyGraphicsSamplers = {};
 
     public:
         Heaps(ID3D12Device* device, int backBufferCount);
@@ -91,6 +103,9 @@ namespace Graphics {
         void Prepare(unsigned int frame) {
             m_srvShaderHeapPos = 0;
             m_samplerShaderHeapPos = 0;
+            m_srvSlotUsed = m_samplerSlotUsed = 0;
+            m_srvWrittenMask = m_samplerWrittenMask = 0;
+            m_emptyGraphicsSrvs = m_emptyGraphicsSamplers = {};
             m_idx = frame % MAX_BACK_BUFFER_COUNT;
         }
 
@@ -99,7 +114,8 @@ namespace Graphics {
         void FreeSRVUAVHandle(D3D12_CPU_DESCRIPTOR_HANDLE handle) { m_srvHeap->FreeCpuHandle(handle); }
         void CopySRVUAVToShader(const D3D12_CPU_DESCRIPTOR_HANDLE srv, uint32_t slot);
         D3D12_GPU_DESCRIPTOR_HANDLE GetGpuHandleAtSlot(uint32_t slot);
-        D3D12_GPU_DESCRIPTOR_HANDLE ApplySRVsToShader();
+        D3D12_GPU_DESCRIPTOR_HANDLE ApplySRVsToShader(bool graphicsTable = false);
+        bool RequiresFullGraphicsTables() const noexcept { return m_tier1Bindings; }
         ID3D12DescriptorHeap* GetSRVShaderHeap() { return m_srvShaderHeap[m_idx]->Heap(); }
 
         D3D12_CPU_DESCRIPTOR_HANDLE CreateSamplerHandle() { return m_samplerHeap->AllocCpuHandle(); }

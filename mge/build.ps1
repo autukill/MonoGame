@@ -27,6 +27,8 @@ try {
  if($LASTEXITCODE){throw 'ABI or builtin Effect mismatch'}
  & "$out/build/Release/dx12-lifecycle.exe" *> "$out/lifecycle.log"
  if($LASTEXITCODE){throw "Native lifecycle regression failed: $out/lifecycle.log"}
+ & "$out/build/Release/dx12-lifecycle.exe" --tier1-bindings *> "$out/tier1-lifecycle.log"
+ if($LASTEXITCODE){throw "Tier 1 descriptor binding regression failed: $out/tier1-lifecycle.log"}
  if($StartupDiagnostics){
   & "$out/build/Release/dx12-diagnostics.exe" *> "$out/diagnostics.log"
   if($LASTEXITCODE){throw "Device removal diagnostic regression failed: $out/diagnostics.log"}

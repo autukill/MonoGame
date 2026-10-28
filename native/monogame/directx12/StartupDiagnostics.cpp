@@ -35,6 +35,12 @@ namespace DX::StartupDiagnostics {
         std::lock_guard<std::mutex> lock(deviceMutex);
         currentDevice = device;
         fprintf(stderr, "[DX12-DIAG] device.registered=%s\n", device ? "yes" : "no");
+        if (device) {
+            D3D12_FEATURE_DATA_D3D12_OPTIONS options = {};
+            const HRESULT hr = device->CheckFeatureSupport(D3D12_FEATURE_D3D12_OPTIONS, &options, sizeof(options));
+            fprintf(stderr, "[DX12-DIAG] CheckFeatureSupport(D3D12_OPTIONS)=0x%08X ResourceBindingTier=%u\n",
+                static_cast<unsigned int>(hr), static_cast<unsigned int>(options.ResourceBindingTier));
+        }
         fflush(stderr);
     }
 
