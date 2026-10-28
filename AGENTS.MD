@@ -14,3 +14,8 @@ never open an upstream issue/PR or submit this branch there.
 - Native builds: --parallel 1 -- /m:1 /nr:false /p:UseSharedCompilation=false /p:BuildInParallel=false.
 - Await and reconcile owned processes; never stop unrelated apps/builds.
 - Publish only a clean, committed, validated package. Never store credentials.
+- For a coordinated release, build and validate every package first (including
+  companion engine native packages), then upload the entire reviewed set without
+  waiting for individual packages to become installable. Wait for NuGet validation
+  and verify public restores as a batch after all uploads. Do not serialize the
+  release as upload/wait/upload/wait. See mge/docs/build-and-release.md.
