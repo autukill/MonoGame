@@ -88,6 +88,13 @@ Run-Probe.cmd保留原生stderr、实际加载DLL身份、每阶段完成记录�
 此项目没有引擎或游戏反向引用，完整覆盖范围和构建入口见其README。
 共用常量环结果改用JSON源生成，以供NativeAOT探针复用，原有回归行为和字段保持相同。
 
+完整后端探针还在本机复现了独立的读取后继续绘制问题：旧候选在第0帧离屏纹理／mip
+读取成功，后续后台缓冲仍为黑色。同步Texture.GetData／GetBackBufferData会关闭并重启
+command list；原代码恢复了根签名、堆和脏状态，却未重新绑定缓存的RTV／DSV。
+修复仅在这两条读取后重启路径恢复原输出目标，保留原资源状态和切换逻辑。
+同一NativeAOT探针保留读取后继续绘制的检查，以核对修复而不绕过失败路径；
+首轮失败位于 `mge/out/backend-probe-20261028/launcher validation-中文`。
+
 2026-10-28 18:36 Yoga独立探针真机结果已返回：Intel HD Graphics 5300，驱动
 20.19.15.4642，Windows NT 10.0.22000，实际ResourceBindingTier=1。
 探针EXE哈希与交付一致。原无界根布局CreateRootSignature=E_INVALIDARG，

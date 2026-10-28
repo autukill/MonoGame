@@ -992,6 +992,7 @@ void MGG_GraphicsDevice_GetBackBufferData(MGG_GraphicsDevice* device, mgint x, m
 	{
 		auto context = device->resources->GetCommandContext();
 		context->Reset();
+		context->RestoreRenderTargets();
 
 		device->pipelineManager->Prepare();
 		device->indexBufferDirty = true;
@@ -2246,6 +2247,7 @@ void MGG_Texture_GetData(MGG_GraphicsDevice* device, MGG_Texture* texture, mgint
 	{
 		auto context = device->resources->GetCommandContext();
 		context->Reset();
+		context->RestoreRenderTargets();
 
 		device->pipelineManager->Prepare();
 		device->indexBufferDirty = true;

@@ -323,6 +323,15 @@ void CommandContext::SetRenderTargets(UINT NumRTVs, const D3D12_CPU_DESCRIPTOR_H
     cmdList->OMSetRenderTargets(NumRTVs, RTVs, FALSE, &DSV);
 }
 
+void CommandContext::RestoreRenderTargets() {
+    // A synchronous readback closes the command list. Reset binds the root
+    // signature/heaps, but the new list also needs the unchanged output targets.
+    if (m_currentDepthStencil)
+        SetRenderTargets(static_cast<UINT>(m_currentRTV.size()), m_currentRTV.data(), m_currentDepthStencil->GetDSV());
+    else
+        SetRenderTargets(static_cast<UINT>(m_currentRTV.size()), m_currentRTV.data());
+}
+
 void CommandContext::CreateDefaultRootSignature() {
     D3D12_ROOT_SIGNATURE_FLAGS flags =
         D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT
