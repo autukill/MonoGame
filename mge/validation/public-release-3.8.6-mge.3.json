@@ -1,0 +1,127 @@
+{
+  "status": "published-public-cache-gpu-verified",
+  "producingCommit": "5bf661b0f85ab196e0729e2635512732dc4166ab",
+  "featureCommit": "3e3bace62",
+  "packages": [
+    {
+      "package": "MyGameEngine.MonoGame.Framework.Native",
+      "version": "3.8.6-mge.3",
+      "url": "https://api.nuget.org/v3-flatcontainer/mygameengine.monogame.framework.native/3.8.6-mge.3/mygameengine.monogame.framework.native.3.8.6-mge.3.nupkg",
+      "verifiedUtc": "2026-10-28T02:57:27.772193+00:00",
+      "candidateArchiveSha256": "e604b121c06a18009ad90420ee5749ec6935b3e63b33742f0e10359a9f028d9f",
+      "signedArchiveSha256": "bd3ba456bea256db0bed31036b1491ccf28d48ad7a2be6407fc8274ac23ea00c",
+      "allOriginalEntriesByteIdentical": true,
+      "onlyAddedEntry": ".signature.p7s",
+      "repositorySignatureVerified": true,
+      "dlls": {
+        "lib/netstandard2.1/MonoGame.Framework.dll": "ef69f358292229b63556b4f3fe54c91090ddf1005844fb875b604de35ce05d81"
+      }
+    },
+    {
+      "package": "MyGameEngine.MonoGame.Runtime.Windows.DX12",
+      "version": "3.8.6-mge.3",
+      "url": "https://api.nuget.org/v3-flatcontainer/mygameengine.monogame.runtime.windows.dx12/3.8.6-mge.3/mygameengine.monogame.runtime.windows.dx12.3.8.6-mge.3.nupkg",
+      "verifiedUtc": "2026-10-28T02:57:34.192347+00:00",
+      "candidateArchiveSha256": "da027c18b4e3f8f98c39e57fe939b5992f3f031097f34bb75e6fb81461586977",
+      "signedArchiveSha256": "627ea8ba2f5171b9480a9b0e0e1dd4994dafab5abeff5270277e71187a92a89d",
+      "allOriginalEntriesByteIdentical": true,
+      "onlyAddedEntry": ".signature.p7s",
+      "repositorySignatureVerified": true,
+      "dlls": {
+        "runtimes/win-x64/native/mgruntime.dll": "79d004ca317188411a000b5deed0f4b9ef3eead5ecbf11ea7d8b6d56da66d27a"
+      }
+    }
+  ],
+  "sourceChecks": 9,
+  "nativeExports": 172,
+  "builtinEffects": 6,
+  "nativeLifecycle": true,
+  "publicOnlyEmptyCacheRestore": true,
+  "publicGpu": {
+    "status": "passed",
+    "cases": [
+      {
+        "format": "Bc7",
+        "width": 4,
+        "height": 4,
+        "mips": 1,
+        "status": "passed"
+      },
+      {
+        "format": "Bc7",
+        "width": 36,
+        "height": 36,
+        "mips": 1,
+        "status": "passed"
+      },
+      {
+        "format": "Bc7",
+        "width": 7,
+        "height": 5,
+        "status": "unsupported-base"
+      },
+      {
+        "format": "Bc7",
+        "width": 2,
+        "height": 2,
+        "status": "unsupported-base"
+      },
+      {
+        "format": "Bc7",
+        "width": 1,
+        "height": 1,
+        "status": "unsupported-base"
+      },
+      {
+        "format": "Bc7",
+        "width": 16,
+        "height": 8,
+        "mips": 5,
+        "status": "passed"
+      },
+      {
+        "format": "Bc7SRgb",
+        "width": 4,
+        "height": 4,
+        "mips": 1,
+        "status": "passed"
+      },
+      {
+        "format": "Bc7SRgb",
+        "width": 36,
+        "height": 36,
+        "mips": 1,
+        "status": "passed"
+      },
+      {
+        "format": "Bc7SRgb",
+        "width": 7,
+        "height": 5,
+        "status": "unsupported-base"
+      },
+      {
+        "format": "Bc7SRgb",
+        "width": 2,
+        "height": 2,
+        "status": "unsupported-base"
+      },
+      {
+        "format": "Bc7SRgb",
+        "width": 1,
+        "height": 1,
+        "status": "unsupported-base"
+      },
+      {
+        "format": "Bc7SRgb",
+        "width": 16,
+        "height": 8,
+        "mips": 5,
+        "status": "passed"
+      }
+    ]
+  },
+  "publicGpuExitCode": 0,
+  "publicGpuReportSha256": "6ddd013a163dc77e1a5d498848c99e02a04b1ba156eaee83b241b488b19714e7",
+  "publicationTransport": "user-authorized NuGet Gallery upload",
+  "githubWorkflowClaimed": false
+}

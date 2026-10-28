@@ -54,3 +54,11 @@ Build with serial native `--parallel 1 -- /m:1 /nr:false` and managed
 -p:BuildInParallel=false -p:RestoreBuildInParallel=false`, with
 MSBUILDDISABLENODEREUSE=1 and DOTNET_CLI_USE_MSBUILD_SERVER=0.
 Candidate packages are local only; no public release or upstream contribution.
+
+## Public maintenance release
+
+The historical candidates above remain unpublished. The rebuilt paired release
+`3.8.6-mge.3` is now public; see `release-3.8.6-mge.3.md` for exact producing
+commit, new binary hashes, signatures and public-cache GPU validation.
+Use `mge/build-maintained-dx12.ps1` for future reviewed maintenance production.
+The independently portable feature commit remains `3e3bace62`.
