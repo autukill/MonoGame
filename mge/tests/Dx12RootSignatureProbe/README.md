@@ -8,7 +8,7 @@ MyGameEngine、Monster、游戏资源、存档或 .NET 运行时。Windows x64�
 不需要管理员权限、开发工具或安装调试层；不会改动驱动和系统设置。
 
 探针选取 DXGI 高性能优先的第一块硬件适配器，记录名称／PCI标识、驱动版本查询状态、
-实际 ResourceBindingTier、最高根签名版本，以及每个关键 API 的 HRESULT。
+实际 ResourceBindingTier、根签名版本支持情况（查询至1.1），以及每个关键 API 的 HRESULT。
 驱动版本查询失败只记录，不影响其余测试。
 
 两个布局分别创建独立 D3D12 设备，最低功能级均为11_0：

@@ -24,6 +24,9 @@ static std::ofstream logFile;
 static std::string Hex(HRESULT hr) {
     char value[16]; sprintf_s(value, "0x%08X", static_cast<unsigned>(hr)); return value;
 }
+static const char* RootVersion(unsigned version) {
+    return version == D3D_ROOT_SIGNATURE_VERSION_1_1 ? "1.1" : version == D3D_ROOT_SIGNATURE_VERSION_1_0 ? "1.0" : "unknown";
+}
 static const char* Name(HRESULT hr) {
     switch (hr) {
     case S_OK: return "S_OK";
@@ -229,7 +232,7 @@ static Result RunCase(IDXGIAdapter1* adapter, bool bounded) {
         D3D12_FEATURE_DATA_ROOT_SIGNATURE version = {D3D_ROOT_SIGNATURE_VERSION_1_1};
         if (FAILED(device->CheckFeatureSupport(D3D12_FEATURE_ROOT_SIGNATURE,&version,sizeof(version)))) version.HighestVersion=D3D_ROOT_SIGNATURE_VERSION_1_0;
         r.rootVersion=version.HighestVersion;
-        Log("ResourceBindingTier="+std::to_string(r.bindingTier)+"; HighestRootSignatureVersion="+std::to_string(r.rootVersion));
+        Log("ResourceBindingTier="+std::to_string(r.bindingTier)+"; RootSignatureVersionSupport(up to 1.1)="+RootVersion(r.rootVersion));
         D3D12_DESCRIPTOR_RANGE ranges[4] = {};
         D3D12_ROOT_PARAMETER parameters[6] = {};
         for(UINT i=0;i<2;++i) {
@@ -268,7 +271,7 @@ static void WriteResult(std::ostream& out,const Result& r) {
         <<",\"rootHresultName\":"<<Json(Name(r.rootHr))<<",\"getDeviceRemovedReasonAfterRoot\":"<<Json(Hex(r.removedHr))
         <<",\"deviceRemovedReasonWasQueriedAfterRoot\":"<<(r.removedHr!=E_PENDING?"true":"false")
         <<",\"getDeviceRemovedReasonFinal\":"<<Json(Hex(r.finalRemovedHr))<<",\"resourceBindingTier\":"<<r.bindingTier
-        <<",\"highestRootSignatureVersion\":"<<r.rootVersion<<",\"drawReadbackPassed\":"<<(r.drew?"true":"false")
+        <<",\"rootSignatureVersionSupportThrough1_1\":"<<Json(RootVersion(r.rootVersion))<<",\"drawReadbackPassed\":"<<(r.drew?"true":"false")
         <<",\"error\":"<<Json(r.error)<<"}";
 }
 int wmain(int argc,wchar_t** argv) {
@@ -292,7 +295,9 @@ int wmain(int argc,wchar_t** argv) {
         std::string adapterName=Utf8(adapterDesc.Description);
         Log("Adapter="+adapterName+"; vendor="+std::to_string(adapterDesc.VendorId)+"; device="+std::to_string(adapterDesc.DeviceId));
         LARGE_INTEGER driver = {}; HRESULT driverHr=adapter->CheckInterfaceSupport(__uuidof(IDXGIDevice),&driver);
-        Log("CheckInterfaceSupport driver version query="+Hex(driverHr)+"; raw="+std::to_string(driver.QuadPart));
+        const std::string driverVersion = SUCCEEDED(driverHr) ? std::to_string(HIWORD(driver.HighPart))+"."+std::to_string(LOWORD(driver.HighPart))+"."+
+            std::to_string(HIWORD(driver.LowPart))+"."+std::to_string(LOWORD(driver.LowPart)) : "unavailable";
+        Log("CheckInterfaceSupport driver version query="+Hex(driverHr)+"; version="+driverVersion+"; raw="+std::to_string(driver.QuadPart));
         const Result original=RunCase(adapter.Get(),false);
         const Result bounded=RunCase(adapter.Get(),true);
         const std::string conclusion = FAILED(original.rootHr)&&original.rootHr!=E_PENDING&&bounded.drew
@@ -302,6 +307,7 @@ int wmain(int argc,wchar_t** argv) {
         report<<"{\n\"probe\":\"Dx12RootSignatureProbe\",\"adapter\":"<<Json(adapterName)
             <<",\"vendorId\":"<<adapterDesc.VendorId<<",\"deviceId\":"<<adapterDesc.DeviceId
             <<",\"driverVersionQueryHresult\":"<<Json(Hex(driverHr))<<",\"driverVersionRaw\":"<<driver.QuadPart
+            <<",\"driverVersion\":"<<Json(driverVersion)
             <<",\"caseIsolation\":\"separate D3D12 device per layout\",\"debugLayerEnabled\":false,\n\"cases\":[";
         WriteResult(report,original);report<<",\n";WriteResult(report,bounded);
         report<<"],\n\"conclusion\":"<<Json(conclusion)<<"\n}\n";report.close();
