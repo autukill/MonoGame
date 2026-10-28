@@ -36,6 +36,19 @@ resource lifetimes. The report must distinguish rejected base dimensions from va
 mip tails. Preserve the 172-export ABI and six official builtin Effects.
 Results are recorded separately; this document alone does not assert a passing run.
 
+Local validation on 2026-10-28 passed source checks, the unchanged 172 exports and
+six official Effects, native lifecycle, BC7 public-API GPU checks, and the engine's
+26 real KTX2 uploads / 131072 alpha pixels / DX12 NativeAOT full-trim startup.
+See `mge/validation/bc7-20261028.json`. This is not a public package release or a
+certification for other adapters/backends.
+
+Paired candidate production commit: `eb18681b4`. Packaging metadata correction:
+`9edb9ce4b` (maintained repository URL and explicit unofficial description).
+The corrected local framework package was packed without rebuilding the verified
+DLL, retains its actual compiled source commit `eb18681b4`, and restored in a new
+cache with byte-identical DLLs. Original packages/evidence were preserved. Neither
+local candidate was published; do not replace a published version in this manner.
+
 Build with serial native `--parallel 1 -- /m:1 /nr:false` and managed
 `--disable-build-servers -m:1 -nr:false -p:UseSharedCompilation=false
 -p:BuildInParallel=false -p:RestoreBuildInParallel=false`, with

@@ -1,0 +1,33 @@
+{
+  "status": "local-validation-passed-not-published",
+  "officialBaseline": "c610a529667336f63da323c6057274258727664b",
+  "featureCommit": "3e3bace62",
+  "producingCommit": "eb18681b48b931b89fa6e4f5bc11b3010c68259f",
+  "packagingMetadataFix": "9edb9ce4b",
+  "engineFeatureCommit": "0ffdaa09",
+  "frameworkPackage": "MyGameEngine.MonoGame.Framework.Native/3.8.6-mge.3-bc7.1",
+  "runtimePackage": "MyGameEngine.MonoGame.Runtime.Windows.DX12/3.8.6-mge.3-bc7.1",
+  "nativeSha256": "25bc4cda837d32b9081c0f5057a613f301d54a12ee76dfd5952973a1211f23ef",
+  "managedSha256": "c3b7f10af8db016054de075bcf7440b4ad795e1116017d49ac6ea5663865a252",
+  "correctedFrameworkPackageSha256": "8fe8d0da31fc0b04b18c482a8b8a488434cf3fb726430f7876da637f385ef2d3",
+  "exports": 172,
+  "builtinEffects": 6,
+  "sourceChecks": 9,
+  "gpu": "NVIDIA GeForce GTX 970",
+  "realEngineKtx2": 26,
+  "alphaPixels": 131072,
+  "windowsBasisLegacyOutputsByteIdentical": 144,
+  "shippingNativeAotFullTrim": true,
+  "shippingStartupExitCode": 0,
+  "shippingObservedBc7Textures": 12,
+  "androidTested": false,
+  "published": false,
+  "upstreamContribution": false,
+  "evidence": {
+    "nativeAbiEffects": "23c67f7578522c4bfd694d57d9a3a0103811a8e0ceb081f05ee78667e549d98f",
+    "publicApiGpu": "6ddd013a163dc77e1a5d498848c99e02a04b1ba156eaee83b241b488b19714e7",
+    "alphaGpu": "2793e4b5855b517086cbd7becb225c3e0217eb4594af311f9ab2d7db0b38c75c",
+    "shippingStartup": "94d31a6edb83ef36f0f6e0a20240f872471d104f5fc79bf7137e1fb01aa9b0e8",
+    "metadataCorrection": "48ff0aed8eddc8f523e06badf6268a0f476573b590dce32a793af76e60441cd6"
+  }
+}
