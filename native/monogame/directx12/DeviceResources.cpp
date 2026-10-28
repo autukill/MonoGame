@@ -211,6 +211,7 @@ public:
         m_adapter = adapter;
 
         // Create the DX12 API device object.
+        MGE_DX12_VALIDATE_API();
         MGE_DX12_STEP("D3D12CreateDevice FL11_0");
         HRESULT hr;
         hr = D3D12CreateDevice(
@@ -389,6 +390,8 @@ public:
                 nullptr,
                 swapChain.GetAddressOf()
             ));
+
+            MGE_DX12_AFTER("CreateSwapChainForHwnd");
 
             ThrowIfFailed(swapChain.As(&m_swapChain));
 

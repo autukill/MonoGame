@@ -325,6 +325,7 @@ struct MGG_GraphicsSystem
 
 MGG_GraphicsSystem* MGG_GraphicsSystem_Create()
 {
+	MGE_DX12_VALIDATE_API();
 	auto system = new MGG_GraphicsSystem();
 
 #if defined(_GAMING_XBOX)
@@ -727,6 +728,7 @@ mgbyte MGG_GraphicsDevice_ResizeSwapchain(
 
 	if (depth != MGDepthFormat::None)
 	{
+		MGE_DX12_STEP("DefaultDepthTexture.Create");
 		device->depthTexture = new Texture(width, height, depth);
 		if (multiSampleCount > 1)
 			device->depthTexture->SetMSAA(multiSampleCount);
@@ -734,6 +736,7 @@ mgbyte MGG_GraphicsDevice_ResizeSwapchain(
 	}
 
 	MGDX_PrepareNextFrame(device);
+	MGE_DX12_AFTER("ResizeSwapchain and initial frame preparation");
 	return 1;
 }
 

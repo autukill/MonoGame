@@ -6,6 +6,9 @@ Tier 1根布局的诊断原生DLL。程序不引用引擎／Monster，不加载�
 
 解压到新目录，双击 **Run-Probe.cmd**，等待测试窗口自动打开和关闭。
 请不要提前关闭测试窗口。完成后返回整个 **backend-probe-results-时间戳** 文件夹。
+当前版本自动以独立进程依次运行三组：`none`（无默认深度缓冲）、`depth16`、
+`depth24stencil8`。每组执行相同的完整后端套件，一组原生崩溃仍继续其余组。
+顶层report.json汇总三组状态，组内保存各自的report.json、原始stdout／stderr及退出码。
 
 自动依次检查：
 
@@ -19,12 +22,15 @@ Tier 1根布局的诊断原生DLL。程序不引用引擎／Monster，不加载�
 
 日志中的 ResourceBindingTier 来自诊断DLL实际设备查询；Tier 1应显示
 `DefaultRootSignature.Tier1.Bounded16`。原生错误会在stderr保留调用位置、阶段和
-GetDeviceRemovedReason。此探针实际走MonoGame的资源上传、状态缓存、窗口和交换链，
+GetDeviceRemovedReason。创建视图和提交命令后增加设备状态检查；已安装系统调试层时
+在创建设备前启用CPU API校验并记录消息ID，未安装时记录unavailable并继续，不安装或
+更改系统组件。调试层的ERROR／CORRUPTION会使该组判为失败，即使像素检查通过。
+此探针实际走MonoGame的资源上传、状态缓存、窗口和交换链，
 用于接续已通过的Windows SDK根签名A/B探针；不覆盖完整游戏、长时内存或所有后端功能。
 
 重点文件：result.txt、report.json、probe.log、stdout.txt、stderr.txt、launcher-result.txt。
 报告以每阶段完成状态和完整像素检查为准；窗口提前关闭会判为失败。
-启动脚本超时120秒只停止本次探针，保留已写出的阶段和实际退出码。
+每个子进程限时120秒，外层启动器限时390秒，只停止其自己启动的探针，保留阶段和退出码。
 
 源码构建（从干净维护库提交；原生候选必须已完成ABI／内置Effect／native生命周期验证）：
 

@@ -33,14 +33,15 @@ uint64_t CommandQueue::ExecuteCommandList(ID3D12CommandList* commandList)
     // Make sure the fence covers ExecuteCommandLists call.
     std::lock_guard lock(m_fenceMutex);
     m_queue->ExecuteCommandLists(1, &commandList);
-    m_queue->Signal(m_fence.Get(), m_nextFenceValue);
+    MGE_DX12_AFTER("ExecuteCommandLists");
+    MGE_DX12_CHECK(m_queue->Signal(m_fence.Get(), m_nextFenceValue));
     return m_nextFenceValue++;
 }
 
 uint64_t CommandQueue::SignalFence()
 {
     std::lock_guard lock(m_fenceMutex);
-    m_queue->Signal(m_fence.Get(), m_nextFenceValue);
+    MGE_DX12_CHECK(m_queue->Signal(m_fence.Get(), m_nextFenceValue));
     return m_nextFenceValue++;
 }
 
@@ -119,6 +120,7 @@ CommandListPool::~CommandListPool()
 
 CommandList* CommandListPool::Begin()
 {
+    MGE_DX12_AFTER("CommandListPool.Begin before allocator reuse or creation");
     // Ensure m_fenceMutex is acquired before m_mutex.
     uint64_t currentFence = m_queue->PollCurrentFenceValue();
 
@@ -134,8 +136,8 @@ CommandList* CommandListPool::Begin()
 
         ctx = (*iter);
         m_freeContexts.erase(iter);
-        ctx->m_allocator->Reset();
-        ctx->m_list->Reset(ctx->m_allocator.Get(), nullptr);
+        MGE_DX12_CHECK(ctx->m_allocator->Reset());
+        MGE_DX12_CHECK(ctx->m_list->Reset(ctx->m_allocator.Get(), nullptr));
         return ctx;
     }
         

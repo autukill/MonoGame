@@ -14,11 +14,11 @@ internal sealed class BackendGame : Game
     Color[] backbuffer = [];
     readonly Color[] pixels = new Color[32 * 16];
     int resizeStep;
-    public BackendGame(int cycle, BackendStage result, Action<string> log, Action checkNative)
+    public BackendGame(int cycle, BackendStage result, Action<string> log, Action checkNative, DepthFormat depthFormat)
     {
         this.result = result; this.log = log; this.checkNative = checkNative;
         graphics = new(this) { PreferredBackBufferWidth = 640, PreferredBackBufferHeight = 360,
-            PreferredBackBufferFormat = SurfaceFormat.Color, PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8,
+            PreferredBackBufferFormat = SurfaceFormat.Color, PreferredDepthStencilFormat = depthFormat,
             GraphicsProfile = GraphicsProfile.HiDef, SynchronizeWithVerticalRetrace = true };
         IsFixedTimeStep = false; InactiveSleepTime = TimeSpan.Zero;
         Window.Title = $"Standalone maintained DX12 backend probe - cycle {cycle + 1}/3";

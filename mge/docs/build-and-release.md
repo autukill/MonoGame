@@ -107,6 +107,19 @@ command list；原代码恢复了根签名、堆和脏状态，却未重新绑�
 约2.5MiB，不含游戏、存档或PDB；Yoga完整后端复验仍待新日志，不扩大既有根布局真机结论。
 详情见 [后端探针本机记录](../validation/20261028/backend-probe-local.json)。
 
+2026-10-28 Yoga 19:04完整后端日志仍失败，但已通过Tier 1有界根签名创建和DeviceResources.ready。
+第一帧之前，在下一次CreateCommandAllocator处返回DEVICE_REMOVED，实际移除原因
+INVALID_CALL／0x887A0001；不能把分配器报错行当成最早错误位置。原始目录保留为
+`mge/out/backend-probe-20261028/yoga-190403`。当时LoadContent前中止，实际加载模块字段
+尚为空，新探针将模块核对提前到Game构造后、Run之前。
+
+诊断DLL增加可选的CPU调试层（仅已有系统组件时启用，不安装），记录InfoQueue警告／
+错误ID，并在视图创建、命令执行／重用之后检查实际设备状态；记录SRV／DSV格式及资源flags。
+这些钩子由原诊断编译开关隔离，普通构建不包含日志、校验层或额外状态查询。
+后端探针以三个子进程分别跑None／Depth16／Depth24Stencil8的同一套测试，崩溃不会
+阻止后续组；每个子进程保留原始退出码及独立日志，顶层汇总API校验错误。
+本机独立SDK实验未复现typed深度资源创建采样视图错误，故此次未凭猜测改动深度资源格式。
+
 2026-10-28 18:36 Yoga独立探针真机结果已返回：Intel HD Graphics 5300，驱动
 20.19.15.4642，Windows NT 10.0.22000，实际ResourceBindingTier=1。
 探针EXE哈希与交付一致。原无界根布局CreateRootSignature=E_INVALIDARG，

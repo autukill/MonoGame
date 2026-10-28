@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 // then verifies earlier draws and reuses every backbuffer over multiple frames.
 internal static class NativeConstantRingProbe
 {
-    internal static int Run(string output)
+    internal static int Run(string output, DepthFormat? depthFormat = null)
     {
         Directory.CreateDirectory(output);
         try
         {
-            using var game = new RingGame();
+            using var game = new RingGame(depthFormat);
             game.Run();
             if (game.VerifiedFrames != 6) throw new InvalidOperationException("Constant ring probe closed early.");
             File.WriteAllText(Path.Combine(output, "report.json"), JsonSerializer.Serialize(new NativeConstantRingResult
@@ -32,10 +32,11 @@ internal static class NativeConstantRingProbe
         private RasterizerState rasterizer = null!;
         private readonly Color[] pixels = new Color[128 * 64];
         internal int VerifiedFrames { get; private set; }
-        internal RingGame()
+        internal RingGame(DepthFormat? depthFormat)
         {
             graphics = new(this) { PreferredBackBufferWidth = 320, PreferredBackBufferHeight = 180,
                 GraphicsProfile = GraphicsProfile.HiDef, SynchronizeWithVerticalRetrace = true };
+            if (depthFormat.HasValue) graphics.PreferredDepthStencilFormat = depthFormat.Value;
             IsFixedTimeStep = false;
             Window.Title = "DX12 constant ring regression";
         }

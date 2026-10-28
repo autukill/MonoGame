@@ -175,6 +175,8 @@ void Texture::Create(DeviceResources* device, bool createViews) {
     // ALLOCATION_FLAG_NONE places the resource into existing preallocated pool.
     D3D12MA::ALLOCATION_DESC allocDesc = { allocFlags, D3D12_HEAP_TYPE_DEFAULT, heapFlags };
 
+    MGE_DX12_STEP(impl->m_depthFormat != MGDepthFormat::None ? "DepthTexture.CreateResource" : "Texture.CreateResource");
+
     ThrowIfFailed(device->GetAllocator()->CreateResource(
         &allocDesc,
         &resDesc,
@@ -182,6 +184,7 @@ void Texture::Create(DeviceResources* device, bool createViews) {
         pClearValue,
         impl->m_alloc.ReleaseAndGetAddressOf(),
         IID_GRAPHICS_PPV_ARGS(impl->m_res.ReleaseAndGetAddressOf())));
+    MGE_DX12_AFTER("Texture.CreateResource");
 
     switch (impl->m_type) {
     case SurfaceType::Texture:

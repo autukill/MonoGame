@@ -57,7 +57,8 @@ NonShaderVisibleDescHeap::NonShaderVisibleDescHeap(ID3D12Device* device, D3D12_D
     m_increment = device->GetDescriptorHandleIncrementSize(type);
 
     D3D12_DESCRIPTOR_HEAP_DESC desc = { type, static_cast<UINT>(size), flags, 0 };
-    device->CreateDescriptorHeap(&desc, IID_GRAPHICS_PPV_ARGS(m_heap.ReleaseAndGetAddressOf()));
+    MGE_DX12_CHECK(device->CreateDescriptorHeap(&desc, IID_GRAPHICS_PPV_ARGS(m_heap.ReleaseAndGetAddressOf())));
+    MGE_DX12_AFTER("CreateDescriptorHeap");
 
     m_heapStartCPU = m_heap->GetCPUDescriptorHandleForHeapStart();
 }
@@ -136,6 +137,7 @@ Heaps::Heaps(ID3D12Device* device, int backBufferCount) {
         sampler.MaxAnisotropy = 1;
         sampler.MaxLOD = D3D12_FLOAT32_MAX;
         device->CreateSampler(&sampler, m_defaultSampler);
+        MGE_DX12_AFTER("CreateSampler for Tier1 default table");
     }
 
     for (UINT n = 0; n < backBufferCount; n++)
@@ -153,13 +155,16 @@ Heaps::~Heaps() {}
 
 D3D12_CPU_DESCRIPTOR_HANDLE Heaps::CreateSRVHandle(ID3D12Resource* res, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc) {
     D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = m_srvHeap->AllocCpuHandle();
+    MGE_DX12_VIEW("SRV", res, srvDesc.Format, srvDesc.ViewDimension);
     m_device->CreateShaderResourceView(res, &srvDesc, cpuHandle);
+    MGE_DX12_AFTER("CreateShaderResourceView");
     return cpuHandle;
 }
 
 D3D12_CPU_DESCRIPTOR_HANDLE Heaps::CreateUAVHandle(ID3D12Resource* res, D3D12_UNORDERED_ACCESS_VIEW_DESC uavDesc) {
     D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = m_srvHeap->AllocCpuHandle();
     m_device->CreateUnorderedAccessView(res, nullptr, &uavDesc, cpuHandle);
+    MGE_DX12_AFTER("CreateUnorderedAccessView");
     return cpuHandle;
 }
 
@@ -220,12 +225,15 @@ D3D12_GPU_DESCRIPTOR_HANDLE Heaps::ApplySamplersToShader() {
 D3D12_CPU_DESCRIPTOR_HANDLE Heaps::CreateRTVHandle(ID3D12Resource* res, D3D12_RENDER_TARGET_VIEW_DESC rtvDesc) {
     D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = m_rtvHeap->AllocCpuHandle();
     m_device->CreateRenderTargetView(res, &rtvDesc, cpuHandle);
+    MGE_DX12_AFTER("CreateRenderTargetView");
     return cpuHandle;
 }
 
 D3D12_CPU_DESCRIPTOR_HANDLE Heaps::CreateDSVHandle(ID3D12Resource* res, D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc) {
     D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = m_dsvHeap->AllocCpuHandle();
+    MGE_DX12_VIEW("DSV", res, dsvDesc.Format, dsvDesc.ViewDimension);
     m_device->CreateDepthStencilView(res, &dsvDesc, cpuHandle);
+    MGE_DX12_AFTER("CreateDepthStencilView");
     return cpuHandle;
 }
 

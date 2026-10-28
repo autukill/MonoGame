@@ -9,10 +9,11 @@ sealed class DynamicBufferProbe : Game
     BasicEffect effect = null!;
     RasterizerState rasterizer = null!;
     public int Frames { get; private set; }
-    public DynamicBufferProbe()
+    public DynamicBufferProbe(DepthFormat? depthFormat = null)
     {
         graphics=new(this) { PreferredBackBufferWidth=320, PreferredBackBufferHeight=180,
             GraphicsProfile=GraphicsProfile.HiDef, SynchronizeWithVerticalRetrace=true };
+        if (depthFormat.HasValue) graphics.PreferredDepthStencilFormat = depthFormat.Value;
         IsFixedTimeStep=false; Window.Title="DX12 dynamic buffer version regression";
     }
     protected override void LoadContent()
