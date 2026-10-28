@@ -21,7 +21,7 @@ if($LASTEXITCODE){throw 'Native candidate failed'}
 if($LASTEXITCODE){throw 'Native candidate pack failed'}
 & dotnet restore "$root/MonoGame.Framework/MonoGame.Framework.Native.csproj" --configfile $NuGetConfig -p:MgeBc7Candidate=true @flags *> "$out/framework-restore.log"
 if($LASTEXITCODE){throw 'Framework restore failed'}
-& dotnet pack "$root/MonoGame.Framework/MonoGame.Framework.Native.csproj" -c Release --no-restore -o "$out/feed" -p:MgeBc7Candidate=true "-p:PackageVersion=$($pin.packageVersion)" -p:Version=3.8.6 -p:AssemblyVersion=3.8.6.0 -p:FileVersion=3.8.6.0 "-p:RepositoryCommit=$source" @flags *> "$out/framework-build.log"
+& dotnet pack "$root/MonoGame.Framework/MonoGame.Framework.Native.csproj" -c Release --no-restore -o "$out/feed" -p:MgeBc7Candidate=true "-p:PackageVersion=$($pin.packageVersion)" -p:Version=3.8.6 -p:AssemblyVersion=3.8.6.0 -p:FileVersion=3.8.6.0 "-p:RepositoryCommit=$source" -p:RepositoryUrl=https://github.com/autukill/MonoGame -p:PackageProjectUrl=https://github.com/autukill/MonoGame/tree/mge/3.8.6 '-p:Description=MyGameEngine maintained BC7 framework candidate. Unofficial local validation only.' @flags *> "$out/framework-build.log"
 if($LASTEXITCODE){throw 'Framework candidate failed'}
 Assert-MgeCleanSource -Root $root -Pins $pin.submodules
 if((& git -C $root rev-parse HEAD).Trim() -ne $source){throw 'Source changed during candidate build'}
