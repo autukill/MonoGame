@@ -1,0 +1,43 @@
+{
+  "probe": "Dx12BackendProbe",
+  "date": "2026-10-28",
+  "probeCommit": "2af45ffd87bbccfaa09e99820a22ca0ea08bbfe6",
+  "nativeCommit": "18907ad635456a3e5f9269660ded12bba8157c8d",
+  "exeSha256": "5CCD35E3B530E5E172C94634B6D518B562CB8C70D74481E9F9FBBCAE9C881FBB",
+  "nativeSha256": "357051A2023642D346EA879978F7F692878065FFA45BE8E329DE6C3418917542",
+  "frameworkPackage": "MyGameEngine.MonoGame.Framework.Native 3.8.6-mge.3",
+  "localAdapter": "NVIDIA GeForce GTX 970",
+  "localTier": 3,
+  "nativeAot": true,
+  "stagesPassed": 5,
+  "windowDeviceLifetimes": 3,
+  "swapchainResizes": 6,
+  "pixelChecks": 2533815,
+  "dynamicBufferFrames": 6,
+  "constantRingDrawsPerFrame": 5000,
+  "constantRingFrames": 6,
+  "sameExeOldNativeFailedReadbackNewNativePassed": true,
+  "normalExitCode": 0,
+  "launcherWindowsPowerShell51": true,
+  "unicodeAndSpacePath": true,
+  "processesRemaining": 0,
+  "yogaBackendRetest": "pending",
+  "zipBytes": 2615611,
+  "zipSha256": "4BC12004D108BC3C9C9EB76B8BCE9556A05809DF7889C3D79EB005BA8B7A55AB",
+  "failedBuildAttempts": [
+    "release-01 MSVC linker absent",
+    "release-02 developer-shell PATH exceeded cmd limit"
+  ],
+  "baselineBackendFailure": "release-03 frame 0 black backbuffer after synchronous readback; logs retained",
+  "scope": [
+    "maintained framework/native backend",
+    "window and Present",
+    "resize",
+    "texture and mip uploads and reads",
+    "readback followed by further drawing",
+    "dynamic buffers",
+    "constant ring",
+    "device disposal"
+  ],
+  "rawLocalReportSha256": "BDA4684DD667D0353F814318205B1946189F48BBC13EB5FB0720189E8C6F7A65"
+}

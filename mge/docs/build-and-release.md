@@ -95,6 +95,18 @@ command list；原代码恢复了根签名、堆和脏状态，却未重新绑�
 同一NativeAOT探针保留读取后继续绘制的检查，以核对修复而不绕过失败路径；
 首轮失败位于 `mge/out/backend-probe-20261028/launcher validation-中文`。
 
+2026-10-28 完整后端探针本机验证完成：同一NativeAOT EXE（SHA256 5CCD35E3…881FBB）
+使用旧DLL时在第0帧后台缓冲黑色失败，只替换为18907ad63的修复DLL后五阶段通过。
+实际加载DLL SHA256 357051A2…917542、无CoreCLR，GTX970实际Tier 3；三次窗口／设备
+生命周期、六次交换链缩放、2533815次像素检查、动态缓冲六帧和5000draw常量环六帧通过，
+正常退出0。Windows PowerShell 5.1入口、中文／空格路径通过，构建／探针进程剩余0。
+首两轮NativeAOT链接环境失败保留：缺少link.exe，及开发环境PATH超出cmd限制，
+修正脚本后串行发布成功。核心EXE未重复构建以验证读取修复；原生候选重新构建并通过
+172导出／六内置Effect、真实／强制Tier 1生命周期及设备移除probe。
+独立交付 `mge/out/backend-probe-20261028/release-04/Dx12BackendProbe-win-x64-NativeAOT.zip`
+约2.5MiB，不含游戏、存档或PDB；Yoga完整后端复验仍待新日志，不扩大既有根布局真机结论。
+详情见 [后端探针本机记录](../validation/20261028/backend-probe-local.json)。
+
 2026-10-28 18:36 Yoga独立探针真机结果已返回：Intel HD Graphics 5300，驱动
 20.19.15.4642，Windows NT 10.0.22000，实际ResourceBindingTier=1。
 探针EXE哈希与交付一致。原无界根布局CreateRootSignature=E_INVALIDARG，
