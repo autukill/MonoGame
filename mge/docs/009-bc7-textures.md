@@ -3,6 +3,9 @@
 Feature addition against official 3.8.6 `c610a529667336f63da323c6057274258727664b`.
 This is not a claim that all later official releases lack BC7.
 
+Feature commit: `3e3bace62` (`feat(dx12): support BC7 texture upload sampling and readback`).
+Replay that commit before the separately committed local packaging integration.
+
 ## Porting to a new official release
 
 Keep this change as an independently replayable feature commit. The validation report

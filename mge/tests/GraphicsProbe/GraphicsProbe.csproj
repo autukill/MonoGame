@@ -1,4 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
  <PropertyGroup><TargetFramework>net11.0</TargetFramework><OutputType>Exe</OutputType><RuntimeIdentifier>win-x64</RuntimeIdentifier><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><ServerGarbageCollection>false</ServerGarbageCollection><ConcurrentGarbageCollection>true</ConcurrentGarbageCollection></PropertyGroup>
- <ItemGroup><PackageReference Include="MonoGame.Framework.Native" Version="[3.8.6]"/><PackageReference Include="MyGameEngine.MonoGame.Runtime.Windows.DX12" Version="[3.8.6-mge.1]"/></ItemGroup>
+ <ItemGroup><PackageReference Include="MyGameEngine.MonoGame.Framework.Native" Version="[3.8.6-mge.3-bc7.1]"/><PackageReference Include="MyGameEngine.MonoGame.Runtime.Windows.DX12" Version="[3.8.6-mge.3-bc7.1]"/></ItemGroup>
 </Project>
