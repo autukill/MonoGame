@@ -104,6 +104,7 @@ public:
                 D3D12_RLDO_DETAIL | D3D12_RLDO_IGNORE_INTERNAL);
         }
 #endif
+        MGE_DX12_CLEAR(m_d3dDevice.Get());
         m_d3dDevice.Reset();
 
 #if defined(_DEBUG) && !defined(_GAMING_XBOX)
@@ -210,6 +211,7 @@ public:
         m_adapter = adapter;
 
         // Create the DX12 API device object.
+        MGE_DX12_STEP("D3D12CreateDevice FL11_0");
         HRESULT hr;
         hr = D3D12CreateDevice(
             adapter,
@@ -217,6 +219,8 @@ public:
             IID_PPV_ARGS(m_d3dDevice.ReleaseAndGetAddressOf())
         );
         ThrowIfFailed(hr);
+
+        MGE_DX12_REGISTER(m_d3dDevice.Get());
 
 #if defined(_DEBUG)
         if (MGG_EnableDebugLayer)
@@ -257,11 +261,14 @@ public:
 
         // We use a singular queue for all commands which means
         // submission order defines execution order.
+        MGE_DX12_STEP("CommandQueue.Create");
         m_queue = std::make_unique<CommandQueue>(D3D12_COMMAND_LIST_TYPE_DIRECT, L"CommandQueue");
         m_queue->Create(m_d3dDevice.Get());
 
+        MGE_DX12_STEP("CommandListPool.Create");
         m_commandListPool = std::make_unique<CommandListPool>(m_d3dDevice.Get(), m_queue.get());
 
+        MGE_DX12_STEP("Heaps.Create");
         m_heaps = std::make_unique<Heaps>(m_d3dDevice.Get(), m_backBufferCount);
 
         {
@@ -288,9 +295,11 @@ public:
             hr = dxgiDevice->GetAdapter(dxgiAdapter.GetAddressOf());
             desc.pAdapter = dxgiAdapter.Get();
 #endif
-            D3D12MA::CreateAllocator(&desc, &m_allocator);
+            MGE_DX12_STEP("D3D12MA.CreateAllocator");
+            MGE_DX12_CHECK(D3D12MA::CreateAllocator(&desc, &m_allocator));
         }
 
+        MGE_DX12_STEP("CommandContext.Create");
         m_commandContext = std::make_unique<CommandContext>(device);
 
         BOOL allowTearing = FALSE;
@@ -303,6 +312,7 @@ public:
             m_allowTearing = allowTearing == TRUE;
         }
 #endif
+        MGE_DX12_STEP("DeviceResources.ready");
     }
 
 
@@ -370,6 +380,7 @@ public:
 
             // Create a swap chain for the window.
             Microsoft::WRL::ComPtr<IDXGISwapChain1> swapChain;
+            MGE_DX12_STEP("CreateSwapChainForHwnd");
             ThrowIfFailed(m_dxgiFactory->CreateSwapChainForHwnd(
                 m_queue->Get(),
                 m_window,
@@ -490,6 +501,7 @@ public:
             return false;
         }
 
+        MGE_DX12_REPORT(hr, "IDXGISwapChain::Present / ResizeBuffers before device reset");
         m_lostCbk(); // let the C# dictate the order of reset
         return true;
     }
@@ -510,6 +522,7 @@ public:
         m_heaps.reset();
         //m_transientBufferPool.Reset();
         m_swapChain.Reset();
+        MGE_DX12_CLEAR(m_d3dDevice.Get());
         m_d3dDevice.Reset();
         m_dxgiFactory.Reset();
         m_allocator.Reset();

@@ -46,6 +46,29 @@ OutputRoot 必须是尚不存在的目录；源码、维护文档和回归须先
 独立GraphicsProbe可用本地源还原后串行构建，运行时传入预期原生DLL哈希。
 原生probe包含三次设备生命周期、mip像素/首次重复耗时、query满容量和分页描述符GPU验证。
 
+### DX12 设备移除诊断（独立交付）
+
+`./mge/build.ps1 -StartupDiagnostics -OutputRoot ./mge/out/startup-diagnostics-1`
+显式打开默认 OFF 的 `MGE_DX12_STARTUP_DIAGNOSTICS` 编译开关。
+此 DLL 在原有失败路径抛出异常前向 stderr 刷新失败 HRESULT、调用表达式、源码行、
+初始化阶段，以及对当前实际设备调用 `GetDeviceRemovedReason` 的结果。
+已创建设备且未移除时保留 S_OK；设备尚未创建或已清除时明确输出 UNAVAILABLE，
+不得把外层 DXGI_ERROR_DEVICE_REMOVED 或无设备时的占位值当成查询结果。
+现有交换链设备重置回调之前也记录原因。桌面其他后端和 Xbox 不接入这些钩子。
+
+诊断注册暂持有当前设备的 COM 引用，Reset/销毁时按身份释放；查询复制引用以避免
+与清理并发使用悬空指针。阶段属于调用线程，其他工作线程失败会标明本线程阶段未知。
+除诊断编译外，原错误处理、根签名和分配器调用保持现有行为，不增加日志或新 ABI 导出。
+诊断版本对原来未检查的根签名／分配器调用额外检查 HRESULT，以保留最早失败证据。
+
+构建继续执行 172 导出／六 Effect 核对及三次设备生命周期，额外运行独立
+`dx12-diagnostics.exe`：验证无设备、真实 WARP 设备 S_OK、异常调用位置、
+仅移除此私有软件设备后的实际非 S_OK 原因，以及清除后不再查询。
+强制 RemoveDevice 只存在于独立测试可执行文件，不在 DLL／玩家中。
+provenance 的 diagnosticRuntime=true 使正式 pack.ps1 拒绝打包；不得覆盖公开维护包、
+NuGet 缓存或已经验收的游戏目录。应复制已发布游戏至独立诊断目录，仅替换该 DLL，
+携带原 EXE 与新 DLL 哈希、源码提交及启动日志脚本；最终原因仍须故障机器复测。
+
 所有托管构建均设置MSBUILDDISABLENODEREUSE=1、DOTNET_CLI_USE_MSBUILD_SERVER=0，
 参数为--disable-build-servers -m:1 -nr:false -p:UseSharedCompilation=false
 -p:BuildInParallel=false -p:RestoreBuildInParallel=false。

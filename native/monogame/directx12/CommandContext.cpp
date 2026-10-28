@@ -347,11 +347,13 @@ void CommandContext::CreateDefaultRootSignature() {
     CD3DX12_VERSIONED_ROOT_SIGNATURE_DESC RootSig(6, RP, 0, nullptr, flags);
     ID3DBlob* pSerializedRootSig = nullptr;
     ID3DBlob* pErrorBlob = nullptr;
-    D3D12SerializeVersionedRootSignature(&RootSig, &pSerializedRootSig, &pErrorBlob);
+    MGE_DX12_STEP("DefaultRootSignature.Serialize");
+    MGE_DX12_CHECK(D3D12SerializeVersionedRootSignature(&RootSig, &pSerializedRootSig, &pErrorBlob));
 
-    m_deviceRes->GetD3DDevice()->CreateRootSignature(
+    MGE_DX12_STEP("DefaultRootSignature.Create");
+    MGE_DX12_CHECK(m_deviceRes->GetD3DDevice()->CreateRootSignature(
         0, pSerializedRootSig->GetBufferPointer(), pSerializedRootSig->GetBufferSize(),
-        IID_GRAPHICS_PPV_ARGS(m_rootSig.ReleaseAndGetAddressOf()));
+        IID_GRAPHICS_PPV_ARGS(m_rootSig.ReleaseAndGetAddressOf())));
 
     // Release the blobs.
     if (pSerializedRootSig)

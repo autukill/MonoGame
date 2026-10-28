@@ -1,0 +1,48 @@
+// Standalone, diagnostic-only executable. No player flags or forced removal in the DLL.
+#include "directx12.h"
+
+using Microsoft::WRL::ComPtr;
+
+int main()
+{
+    try {
+        using namespace DX::StartupDiagnostics;
+        Step("probe.no-device");
+        if (ReportFailure(E_INVALIDARG, "probe.before-device", __FILE__, __LINE__).deviceAvailable)
+            throw std::runtime_error("Unavailable device incorrectly reported a reason");
+        ComPtr<IDXGIFactory4> factory;
+        DX::ThrowIfFailed(CreateDXGIFactory2(0, IID_PPV_ARGS(&factory)));
+        ComPtr<IDXGIAdapter> warp;
+        DX::ThrowIfFailed(factory->EnumWarpAdapter(IID_PPV_ARGS(&warp)));
+        ComPtr<ID3D12Device> device;
+        DX::ThrowIfFailed(D3D12CreateDevice(warp.Get(), D3D_FEATURE_LEVEL_11_0, IID_PPV_ARGS(&device)));
+        RegisterDevice(device.Get());
+        Step("probe.live-device");
+        auto live = ReportFailure(E_INVALIDARG, "probe.live-device", __FILE__, __LINE__);
+        if (!live.deviceAvailable || live.removedReason != S_OK)
+            throw std::runtime_error("Live WARP device did not report S_OK");
+        // Exercise the same call-site wrapper used by the diagnostic DLL.
+        bool caught = false;
+        try { DX::ThrowIfFailed(E_INVALIDARG); }
+        catch (const DX::com_exception&) { caught = true; }
+        if (!caught) throw std::runtime_error("Failure did not retain existing exception behavior");
+        DX::ThrowIfFailed(S_OK);
+        ComPtr<ID3D12Device5> removable;
+        DX::ThrowIfFailed(device.As(&removable));
+        // Only this private software device is removed; no physical GPU reset.
+        removable->RemoveDevice();
+        const HRESULT expected = device->GetDeviceRemovedReason();
+        Step("probe.removed-device");
+        const auto removed = ReportFailure(DXGI_ERROR_DEVICE_REMOVED, "probe.after-RemoveDevice", __FILE__, __LINE__);
+        if (!removed.deviceAvailable || SUCCEEDED(expected) || removed.removedReason != expected)
+            throw std::runtime_error("Removed reason was lost or replaced by the outer HRESULT");
+        ClearDevice(device.Get());
+        if (ReportFailure(E_FAIL, "probe.after-clear", __FILE__, __LINE__).deviceAvailable)
+            throw std::runtime_error("Cleared device was still retained");
+        puts("DX12 diagnostic probe passed: unavailable, live S_OK, call-site exception, removed WARP device, clear.");
+        return 0;
+    } catch (const std::exception& error) {
+        fprintf(stderr, "Diagnostic regression: %s\n", error.what());
+        return 1;
+    }
+}

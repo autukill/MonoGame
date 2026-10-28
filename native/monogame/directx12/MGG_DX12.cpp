@@ -377,9 +377,11 @@ MGG_GraphicsSystem* MGG_GraphicsSystem_Create()
 	HRESULT hr;
 	{
 		Microsoft::WRL::ComPtr<IDXGIFactory2> dxgiFactory2;
+		MGE_DX12_STEP("CreateDXGIFactory2");
 		hr = CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(dxgiFactory2.ReleaseAndGetAddressOf()));
 		DX::ThrowIfFailed(hr);
 
+		MGE_DX12_STEP("QueryInterface IDXGIFactory6");
 		hr = dxgiFactory2->QueryInterface(IID_PPV_ARGS(system->dxgiFactory.ReleaseAndGetAddressOf()));
 		DX::ThrowIfFailed(hr);
 	}

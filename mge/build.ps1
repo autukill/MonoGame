@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$OutputRoot,[string]$OfficialRuntime=(Join-Path $env:USERPROFILE '.nuget/packages/monogame.runtime.windows.dx12/3.8.6/runtimes/win-x64/native/mgruntime.dll'))
+param([Parameter(Mandatory)][string]$OutputRoot,[string]$OfficialRuntime=(Join-Path $env:USERPROFILE '.nuget/packages/monogame.runtime.windows.dx12/3.8.6/runtimes/win-x64/native/mgruntime.dll'),[switch]$StartupDiagnostics)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $out=[IO.Path]::GetFullPath($OutputRoot)
@@ -17,14 +17,20 @@ $cmake=Join-Path $vs 'Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cma
 $oldReuse=$env:MSBUILDDISABLENODEREUSE;$oldServer=$env:DOTNET_CLI_USE_MSBUILD_SERVER
 $env:MSBUILDDISABLENODEREUSE='1';$env:DOTNET_CLI_USE_MSBUILD_SERVER='0'
 try {
- & $cmake -S $PSScriptRoot -B "$out/build" -G 'Visual Studio 18 2026' -A x64 "-DMGE_EFFECTS=$($out.Replace('\','/'))/effects" *> "$out/configure.log"
+ $diagnosticFlag=if($StartupDiagnostics){'ON'}else{'OFF'}
+ $targets=@('mgruntime','dx12-lifecycle');if($StartupDiagnostics){$targets+='dx12-diagnostics'}
+ & $cmake -S $PSScriptRoot -B "$out/build" -G 'Visual Studio 18 2026' -A x64 "-DMGE_EFFECTS=$($out.Replace('\','/'))/effects" "-DMGE_DX12_STARTUP_DIAGNOSTICS=$diagnosticFlag" *> "$out/configure.log"
  if($LASTEXITCODE){throw "Configure failed: $out/configure.log"}
- & $cmake --build "$out/build" --config Release --target mgruntime dx12-lifecycle --parallel 1 -- /m:1 /nr:false /p:UseSharedCompilation=false /p:BuildInParallel=false *> "$out/build.log"
+ & $cmake --build "$out/build" --config Release --target @targets --parallel 1 -- /m:1 /nr:false /p:UseSharedCompilation=false /p:BuildInParallel=false *> "$out/build.log"
  if($LASTEXITCODE){throw "Build failed: $out/build.log"}
  & python "$PSScriptRoot/verify-runtime.py" $OfficialRuntime "$out/build/Release/mgruntime.dll" "$out/abi-effects.json"
  if($LASTEXITCODE){throw 'ABI or builtin Effect mismatch'}
  & "$out/build/Release/dx12-lifecycle.exe" *> "$out/lifecycle.log"
  if($LASTEXITCODE){throw "Native lifecycle regression failed: $out/lifecycle.log"}
+ if($StartupDiagnostics){
+  & "$out/build/Release/dx12-diagnostics.exe" *> "$out/diagnostics.log"
+  if($LASTEXITCODE){throw "Device removal diagnostic regression failed: $out/diagnostics.log"}
+ }
  Assert-MgeCleanSource -Root $root -Pins $pin.submodules
  if((& git -C $root rev-parse HEAD).Trim() -ne $commit -or $LASTEXITCODE){throw 'Source changed during build'}
  Copy-Item -LiteralPath "$out/build/Release/mgruntime.dll" -Destination "$out/payload/mgruntime.dll"
@@ -32,6 +38,6 @@ try {
  Copy-Item -LiteralPath "$root/native/monogame/external/sdl2/sdl/LICENSE.txt" -Destination "$out/payload/licenses/SDL-LICENSE.txt"
  Copy-Item -LiteralPath "$root/external/stb/LICENSE" -Destination "$out/payload/licenses/STB-LICENSE.txt"
  $toolset=Get-ChildItem "$vs/VC/Tools/MSVC" -Directory|Sort-Object Name -Descending|Select-Object -First 1 -ExpandProperty Name
- [ordered]@{packageId=$pin.packageId;packageVersion=$pin.packageVersion;sourceCommit=$commit;upstream=$pin.upstream;upstreamCommit=$pin.commit;submodules=$pin.submodules;frameworkVersion=$pin.frameworkVersion;sha256=(Get-FileHash "$out/payload/mgruntime.dll").Hash;officialRuntimeSha256=$pin.officialRuntimeSha256;visualStudio=$vs;msvc=$toolset;cmake=(& $cmake --version|Select-Object -First 1);configuration='Release x64 /MT';buildArguments='--parallel 1 -- /m:1 /nr:false /p:UseSharedCompilation=false /p:BuildInParallel=false';diagnosticRuntime=$false;sourceChecks=$true;abiEffects=$true;nativeLifecycle=$true}|ConvertTo-Json -Depth 8|Set-Content "$out/payload/provenance.json" -Encoding utf8
+ [ordered]@{packageId=$pin.packageId;packageVersion=$pin.packageVersion;sourceCommit=$commit;upstream=$pin.upstream;upstreamCommit=$pin.commit;submodules=$pin.submodules;frameworkVersion=$pin.frameworkVersion;sha256=(Get-FileHash "$out/payload/mgruntime.dll").Hash;officialRuntimeSha256=$pin.officialRuntimeSha256;visualStudio=$vs;msvc=$toolset;cmake=(& $cmake --version|Select-Object -First 1);configuration='Release x64 /MT';buildArguments='--parallel 1 -- /m:1 /nr:false /p:UseSharedCompilation=false /p:BuildInParallel=false';diagnosticRuntime=[bool]$StartupDiagnostics;sourceChecks=$true;abiEffects=$true;nativeLifecycle=$true;deviceRemovalProbe=[bool]$StartupDiagnostics}|ConvertTo-Json -Depth 8|Set-Content "$out/payload/provenance.json" -Encoding utf8
  Get-Content "$out/payload/provenance.json"
 }finally{$env:MSBUILDDISABLENODEREUSE=$oldReuse;$env:DOTNET_CLI_USE_MSBUILD_SERVER=$oldServer}
