@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,8 +15,8 @@ internal static class NativeConstantRingProbe
             using var game = new RingGame();
             game.Run();
             if (game.VerifiedFrames != 6) throw new InvalidOperationException("Constant ring probe closed early.");
-            File.WriteAllText(Path.Combine(output, "report.json"), JsonSerializer.Serialize(new
-            { Completed = true, Frames = game.VerifiedFrames, DrawsPerFrame = 5000, ExactPixelTolerance = 1 }));
+            File.WriteAllText(Path.Combine(output, "report.json"), JsonSerializer.Serialize(new NativeConstantRingResult
+            { Completed = true, Frames = game.VerifiedFrames, DrawsPerFrame = 5000, ExactPixelTolerance = 1 }, NativeConstantRingJson.Default.NativeConstantRingResult));
             Console.WriteLine("Constant ring: 5000 distinct draws/frame, chunk rollover and six frames of pixel readback passed.");
             return 0;
         }
@@ -82,3 +83,13 @@ internal static class NativeConstantRingProbe
         { rasterizer?.Dispose(); effect?.Dispose(); vertices?.Dispose(); target?.Dispose(); }
     }
 }
+
+internal sealed class NativeConstantRingResult
+{
+    public bool Completed { get; set; }
+    public int Frames { get; set; }
+    public int DrawsPerFrame { get; set; }
+    public int ExactPixelTolerance { get; set; }
+}
+[JsonSerializable(typeof(NativeConstantRingResult))]
+internal partial class NativeConstantRingJson : JsonSerializerContext { }

@@ -80,6 +80,14 @@ NuGet 缓存或已经验收的游戏目录。应复制已发布游戏至独立�
 无MonoGame、引擎、游戏资源、存档、音频或.NET运行时依赖。用户返回 probe-results-*。
 完整流程、结论分类和能力边界见该项目 README.md；旧Monster候选只保留为历史产物。
 
+继续验证维护版实际后端时使用 `mge/tests/Dx12BackendProbe`：独立NativeAOT宿主引用
+公开固定Framework包，在专属输出中使用已验证的Tier 1诊断DLL；源码校验确认原生输入
+与该DLL来源提交相同。三次窗口／设备生命周期、六次交换链尺寸变化、SpriteBatch／纹理
+切换、mip与图形交错、后台缓冲像素，以及共用的动态缓冲和5000draw常量环回归均自动执行。
+Run-Probe.cmd保留原生stderr、实际加载DLL身份、每阶段完成记录与退出码，适用于Yoga复测。
+此项目没有引擎或游戏反向引用，完整覆盖范围和构建入口见其README。
+共用常量环结果改用JSON源生成，以供NativeAOT探针复用，原有回归行为和字段保持相同。
+
 2026-10-28 18:36 Yoga独立探针真机结果已返回：Intel HD Graphics 5300，驱动
 20.19.15.4642，Windows NT 10.0.22000，实际ResourceBindingTier=1。
 探针EXE哈希与交付一致。原无界根布局CreateRootSignature=E_INVALIDARG，
