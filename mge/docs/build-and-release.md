@@ -80,6 +80,17 @@ NuGet 缓存或已经验收的游戏目录。应复制已发布游戏至独立�
 无MonoGame、引擎、游戏资源、存档、音频或.NET运行时依赖。用户返回 probe-results-*。
 完整流程、结论分类和能力边界见该项目 README.md；旧Monster候选只保留为历史产物。
 
+2026-10-28 18:36 Yoga独立探针真机结果已返回：Intel HD Graphics 5300，驱动
+20.19.15.4642，Windows NT 10.0.22000，实际ResourceBindingTier=1。
+探针EXE哈希与交付一致。原无界根布局CreateRootSignature=E_INVALIDARG，
+GetDeviceRemovedReason=S_OK；只将四张表限制为16槽后，根签名创建、实际PSO／纹理／
+采样器绘制及全部256像素回读通过，最终移除原因S_OK，退出0，未超时，stderr为空。
+根签名版本支持查询为1.1，两例实际序列化均使用1.0；A/B改变的是描述符范围长度。
+这确认了该设备原根布局的兼容性问题及有界布局的基础绘制修复，未扩展为维护版
+MonoGame完整集成、窗口／交换链、复杂负载或性能认证。摘要与原始文件哈希见
+[真机证据](../validation/20261028/root-signature-yoga.json)，原始文件保存在
+`mge/out/standalone-root-signature-probe-20261028/yoga-183609`。
+
 2026-10-28 Yoga 新诊断在默认根签名创建时返回 E_INVALIDARG (0x80070057)，
 实际 GetDeviceRemovedReason=S_OK。最早已定位的问题是 CreateRootSignature 拒绝输入，
 不能再把此前未检查失败之后的 DEVICE_REMOVED 当成最早原因。

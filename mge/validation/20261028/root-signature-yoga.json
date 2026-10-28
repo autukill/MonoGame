@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-28",
+  "evidence": "probe-results-20261028-183609-637",
+  "probeSourceCommit": "e02e37cbed22ec575575545e7042e5dd4a1a72cd",
+  "probeExeSha256": "EB68E46D02F19B88E3B7DF964495DD04C9805B7103EAC545FD908134289592A3",
+  "adapter": "Intel(R) HD Graphics 5300",
+  "vendorId": 32902,
+  "deviceId": 5662,
+  "driverVersion": "20.19.15.4642",
+  "osBuild": "Windows NT 10.0.22000.0",
+  "resourceBindingTier": 1,
+  "rootSignatureSupportThrough1_1": "1.1",
+  "testedRootSignatureVersion": "1.0",
+  "originalUnboundedRoot": "0x80070057 E_INVALIDARG",
+  "originalDeviceRemovedReason": "0x00000000 S_OK",
+  "bounded16Root": "0x00000000 S_OK",
+  "boundedDrawReadbackPassed": true,
+  "matchingPixels": 256,
+  "boundedFinalDeviceRemovedReason": "0x00000000 S_OK",
+  "exitCode": 0,
+  "timeout": false,
+  "stderrBytes": 0,
+  "conclusion": "UNBOUNDED_REJECTED_BOUNDED_DRAW_PASSED",
+  "confirmedScope": [
+    "original unbounded root layout rejection on this Tier 1 device",
+    "16-slot root creation and independent basic DX12 drawing/readback"
+  ],
+  "pending": [
+    "maintained MonoGame backend integration on Yoga",
+    "window and swapchain regression",
+    "complex workloads and performance"
+  ],
+  "rawEvidenceSha256": {
+    "launcher-result.txt": "CFBE0A41AAA3814FC232E3DB3A8331477D4735C09D883201F67FCAB519AE834A",
+    "probe.log": "E9ABD1A7D91AFC5F276651333AFC5F034C99CE8526C35302685B9E491CD6CEB3",
+    "report.json": "1B1A2FA94EACE4917AF246369C5DC0CF9B991AE0608874713C94AACD76C5B0FB",
+    "result.txt": "74A8E5295240E3CF7BA80BEDC106A9B4A6235278666E86367968C263D2072914",
+    "stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "stdout.txt": "E9ABD1A7D91AFC5F276651333AFC5F034C99CE8526C35302685B9E491CD6CEB3"
+  }
+}

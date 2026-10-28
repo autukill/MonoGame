@@ -33,6 +33,10 @@ stdout／stderr原始流保留，启动脚本45秒保护只结束其自己启动
 没有强制移除设备、游戏逻辑、声音、内容加载或窗口／交换链测试；
 此结果只用于定位根签名和基本GPU绘制，不能替代完整后端或游戏验收。
 
+2026-10-28 Yoga／HD5300真机已复现：Tier 1、驱动20.19.15.4642，原无界布局
+E_INVALIDARG且设备原因S_OK；16槽根签名与256像素回读通过，退出0。
+探针范围及文件哈希记录见 [真机证据](../../validation/20261028/root-signature-yoga.json)。
+
 源码项目位于 `mge/tests/Dx12RootSignatureProbe`，构建脚本：
 
 ```powershell
