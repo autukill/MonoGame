@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.24)
+project(MgfxcSm51 LANGUAGES CXX)
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+add_executable(mgfxc-sm51 Main.cpp)
+target_compile_features(mgfxc-sm51 PRIVATE cxx_std_17)
+target_compile_definitions(mgfxc-sm51 PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
+target_link_libraries(mgfxc-sm51 PRIVATE d3dcompiler dxguid)

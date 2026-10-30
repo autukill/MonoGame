@@ -6,10 +6,15 @@
 //-----------------------------------------------------------------------------
 
 
-#if defined(SM6) || defined(VULKAN)
+#if defined(SM6) || defined(VULKAN) || defined(SM51)
 
+#if defined(SM51)
+#define TECHNIQUE(name, vsname, psname ) \
+	technique name { pass { VertexShader = compile vs_5_1 vsname (); PixelShader = compile ps_5_1 psname(); } }
+#else
 #define TECHNIQUE(name, vsname, psname ) \
 	technique name { pass { VertexShader = compile vs_6_0 vsname (); PixelShader = compile ps_6_0 psname(); } }
+#endif
 
 #define BEGIN_CONSTANTS     cbuffer _MG_Globals : register(b0) {
 #define MATRIX_CONSTANTS

@@ -1,4 +1,4 @@
-﻿// MonoGame - Copyright (C) MonoGame Foundation, Inc
+// MonoGame - Copyright (C) MonoGame Foundation, Inc
 // This file is subject to the terms and conditions defined in
 // file 'LICENSE.txt', which is part of this source code package.
 
@@ -59,7 +59,7 @@ namespace MonoGame.Effect
             return Dxc.Run(arguments, out stdout, out stderr);
         }
 
-        internal override ShaderData CreateShader(ShaderResult shaderResult, string shaderFunction, string shaderProfile, bool isVertexShader, EffectObject effect, ref string errorsAndWarnings)
+        protected virtual byte[] CompileShader(ShaderResult shaderResult, string shaderFunction, string shaderProfile, bool isVertexShader, out string reflectionData, ref string errorsAndWarnings)
         {
             var inputFile = Path.GetTempFileName();
             var outputFile = Path.GetTempFileName();
@@ -83,7 +83,6 @@ namespace MonoGame.Effect
                 "DescriptorTable(Sampler(s0, numDescriptors = unbounded), visibility = SHADER_VISIBILITY_VERTEX)," +
                 "DescriptorTable(Sampler(s0, numDescriptors = unbounded), visibility = SHADER_VISIBILITY_PIXEL)\" ";
 
-            string reflectionData;
             byte[] bytecode;
             try
             {
@@ -129,6 +128,13 @@ namespace MonoGame.Effect
                 ExternalTool.DeleteFile(inputFile);
                 ExternalTool.DeleteFile(outputFile);
             }
+
+            return bytecode;
+        }
+
+        internal override ShaderData CreateShader(ShaderResult shaderResult, string shaderFunction, string shaderProfile, bool isVertexShader, EffectObject effect, ref string errorsAndWarnings)
+        {
+            var bytecode = CompileShader(shaderResult, shaderFunction, shaderProfile, isVertexShader, out var reflectionData, ref errorsAndWarnings);
 
             // First look to see if we already created this same shader.
             foreach (var shader in effect.Shaders)
