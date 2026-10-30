@@ -1,0 +1,123 @@
+{
+  "probe": "Yoga typeless-depth/PSO diagnostic result 2026-10-30 17:21",
+  "exeSha256": "4D4B4C0AC88F5D2C0DA1B73D895F67E6C2DB575E7C737289643BD5F08757B63D",
+  "nativeSha256": "0F4CD39848D959D55441651E3ED841820E943C0A0D97BC1AE3A030B6E31124FE",
+  "nativeCommit": "b249a2b1b3e893d4d9825d19b0c3ad08f285b1e5",
+  "allPassed": false,
+  "cases": [
+    {
+      "mode": "none",
+      "exitHex": "0xC0000409",
+      "timedOut": false,
+      "passed": false,
+      "actualArtifactHashesMatched": true,
+      "resourceBindingTier": 1,
+      "typedFormatCastingSupported": false,
+      "shaderModelQueryHresult": "S_OK",
+      "highestShaderModel": "5.1",
+      "originalVertexAndPixelShaderModel": "6.0 DXIL",
+      "rootSignatureCreated": true,
+      "depthViews": [],
+      "depthViewsCreatedWithoutDeviceRemoval": false,
+      "originalPsoHresult": "0x80004005 E_FAIL",
+      "getDeviceRemovedReason": "S_OK",
+      "originalShadersDefaultFixedFunction": "E_FAIL",
+      "simpleSM50OriginalFixedFunction": "S_OK",
+      "simpleSM50DefaultFixedFunction": "S_OK",
+      "comparisonPipelinesExecuted": false,
+      "completeStages": 0
+    },
+    {
+      "mode": "depth16",
+      "exitHex": "0xC0000409",
+      "timedOut": false,
+      "passed": false,
+      "actualArtifactHashesMatched": true,
+      "resourceBindingTier": 1,
+      "typedFormatCastingSupported": false,
+      "shaderModelQueryHresult": "S_OK",
+      "highestShaderModel": "5.1",
+      "originalVertexAndPixelShaderModel": "6.0 DXIL",
+      "rootSignatureCreated": true,
+      "depthViews": [
+        {
+          "view": "SRV",
+          "resourceFormat": 53,
+          "viewFormat": 56
+        },
+        {
+          "view": "DSV",
+          "resourceFormat": 53,
+          "viewFormat": 55
+        }
+      ],
+      "depthViewsCreatedWithoutDeviceRemoval": true,
+      "originalPsoHresult": "0x80004005 E_FAIL",
+      "getDeviceRemovedReason": "S_OK",
+      "originalShadersDefaultFixedFunction": "E_FAIL",
+      "simpleSM50OriginalFixedFunction": "S_OK",
+      "simpleSM50DefaultFixedFunction": "S_OK",
+      "comparisonPipelinesExecuted": false,
+      "completeStages": 0
+    },
+    {
+      "mode": "depth24stencil8",
+      "exitHex": "0xC0000409",
+      "timedOut": false,
+      "passed": false,
+      "actualArtifactHashesMatched": true,
+      "resourceBindingTier": 1,
+      "typedFormatCastingSupported": false,
+      "shaderModelQueryHresult": "S_OK",
+      "highestShaderModel": "5.1",
+      "originalVertexAndPixelShaderModel": "6.0 DXIL",
+      "rootSignatureCreated": true,
+      "depthViews": [
+        {
+          "view": "SRV",
+          "resourceFormat": 44,
+          "viewFormat": 46
+        },
+        {
+          "view": "DSV",
+          "resourceFormat": 44,
+          "viewFormat": 45
+        }
+      ],
+      "depthViewsCreatedWithoutDeviceRemoval": true,
+      "originalPsoHresult": "0x80004005 E_FAIL",
+      "getDeviceRemovedReason": "S_OK",
+      "originalShadersDefaultFixedFunction": "E_FAIL",
+      "simpleSM50OriginalFixedFunction": "S_OK",
+      "simpleSM50DefaultFixedFunction": "S_OK",
+      "comparisonPipelinesExecuted": false,
+      "completeStages": 0
+    }
+  ],
+  "conclusion": "Root creation and typeless depth-view initialization now succeed; current device/driver supports only SM5.1, but retained runtime graphics shaders require SM6.0. This unsupported shader model is a confirmed blocker. Simple SM5.0 PSO creation succeeds; this is not an execution or full-backend pass.",
+  "debugLayer": "unavailable 0x887A002D; zero validation errors is not proof of API validity",
+  "compatibilityScope": "Adding SM5.1 requires a distinct compiler/builtin-effect/compute-mip shader path and regression, not another root-signature or depth toggle. Current evidence does not establish whether another driver changes support.",
+  "rawLogSha256": {
+    "depth16/child-process.json": "0E1CBBBE42202F728B19802C3AE261B8A65B6495AD9C200BB76F16D70E676343",
+    "depth16/probe.log": "BE53988FD865927698082CC47B7B1F51B9C29EA05565436C5F7F104778732EE4",
+    "depth16/report.json": "7EBF39699885ECC92CA5C4386FA21FEB5C876F40E0F657326D00FC377CFE5D8B",
+    "depth16/stderr.txt": "11BA0F09DCE25811ED17EBAE17D1B2D91FA0B8449CAC3067681C3AC67024B1F5",
+    "depth16/stdout.txt": "BE53988FD865927698082CC47B7B1F51B9C29EA05565436C5F7F104778732EE4",
+    "depth24stencil8/child-process.json": "A29E05A4F3845065B04305CD7A6F9A32F593DB9ADFE28809C2D21BB2E8FF6906",
+    "depth24stencil8/probe.log": "536D9BBFD45E492DB5C48801A5DC506D79031D1C82450894FCD9E1E3C1C5B42D",
+    "depth24stencil8/report.json": "D6919725ECB0C03884DF2918E5B4976269349731AC93B640320AD513BFED63D7",
+    "depth24stencil8/stderr.txt": "FB21E4167ADCE96B14D1D50F79D0B361F45264519BF134A635FBD9F65E6FDB6C",
+    "depth24stencil8/stdout.txt": "536D9BBFD45E492DB5C48801A5DC506D79031D1C82450894FCD9E1E3C1C5B42D",
+    "launcher-result.txt": "C533A363C2BEB5858F6CD6E37EE0A607D7DEFD2FE6D37B5BB96A7CA76FD79ED1",
+    "none/child-process.json": "E4B43A4667C0ECD1B1C6139066D9D0B017B00DA6494D8152BB397DDB1E1F9FE9",
+    "none/probe.log": "489847751DDC4FF9B78D017CC46A1AFAB514B641759597E0983882CDCD19B501",
+    "none/report.json": "2DBC4D32368DBCA1F07A4DE3B82FBFC70874D8B8D95CEC27884E28B3C6B9E555",
+    "none/stderr.txt": "755F4AA605952E1072F3D250F1260C0C6B763BE205E3034D2BF7688BC5471E40",
+    "none/stdout.txt": "489847751DDC4FF9B78D017CC46A1AFAB514B641759597E0983882CDCD19B501",
+    "probe.log": "B7999072B35CD2E2029A46F3C0E88A505FF5BFDE48382DEE5BE36AFBCCCCF7E7",
+    "report.json": "9595B2D05ACF6D7C66AF2A7A549F8C7507E2BD47BCAD6AD4F79C7989113FEE2B",
+    "result.txt": "739119EE14B5BC2AFC269997E0E815201B461FE420236568ABAE1E6E503C8F61",
+    "stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "stdout.txt": "B7999072B35CD2E2029A46F3C0E88A505FF5BFDE48382DEE5BE36AFBCCCCF7E7"
+  }
+}

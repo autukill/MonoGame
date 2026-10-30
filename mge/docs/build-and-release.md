@@ -253,3 +253,21 @@ R24G8_TYPELESS(44)→R24_UNORM_X8_TYPELESS(46)。172导出、六份内置Effect�
 着色器PSO创建成功，原缺失字节码失败继续保留。构建和探针进程全部退出。
 交付候选位于`mge/out/backend-compatibility-20261030/probe-01/`，仍待Yoga复验；
 [本机验证摘要](../validation/20261030/backend-depth-typeless-local.json)。
+
+2026-10-30 17:21 Yoga复验返回：EXE和实际加载DLL均与交付一致。两个深度模式的
+SRV／DSV创建及初始帧准备后GetDeviceRemovedReason均为S_OK，确认typeless深度资源
+消除了之前的视图创建非法调用；OPTIONS3也确认CastingFullyTypedFormatSupported=0。
+三组仍在首个图形PSO失败，但已获得明确能力差异：请求SM6.0的查询成功，返回最高SM5.1；
+VS／PS容器记录均为SM6.0 DXIL。保留原着色器、改用默认固定功能状态仍E_FAIL；简单
+SM5.0着色器的两种对照PSO创建成功，设备状态始终S_OK。对照PSO只创建／释放，未执行，
+因此不能判为完整绘制或后端通过。系统未安装调试层，validationErrors=0不能作为API验收。
+
+结论：当前Yoga设备／驱动的SM5.1能力无法运行现有SM6.0着色器，这是已确认的兼容阻碍。
+16槽根签名和深度视图初始化修复已有真机证据，无需围绕同一问题重复生成诊断包。
+若继续扩展旧设备DX12支持，需另行设计SM5.1编译器、内置Effect及compute mip内核链路，
+并验证布局／反射、像素和完整生命周期；保持现有六份内置Effect原字节的维护范围内，
+不自动降低或替换shader。此证据不证明更新驱动一定有效。Yoga可继续采用用户此前已
+通过备战和战斗验证的OpenGL版本。当前没有修改Monster或生产新的游戏包。
+[真机能力与PSO对照证据](../validation/20261030/backend-shader-model-yoga.json)。
+能力查询语义依据[微软SHADER_MODEL文档](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_feature_data_shader_model)，
+SM6／DXIL背景见[微软DirectXTK12说明](https://github.com/microsoft/DirectXTK12/wiki/Shader-Model-6)。
