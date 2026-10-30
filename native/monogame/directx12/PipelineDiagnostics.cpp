@@ -102,6 +102,9 @@ namespace DX::StartupDiagnostics {
             clean.VS = variant.VS; clean.PS = variant.PS; clean.InputLayout = {};
             attempt("minimal-shaders-default-fixed-function", clean);
         }
+        // Blob implementations live in the compiler DLL; release their COM
+        // objects before unloading it, including compilation warning blobs.
+        vs.Reset(); ps.Reset(); errors.Reset();
         if (compiler) FreeLibrary(compiler);
         fflush(stderr);
     }
