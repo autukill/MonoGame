@@ -1,0 +1,76 @@
+{
+  "probe": "DX12 typeless depth and pipeline diagnosis candidate",
+  "date": "2026-10-30",
+  "probeCommit": "07c5ac446c5462b640eedee7f86fe22d9492ec02",
+  "nativeCommit": "b249a2b1b3e893d4d9825d19b0c3ad08f285b1e5",
+  "exeSha256": "4D4B4C0AC88F5D2C0DA1B73D895F67E6C2DB575E7C737289643BD5F08757B63D",
+  "nativeSha256": "0F4CD39848D959D55441651E3ED841820E943C0A0D97BC1AE3A030B6E31124FE",
+  "sameExeAsYoga165459": true,
+  "debugLayerEnabled": true,
+  "cases": [
+    {
+      "mode": "none",
+      "passed": true,
+      "adapter": "NVIDIA GeForce GTX 970",
+      "exitCode": 0,
+      "stages": 5,
+      "pixelChecks": 2533815,
+      "windowLifetimes": 3,
+      "resizeChecks": 6,
+      "apiErrors": 0,
+      "warningIds": [
+        820
+      ],
+      "nativeSha256": "0F4CD39848D959D55441651E3ED841820E943C0A0D97BC1AE3A030B6E31124FE",
+      "observedDepthSRV": []
+    },
+    {
+      "mode": "depth16",
+      "passed": true,
+      "adapter": "NVIDIA GeForce GTX 970",
+      "exitCode": 0,
+      "stages": 5,
+      "pixelChecks": 2533815,
+      "windowLifetimes": 3,
+      "resizeChecks": 6,
+      "apiErrors": 0,
+      "warningIds": [
+        820
+      ],
+      "nativeSha256": "0F4CD39848D959D55441651E3ED841820E943C0A0D97BC1AE3A030B6E31124FE",
+      "observedDepthSRV": [
+        [
+          "53",
+          "56"
+        ]
+      ]
+    },
+    {
+      "mode": "depth24stencil8",
+      "passed": true,
+      "adapter": "NVIDIA GeForce GTX 970",
+      "exitCode": 0,
+      "stages": 5,
+      "pixelChecks": 2533815,
+      "windowLifetimes": 3,
+      "resizeChecks": 6,
+      "apiErrors": 0,
+      "warningIds": [
+        820
+      ],
+      "nativeSha256": "0F4CD39848D959D55441651E3ED841820E943C0A0D97BC1AE3A030B6E31124FE",
+      "observedDepthSRV": [
+        [
+          "44",
+          "46"
+        ]
+      ]
+    }
+  ],
+  "totalPixelChecks": 7601445,
+  "nativeABIExports": 172,
+  "builtinEffectsPreserved": 6,
+  "nativeDepthViewProbe": "D16/D24/D24S8; two DSV clears and 384 SRV sampled pixels per cycle; actual and forced Tier1, three lifetimes each",
+  "privateWarpDiagnosticNegativeCase": "Missing shader bytecode fails; minimal SM5 replacement PSOs succeed; blobs released before unloading compiler; RemoveDevice reason retained; exit 0",
+  "yogaRetest": "pending; shader-model hypothesis not yet established on Yoga"
+}

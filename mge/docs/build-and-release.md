@@ -244,3 +244,12 @@ MSAA支持检查；原生生命周期增加D16／D24／D24S8的两次DSV清屏�
 命令、不替换绘制结果的前提下创建／释放默认状态与SM5简单着色器的对照PSO。
 正常发布DLL不含这些诊断实验；六份内置Effect字节继续保留，不自动转换着色器版本。
 Yoga的Shader Model与PSO失败原因仍需新结果确认，不能宣称后端已通过。
+
+2026-10-30 本机候选复验完成：相同NativeAOT EXE仅更新DLL，三组各五阶段通过，
+累计7601445次像素检查，CPU调试层启用且API ERROR／CORRUPTION为0，仅保留ID820
+优化清屏值警告。深度SRV实际资源／视图为R16_TYPELESS(53)→R16_UNORM(56)、
+R24G8_TYPELESS(44)→R24_UNORM_X8_TYPELESS(46)。172导出、六份内置Effect原字节、
+真实等级／强制Tier1三生命周期及WARP故障设备检查通过；WARP诊断负例确认简单SM5
+着色器PSO创建成功，原缺失字节码失败继续保留。构建和探针进程全部退出。
+交付候选位于`mge/out/backend-compatibility-20261030/probe-01/`，仍待Yoga复验；
+[本机验证摘要](../validation/20261030/backend-depth-typeless-local.json)。
