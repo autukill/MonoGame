@@ -31,6 +31,7 @@
 #include "mg_effect.h"
 
 #include "directx12.h"
+#include "Sm51Probe.h"
 #include "CommandContext.h"
 #include "DeviceResources.h"
 #include "PipelineState.h"
@@ -2380,7 +2381,10 @@ MGG_Shader* MGG_Shader_Create(MGG_GraphicsDevice* device, MGShaderStage stage, m
 		shader->maxTextureSlot = 15;
 	}
 
-	shader->bytecode.resize(sizeInBytes);
+    #if defined(MGE_DX12_SM51_PROBE)
+    RequireSm51ProbeShader(bytecode, sizeInBytes, stage == MGShaderStage::Vertex);
+    #endif
+    shader->bytecode.resize(sizeInBytes);
 	memcpy(shader->bytecode.data(), bytecode, sizeInBytes);
 
 	return shader;

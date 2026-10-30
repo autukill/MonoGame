@@ -15,6 +15,8 @@
 #include "GenerateMips_xs.h"
 #elif defined(_GAMING_XBOX)
 #include "GenerateMips_xb.h"
+#elif defined(MGE_DX12_SM51_PROBE)
+#include "GenerateMips_SM51.h"
 #else
 #include "GenerateMips_Desktop.h"
 #endif
@@ -403,6 +405,9 @@ void CommandContext::CreateGenerateMipPipelineResources() {
 
     {
         D3D12_COMPUTE_PIPELINE_STATE_DESC psoDesc = {};
+#if defined(MGE_DX12_SM51_PROBE)
+        MGE_DX12_STEP("GenerateMips.CS5_1.PrivateProbe");
+#endif
         psoDesc.CS.BytecodeLength = sizeof(GenerateMips_main);
         psoDesc.CS.pShaderBytecode = GenerateMips_main;
         psoDesc.pRootSignature = m_generateMipRootSig.Get();
