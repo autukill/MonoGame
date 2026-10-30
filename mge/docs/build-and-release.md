@@ -226,3 +226,21 @@ python ./mge/summarize-empty-window.py ./mge/out/memory-final ./mge/out/memory-f
 测量脚本采样结束后按已核对身份停止进程；正常 Game.Exit() 测试另行记录。quiet 内存比较与 GPU 回读/绘制功能 probe 分别运行、分别解释。CPU 逻辑核当量不能当作整机 CPU 百分比。
 
 2026-10-18 的小型交付证据保存在 mge/validation/20261018/，结论及覆盖边界见 [validation-20261018.md](validation-20261018.md)。不要提交大日志、截图、二进制或 NuGet 缓存。
+
+## 2026-10-30 Yoga 后端复验
+
+三模式包 EXE／实际加载DLL哈希与交付一致，三组均在首帧前退出0xC0000409，
+不是超时。16槽根签名创建成功。Depth16和Depth24Stencil8在typed深度资源上创建
+不同格式的SRV后，立即GetDeviceRemovedReason=0x887A0001；无深度组则继续到
+CreateGraphicsPipelineState=E_FAIL，此时GetDeviceRemovedReason=S_OK。
+系统没有调试层（0x887A002D），因此报告中的validationErrors=0不能代表API合法。
+[脱敏证据及原始日志哈希](../validation/20261030/backend-depth-matrix-yoga.json)。
+
+深度存储统一改用同族typeless资源，保留typed清屏值／DSV／SRV／PSO格式以及typed
+MSAA支持检查；原生生命周期增加D16／D24／D24S8的两次DSV清屏和SRV GPU回读。
+依据[微软格式转换规格](https://microsoft.github.io/DirectX-Specs/d3d/RelaxedCasting.html)，
+旧驱动不能假定支持fully-typed资源间转换。新诊断另记录OPTIONS3和Shader Model能力，
+失败时保留原始PSO HRESULT／设备状态，记录状态参数和容器中的着色器版本，并在不提交
+命令、不替换绘制结果的前提下创建／释放默认状态与SM5简单着色器的对照PSO。
+正常发布DLL不含这些诊断实验；六份内置Effect字节继续保留，不自动转换着色器版本。
+Yoga的Shader Model与PSO失败原因仍需新结果确认，不能宣称后端已通过。

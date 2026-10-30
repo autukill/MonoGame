@@ -14,6 +14,7 @@ namespace DX::StartupDiagnostics {
     void InitializeApiValidation() noexcept;
     void AfterCall(const char* operation, const char* file, int line);
     void ViewInfo(const char* operation, ID3D12Resource* resource, UINT format, UINT dimension) noexcept;
+    void GraphicsPipelineFailure(ID3D12Device* device, const D3D12_GRAPHICS_PIPELINE_STATE_DESC& desc) noexcept;
     Failure ReportFailure(HRESULT hr, const char* expression, const char* file, int line) noexcept;
 }
 namespace DX {
@@ -34,6 +35,7 @@ namespace DX {
 #define MGE_DX12_CLEAR(device) DX::StartupDiagnostics::ClearDevice(device)
 #define MGE_DX12_CHECK(expression) DX::ThrowIfFailed(expression)
 #define MGE_DX12_REPORT(hr, expression) DX::StartupDiagnostics::ReportFailure((hr), (expression), __FILE__, __LINE__)
+#define MGE_DX12_PSO_FAILURE(device, desc) DX::StartupDiagnostics::GraphicsPipelineFailure(device, desc)
 #else
 #define MGE_DX12_STEP(name) ((void)0)
 #define MGE_DX12_VALIDATE_API() ((void)0)
@@ -43,4 +45,5 @@ namespace DX {
 #define MGE_DX12_CLEAR(device) ((void)0)
 #define MGE_DX12_CHECK(expression) ((void)(expression))
 #define MGE_DX12_REPORT(hr, expression) ((void)0)
+#define MGE_DX12_PSO_FAILURE(device, desc) ((void)0)
 #endif

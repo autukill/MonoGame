@@ -27,6 +27,25 @@ int main()
         catch (const DX::com_exception&) { caught = true; }
         if (!caught) throw std::runtime_error("Failure did not retain existing exception behavior");
         DX::ThrowIfFailed(S_OK);
+        // Exercise the failure-only PSO logger and its independent SM5 shader
+        // experiments on a private WARP device, without submitting any work.
+        D3D12_ROOT_SIGNATURE_DESC rootDesc = {};
+        rootDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
+        ComPtr<ID3DBlob> blob, errors;
+        DX::ThrowIfFailed(D3D12SerializeRootSignature(&rootDesc, D3D_ROOT_SIGNATURE_VERSION_1, &blob, &errors));
+        ComPtr<ID3D12RootSignature> root;
+        DX::ThrowIfFailed(device->CreateRootSignature(0, blob->GetBufferPointer(), blob->GetBufferSize(), IID_PPV_ARGS(&root)));
+        D3D12_GRAPHICS_PIPELINE_STATE_DESC invalidPso = {};
+        invalidPso.pRootSignature = root.Get();
+        invalidPso.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+        invalidPso.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
+        invalidPso.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
+        invalidPso.DepthStencilState.DepthEnable = FALSE;
+        invalidPso.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+        invalidPso.SampleDesc.Count = 1; invalidPso.SampleMask = UINT_MAX;
+        invalidPso.NumRenderTargets = 1; invalidPso.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
+        GraphicsPipelineFailure(device.Get(), invalidPso);
+        DX::ThrowIfFailed(device->GetDeviceRemovedReason());
         ComPtr<ID3D12Device5> removable;
         DX::ThrowIfFailed(device.As(&removable));
         // Only this private software device is removed; no physical GPU reset.

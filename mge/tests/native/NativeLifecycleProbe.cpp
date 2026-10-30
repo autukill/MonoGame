@@ -27,6 +27,7 @@ static void VerifyMips(DeviceResources& device,Texture& texture,uint32_t expecte
 }
 #include "PagedDescriptorProbe.h"
 #include "Tier1BindingProbe.h"
+#include "DepthViewProbe.h"
 int main(int argc, char** argv) {
     try {
         if (argc == 2 && strcmp(argv[1], "--tier1-bindings") == 0) {
@@ -69,6 +70,7 @@ int main(int argc, char** argv) {
             if (ForceTier1BindingsForProbe && !heaps->RequiresFullGraphicsTables())
                 throw std::runtime_error("Tier 1 probe did not activate bounded tables");
             if (heaps->RequiresFullGraphicsTables()) VerifyTier1Bindings(device,texture);
+            VerifyDepthViews(device);
             std::vector<int32_t> indices;
             Sample("query.before");
             begin=std::chrono::steady_clock::now();

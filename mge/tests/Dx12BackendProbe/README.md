@@ -28,6 +28,14 @@ GetDeviceRemovedReason。创建视图和提交命令后增加设备状态检查�
 此探针实际走MonoGame的资源上传、状态缓存、窗口和交换链，
 用于接续已通过的Windows SDK根签名A/B探针；不覆盖完整游戏、长时内存或所有后端功能。
 
+2026-10-30候选将深度资源存储改为R16_TYPELESS／R24G8_TYPELESS，DSV、SRV、
+PSO与MSAA检查继续使用各自的明确格式，避免依赖旧驱动不支持的typed-format casting。
+新增SHADER_MODEL 6.0／5.1和OPTIONS3能力查询。若图形PSO创建失败，先保留原始
+HRESULT和设备状态，再记录状态参数及着色器容器／版本。私有诊断DLL随后只创建并释放
+几种默认状态／简单SM5着色器的PSO，记录结果，不绘制、不替换原绘制结果；原失败仍退出。
+因此某个diagnostic-only variant成功不能视为完整套件通过。系统调试层未安装时，
+validationErrors=0也不能视为通过API校验。
+
 重点文件：result.txt、report.json、probe.log、stdout.txt、stderr.txt、launcher-result.txt。
 报告以每阶段完成状态和完整像素检查为准；窗口提前关闭会判为失败。
 每个子进程限时120秒，外层启动器限时390秒，只停止其自己启动的探针，保留阶段和退出码。

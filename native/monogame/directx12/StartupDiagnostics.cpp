@@ -43,6 +43,7 @@ namespace DX::StartupDiagnostics {
             case E_OUTOFMEMORY: return "E_OUTOFMEMORY";
             case E_INVALIDARG: return "E_INVALIDARG";
             case E_NOINTERFACE: return "E_NOINTERFACE";
+            case E_FAIL: return "E_FAIL";
             default: return "UNMAPPED_HRESULT";
             }
         }
@@ -70,6 +71,16 @@ namespace DX::StartupDiagnostics {
             const HRESULT hr = device->CheckFeatureSupport(D3D12_FEATURE_D3D12_OPTIONS, &options, sizeof(options));
             fprintf(stderr, "[DX12-DIAG] CheckFeatureSupport(D3D12_OPTIONS)=0x%08X ResourceBindingTier=%u ResourceHeapTier=%u\n",
                 static_cast<unsigned int>(hr), static_cast<unsigned int>(options.ResourceBindingTier), static_cast<unsigned int>(options.ResourceHeapTier));
+            D3D12_FEATURE_DATA_D3D12_OPTIONS3 casting = {};
+            const HRESULT castingHr = device->CheckFeatureSupport(D3D12_FEATURE_D3D12_OPTIONS3, &casting, sizeof(casting));
+            fprintf(stderr, "[DX12-DIAG] CheckFeatureSupport(D3D12_OPTIONS3)=0x%08X CastingFullyTypedFormatSupported=%u\n",
+                static_cast<unsigned int>(castingHr), static_cast<unsigned int>(casting.CastingFullyTypedFormatSupported));
+            for (auto requested : {D3D_SHADER_MODEL_6_0, D3D_SHADER_MODEL_5_1}) {
+                D3D12_FEATURE_DATA_SHADER_MODEL model = {requested};
+                const HRESULT modelHr = device->CheckFeatureSupport(D3D12_FEATURE_SHADER_MODEL, &model, sizeof(model));
+                fprintf(stderr, "[DX12-DIAG] CheckFeatureSupport(SHADER_MODEL requested=0x%X)=0x%08X returned=0x%X (returned valid only on success)\n",
+                    static_cast<unsigned>(requested), static_cast<unsigned>(modelHr), static_cast<unsigned>(model.HighestShaderModel));
+            }
         }
         fflush(stderr);
     }

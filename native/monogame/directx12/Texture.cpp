@@ -172,7 +172,9 @@ void Texture::Create(DeviceResources* device, bool createViews) {
         impl->m_desc.SampleDesc.Count = 1;
 
     D3D12_RESOURCE_DESC resDesc = impl->m_desc;
-    if (impl->m_allowUAV)
+    if (impl->m_depthFormat != MGDepthFormat::None)
+        resDesc.Format = DepthFormatToResource[(int)impl->m_depthFormat];
+    else if (impl->m_allowUAV)
         resDesc.Format = ConvertSRVtoResourceFormat(impl->m_desc.Format);
 
     // ALLOCATION_FLAG_COMMITTED uses dedicated allocation.

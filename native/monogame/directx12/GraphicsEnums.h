@@ -60,6 +60,15 @@ static constexpr DXGI_FORMAT DepthFormatToSRV[] = {
     DXGI_FORMAT_R24_UNORM_X8_TYPELESS,
 };
 
+// A depth buffer has typed DSV/SRV views in the same format family. Keep
+// its storage typeless so pre-RS2 drivers need no relaxed typed-format casting.
+static constexpr DXGI_FORMAT DepthFormatToResource[] = {
+    DXGI_FORMAT_UNKNOWN,
+    DXGI_FORMAT_R16_TYPELESS,
+    DXGI_FORMAT_R24G8_TYPELESS,
+    DXGI_FORMAT_R24G8_TYPELESS
+};
+
 static constexpr D3D_PRIMITIVE_TOPOLOGY PrimitiveTypeToD3D_PRIMITIVE_TOPOLOGY[] = {
     D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST,
     D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,

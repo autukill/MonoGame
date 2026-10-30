@@ -1,0 +1,75 @@
+{
+  "probe": "Yoga depth matrix received 2026-10-30",
+  "expectedArtifactsMatched": true,
+  "exeSha256": "4D4B4C0AC88F5D2C0DA1B73D895F67E6C2DB575E7C737289643BD5F08757B63D",
+  "nativeSha256": "012ADF908F0D35A7A98946B91A6878C25EDC308A4112D023070AB00608B83144",
+  "allPassed": false,
+  "debugLayer": "unavailable HRESULT 0x887A002D; validationErrors=0 is not evidence of API validity",
+  "cases": [
+    {
+      "mode": "none",
+      "pid": 16060,
+      "started": "2026-10-30T16:55:01.0478971+08:00",
+      "exitCode": -1073740791,
+      "exitHex": "0xC0000409",
+      "timedOut": false,
+      "passed": false,
+      "validationErrors": 0,
+      "lastPhase": "window-mip-resize-lifetime-1",
+      "error": ""
+    },
+    {
+      "mode": "depth16",
+      "pid": 4232,
+      "started": "2026-10-30T16:55:02.8038072+08:00",
+      "exitCode": -1073740791,
+      "exitHex": "0xC0000409",
+      "timedOut": false,
+      "passed": false,
+      "validationErrors": 0,
+      "lastPhase": "window-mip-resize-lifetime-1",
+      "error": ""
+    },
+    {
+      "mode": "depth24stencil8",
+      "pid": 14052,
+      "started": "2026-10-30T16:55:03.8440072+08:00",
+      "exitCode": -1073740791,
+      "exitHex": "0xC0000409",
+      "timedOut": false,
+      "passed": false,
+      "validationErrors": 0,
+      "lastPhase": "window-mip-resize-lifetime-1",
+      "error": ""
+    }
+  ],
+  "findings": {
+    "rootSignature": "Tier1 bounded16 created successfully in all cases",
+    "depth16": "D16 typed resource 55 to R16_UNORM SRV 56: immediate GetDeviceRemovedReason 0x887A0001",
+    "depth24stencil8": "D24S8 typed resource 45 to R24_UNORM_X8_TYPELESS SRV 46: immediate GetDeviceRemovedReason 0x887A0001",
+    "none": "Graphics PSO creation 0x80004005 E_FAIL, GetDeviceRemovedReason S_OK; shader-model capability not yet captured"
+  },
+  "rawLogSha256": {
+    "depth16/child-process.json": "E8755B69CF98438A0A4989076D363DB838F5BC4BDB652586B708F38589DC0C2B",
+    "depth16/probe.log": "EDCBBDCF343B87DA36C112ED67DA67D88EC0E116FEB71048C818FB45277C7FBA",
+    "depth16/report.json": "3DF06472F6AA908FCBF01854EE872E792E985F5924EC116C58FB81A1F886DF58",
+    "depth16/stderr.txt": "119600340D9CB58C229195D1C4246FC1F4445144C98F89D0CF0BDA5FBE534578",
+    "depth16/stdout.txt": "EDCBBDCF343B87DA36C112ED67DA67D88EC0E116FEB71048C818FB45277C7FBA",
+    "depth24stencil8/child-process.json": "D1C21181C9814B017771528FE1DD4008E6F0BD90EF83F8DE6A65788876AF6F67",
+    "depth24stencil8/probe.log": "7DF67536CDC417443AA4BC1FEC3CE65ADD23175D84A33B842CD3CAE869961CD7",
+    "depth24stencil8/report.json": "23029A4C9D5397B9004F67067D2D20E2E4E461D696323FE885AE737C22515555",
+    "depth24stencil8/stderr.txt": "1B9D1FB50F64D0D98A18196EA8DF2FF876470ED453FD4AEB165658FEBABD596C",
+    "depth24stencil8/stdout.txt": "7DF67536CDC417443AA4BC1FEC3CE65ADD23175D84A33B842CD3CAE869961CD7",
+    "launcher-result.txt": "0FCC3AC64D2A4E255E133D519136D68EA47A38772B380C681AFB698621C6B934",
+    "none/child-process.json": "5155DADB07A8E1573B09D6CADD3405EEEC83529AB82598E2C6EFBEFE8253656F",
+    "none/probe.log": "1A5A3971A869DC4272A9E463E543EE514C462856DE45A5FFB7C2978E658BFB6F",
+    "none/report.json": "FB7B3015357EDA112D36076EB000F93615DF89BA754022BB0FA6AE5E94087560",
+    "none/stderr.txt": "336E1FE569839ACABA93691E31FC785C08323B1044838AE32B118B48395E87AA",
+    "none/stdout.txt": "1A5A3971A869DC4272A9E463E543EE514C462856DE45A5FFB7C2978E658BFB6F",
+    "probe.log": "A4C6AC37850B4A668DF4EBAFCF42CF4C9A14A4A04B7421B265EA0B4D1D107F11",
+    "report.json": "AF14C89EEBDE56766512E82958005DD26416E77E222E655B0878C7FB6ECFA883",
+    "result.txt": "739119EE14B5BC2AFC269997E0E815201B461FE420236568ABAE1E6E503C8F61",
+    "stderr.txt": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "stdout.txt": "A4C6AC37850B4A668DF4EBAFCF42CF4C9A14A4A04B7421B265EA0B4D1D107F11"
+  }
+}

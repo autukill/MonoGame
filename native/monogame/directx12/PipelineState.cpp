@@ -96,7 +96,13 @@ void PipelineStateManager::ApplyCurrentPipelineState() {
         if (iter != impl->m_psoHashMap.end())
             ps = iter->second.Get();
         else {
-            DX::ThrowIfFailed(impl->m_deviceRes->GetD3DDevice()->CreateGraphicsPipelineState(&impl->m_currentPSODesc, IID_GRAPHICS_PPV_ARGS(&ps)));
+            MGE_DX12_STEP("CreateGraphicsPipelineState");
+            const HRESULT hr = impl->m_deviceRes->GetD3DDevice()->CreateGraphicsPipelineState(&impl->m_currentPSODesc, IID_GRAPHICS_PPV_ARGS(&ps));
+            if (FAILED(hr)) {
+                MGE_DX12_REPORT(hr, "ID3D12Device::CreateGraphicsPipelineState (original call, before diagnostic variants)");
+                MGE_DX12_PSO_FAILURE(impl->m_deviceRes->GetD3DDevice(), impl->m_currentPSODesc);
+            }
+            DX::ThrowIfFailed(hr);
             impl->m_psoHashMap[HashCode].Attach(ps);
         }
 
