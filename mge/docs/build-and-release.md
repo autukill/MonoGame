@@ -271,3 +271,27 @@ SM5.0着色器的两种对照PSO创建成功，设备状态始终S_OK。对照PS
 [真机能力与PSO对照证据](../validation/20261030/backend-shader-model-yoga.json)。
 能力查询语义依据[微软SHADER_MODEL文档](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_feature_data_shader_model)，
 SM6／DXIL背景见[微软DirectXTK12说明](https://github.com/microsoft/DirectXTK12/wiki/Shader-Model-6)。
+
+## 2026-10-30 SM5.1 独立执行探针
+
+用户授权先验证独立探针，不改Monster。项目为`mge/tests/Dx12Sm51Probe`，使用维护版
+Framework 3.8.6-mge.3的真实Effect加载器／常量更新，以及同库原生DX12后端。
+探针自身用固定ABI的MGFX夹具装载FXC离线编译的vs_5_1／ps_5_1，VS／PS各一个16字节
+b0缓冲；反射汇编校验参数大小／偏移及t0／s0绑定。另将原mip HLSL离线编译为cs_5_1，
+核对SHEX实际5.1版本、shader阶段、无DXIL以及C数组与CS二进制完全一致。
+
+原生开关`MGE_DX12_SM51_PROBE`默认OFF；ON仅允许在诊断构建并指定已准备的header。
+该实验DLL替换mip内核并拒绝非SM5.1的图形shader；六份已有内置Effect仍保留原字节，
+不将此次结果当作通用.fx编译器或内置Effect迁移完成。正常构建路径默认保持原样。
+
+本机GTX970三种深度模式全部完成：每组3次9帧缩放／mip生命周期，另一次6帧、每帧
+5000次独立VS／PS常量更新，并进行动态VB／IB的Discard／NoOverwrite实际索引绘制。
+累计7583013次像素核对、90000次常量压力绘制，CPU API校验启用且ERROR／CORRUPTION
+均为0；172导出和六份内置Effect原字节通过。原生真实等级与强制Tier1生命周期、
+深度／mip GPU回读和WARP故障设备诊断均通过。双击入口在中文／空格路径、Windows
+PowerShell5.1下通过，未超时、正常退出0。Yoga仍待此包复验，不能以本机通过替代。
+
+构建全部串行，先完成原生构建再NativeAOT publish，保留禁服务器／不复用／不共享编译
+参数，直接运行产物验证。本轮构建与探针进程已结束。源码及构建步骤见
+[探针说明](../tests/Dx12Sm51Probe/README.md)，[本机证据](../validation/20261030/sm51-probe-local.json)。
+交付位于`mge/out/sm51-probe-20261030/release-01/`，不替换任何NuGet缓存或游戏目录。

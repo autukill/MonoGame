@@ -11,7 +11,7 @@ cs_5_1；原生诊断DLL拒绝任何非SM5.1图形shader，mip使用同源HLSL�
 自动以三个独立进程测试无深度、D16、D24S8：
 
 - 每组3次完整Game／设备／窗口生命周期，每次9帧实际Present、2次窗口缩放。
-- 顶点／像素阶段独立常量缓冲，纹理／采样器切换、动态VB／IB Discard和NoOverwrite。
+- 顶点／像素阶段独立常量缓冲，纹理切换与采样器绑定、动态VB／IB Discard和NoOverwrite。
 - 离屏绘制、SM5.1 compute mip四级像素回读、交换链三种尺寸整屏核对。
 - 另一次6帧，每帧5000次改变VS／PS常量绘制，逐像素验证跨常量上传chunk。
 - 核对实际加载DLL、EXE与shader哈希；可选系统API调试层存在时启用，错误使测试失败。
