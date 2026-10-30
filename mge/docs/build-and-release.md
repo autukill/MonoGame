@@ -295,3 +295,20 @@ PowerShell5.1下通过，未超时、正常退出0。Yoga仍待此包复验，�
 参数，直接运行产物验证。本轮构建与探针进程已结束。源码及构建步骤见
 [探针说明](../tests/Dx12Sm51Probe/README.md)，[本机证据](../validation/20261030/sm51-probe-local.json)。
 交付位于`mge/out/sm51-probe-20261030/release-01/`，不替换任何NuGet缓存或游戏目录。
+
+2026-10-30 17:55 Yoga SM5.1独立探针真机结果返回：三组none／D16／D24S8全部通过，
+均正常退出0且未超时。EXE与实际加载DLL哈希匹配交付，实际Intel HD Graphics5300、
+ResourceBindingTier1、最高Shader Model5.1。每组四个阶段均完成并Dispose，图形shader
+均经私有运行库验证为DXBC5.1，compute路径确实创建cs_5_1 mip管线，16槽根表也实际启用。
+
+三组合计7583013次精确像素核对、90000次常量压力绘制、99帧Present、18次缩放以及
+12次Game／设备／窗口生命周期；3237次GetDeviceRemovedReason检查均S_OK。动态VB／IB、
+两阶段常量、纹理采样、离屏与后台缓冲回读、四级mip均实际执行通过，不再仅是PSO创建。
+真机没有系统API调试层（0x887A002D），因此报告中的validationErrors=0不能记为完整
+CPU API校验通过。本机启用调试层的独立验证仍保留为另一份证据。
+
+结论：在此次有界根表和typeless深度修复基础上，MonoGame DX12的SM5.1自定义Effect＋
+compute mip通路已在Yoga真机得到验证；六份内置Effect、通用.fx编译器和完整游戏迁移
+仍是独立工作，不能扩大本轮通过范围。未修改Monster，也未进行新的游戏构建。
+[真机统计与日志哈希](../validation/20261030/sm51-probe-yoga.json)，原始日志归档于
+`mge/out/sm51-probe-20261030/yoga-175525`。
